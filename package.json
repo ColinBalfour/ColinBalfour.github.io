@@ -1,0 +1,72 @@
+{
+	"name": "about-me",
+	"version": "1.1.0",
+	"description": "Personal portfolio built using Reactjs",
+	"author": {
+		"name": "Colin Balfour",
+		"email": "colinbalfour@gmail.com",
+		"url": "https://colinbalfour.github.io/about-me"
+	},
+	"homepage": "https://colinbalfour.github.io/about-me",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"@babel/core": "^7.23.3",
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+		"@fortawesome/fontawesome-svg-core": "^6.4.0",
+		"@fortawesome/free-brands-svg-icons": "^6.4.0",
+		"@fortawesome/free-regular-svg-icons": "^6.4.0",
+		"@fortawesome/free-solid-svg-icons": "^6.4.0",
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"babel": "^6.23.0",
+		"babel-cli": "^6.26.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-ga4": "^2.1.0",
+		"react-helmet": "^6.1.0",
+		"react-markdown": "^9.0.1",
+		"react-router-dom": "^6.11.1",
+		"react-scripts": "^5.0.1",
+		"static-extend": "^0.1.2",
+		"styled-components": "^5.3.10",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"prettier": {
+		"useTabs": true,
+		"tabWidth": 4
+	},
+	"devDependencies": {
+		"eslint": "^8.53.0",
+		"eslint-config-react-app": "^7.0.1",
+		"gh-pages": "^6.0.0"
+	}
+}
