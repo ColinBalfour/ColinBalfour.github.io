@@ -2,7 +2,7 @@ const SEO = [
 	{
 		page: "home",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
+			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
 		keywords: [
 			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 		],
@@ -11,7 +11,7 @@ const SEO = [
 	{
 		page: "about",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
+			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
 		keywords: [
 			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 		],
@@ -20,7 +20,7 @@ const SEO = [
 	{
 		page: "robotics",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
+			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
 		keywords: [
 			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 		],

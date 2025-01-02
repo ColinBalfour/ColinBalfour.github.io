@@ -30,7 +30,7 @@ const NavBar = (props) => {
 							>
 								<Link to="/about">About</Link>
 							</li>
-							<li
+							{/* <li
 								className={
 									active === "robotics"
 										? "nav-item active"
@@ -38,7 +38,7 @@ const NavBar = (props) => {
 								}
 							>
 								<Link to="/robotics">Robotics</Link>
-							</li>
+							</li> */}
 							<li
 								className={
 									active === "projects"
@@ -83,7 +83,7 @@ const NavBar = (props) => {
 								}
 							>
 								{/* <Link to="/BalfourResume.pdf" target="_blank" rel="noopener noreferrer">Resume</Link> */}
-								<Link to="https://colinbalfour.github.io/about-me/BalfourResume.pdf" target="_blank" rel="noopener noreferrer">Resume</Link>
+								<Link to="https://colinbalfour.github.io/BalfourResume.pdf" target="_blank" rel="noopener noreferrer">Resume</Link>
 							</li>
 						</ul>
 					</div>

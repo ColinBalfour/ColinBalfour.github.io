@@ -3,7 +3,7 @@ const INFO = {
 		title: "Colin's Portfolio",
 		name: "Colin Balfour",
 		email: "colinbalfour@gmail.com",
-		logo: "/about-me/logo.png",
+		logo: "/logo.png",
 	},
 
 	socials: {
@@ -18,7 +18,7 @@ const INFO = {
 	homepage: {
 		title: "Robotics software engineer and mathematics enthusiast.",
 		description:
-			"I'm an aspiring robotics software engineer with interets in control theory and perception. I have experience developing complex control schemes and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
+			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
 	},
 
 	about: {
@@ -104,11 +104,12 @@ const INFO = {
 			description:
 				"In my work at the PeAR Lab, I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
 				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g.",
-			photo: "/about-me/drone.png",
+			photo: "/drone.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png"
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
 			],
 			linkText: "View Project",
 			link: "https://pear.wpi.edu/index.html",
@@ -123,13 +124,14 @@ const INFO = {
 				"In order to get ground-truth depth data for a novel depth model, I designed and built a data-collection rig with a small team at the PeAR Lab. " +
 				"It uses stitched pointclouds from 3 Intel Realsense D430 cameras to create a 160x40 degree FOV depth image, as well as an L515 LIDAR and an Oak-D Lite. " +
 				"The camera and other sensor data is collected through a ROS2 pipeline",
-			photo: "/about-me/stitched_depth.png",
+			photo: "/stitched_depth.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/about-me/pytorch_logo.png",
-				"/about-me/ros2_logo.png",
-				"/about-me/opencv_logo.png",
+				"/pytorch_logo.png",
+				"/ros2_logo.png",
+				"/opencv_logo.png",
+				"/numpy.svg",
 			],
 			linkText: "View Project",
 			link: "https://pear.wpi.edu/index.html",
@@ -143,10 +145,10 @@ const INFO = {
 			description:
 				"For a project in my Deep Learning for Perception course, I optimized an adversarial patch that tricked a state-of-the-art depth network. " +
 				"The patch was optimized to give incorrect depth values at its pixels, with losses for printability and smoothness to improve real-world performance.",
-			photo: "/about-me/adversarial.png",
+			photo: "/adversarial.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/about-me/pytorch_logo.png",
+				"/pytorch_logo.png",
 			],
 			linkText: "View Project",
 			link: "https://github.com/FelixNgFender/rbe474x_p3",
@@ -160,14 +162,31 @@ const INFO = {
 			description:
 				"For a project in my Deep Learning for Perception course, I trained an implemented a U-Net model from scratch in pytorch using only simulated images. " +
 				"The model was able to generalize to real data it had never seen before.",
-			photo: "/about-me/segmentation.png",
+			photo: "/segmentation.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/about-me/pytorch_logo.png",
-				"/about-me/blender_logo.png",
+				"/pytorch_logo.png",
+				"/blender_logo.png",
 			],
 			linkText: "View Project",
 			link: "https://github.com/ColinBalfour/Group5_p2",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+
+		{
+			title: "A* Pathfinding with an MLP Heuristic",
+			description:
+				"In an independent study in machine learning, I developed neural nets from scratch in numpy, compared optimization using Gradient Descent and Newton's Method, and presented to the mathematics department." +
+				"Part of this independent study was developing an A* algorithm that used a neural net trained via genetic algorithm to improve the performance of A* and visualize NN learning.",
+			photo: "/AStar.gif",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "https://github.com/ColinBalfour/Pathfinding",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
@@ -180,8 +199,8 @@ const INFO = {
 			date: "7 May 2023",
 			logo: ["https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",],
 			linkText: "View Project",
-			link: "/about-me/projects/5", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
-			photo: "/about-me/arm2.png",
+			link: "/projects/5", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
+			photo: "/arm2.png",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
@@ -192,18 +211,18 @@ const INFO = {
 					"For our 2022-2023 season, my FIRST robotics team decided to use a two-jointed arm to pick up the cone and cube game pieces. While I bugged the mechanical group every few hours about getting a prototype we could test code with, I made a simulation in python to iron out as many bugs as possible before then.\n\n" +
 					"## Forward Kinematics Model\n\n" +
 					"To start, I tested out the kinematics model by visually plotting the output.\n\n" +
-					"\n\n![FK plot](/about-me/arm1.png)\n\n" +
+					"\n\n![FK plot](/arm1.png)\n\n" +
 					"This plot demonstrates the forward kinematics model – given joint angles (a, b), the model calculates the endpoint (x, y). Mathematically this is very simple, and the main purpose of this plot is to show the limits I impose on the model. Each red dot represents a configuration that the robot should avoid, while each green dot represents a configuration that is safe. Note that the overlapping red and green is actually intentional. There are two ways to reach the same (x, y) position – to visualize this, hold out your arm with your elbow pointed down, then rotate your arm so your elbow is pointing up, but your hand is in the same position. In the case of the red dots, one of these configurations goes past a limit. For example, it might be red in the case where the “elbow” is pointed down, where the “elbow” is actually pushing into the ground, whereas the elbow-up position is perfectly fine a few feet above the ground (note that the “ground” is actually a bit below where the start of the arm is on the plot, since on the robot it was a few feet off of the ground).\n\n" +
 					"## Inverse Kinematics Model\n\n" +
 					"Next, I implemented the inverse kinematics of a two-jointed arm and plotted the output.\n\n" +
-					"\n\n![IK plot](/about-me/arm2.png)\n\n" +
+					"\n\n![IK plot](/arm2.png)\n\n" +
 					"This next image displays the function of the inverse kinematic model. The inverse model takes some (x, y) coordinates as an input, and gives you back an angle for the “shoulder” and an angle for the “elbow” of the arm. This time it shows a bit more elegantly the limits on where the arm could go (we had a large electrical board behind it, hence the wall of red dots). As I mentioned earlier, there are two possible configurations for these angles, one with the elbow pointing up and the other pointing down – since it can be complicated to decide which to use, we opted to always use the configuration with the elbow pointing up, as there were very few situations where we would need the opposite. It’s important to note that we may have wanted to change this in the future, so I made the code adaptable so at any time with a simple parameter change it would return the opposite; or simply use the closest to whatever angle it was already at (to prevent any “sudden flipping” motion).\n\n" +
-					"\n\n![IK-2 plot](/about-me/arm3.png)\n\n" +
+					"\n\n![IK-2 plot](/arm3.png)\n\n" +
 					"This is what it would look like inverted. Many more positions would be completely unreachable because the elbow down position would hit the ground or robot.\n\n" +
 					"## Motion Profile\n\n" +
 					"Moving on, the next problem was to create a motion profile for the arm to follow. When moving from one point to the other (often large differences), it can be dangerous (both for humans and tensioned chains) if the arm suddenly zips to its next location as fast as it pleases. In addition, it makes it harder to control, since you have less control authority (harder to respond to disturbances). To combat this, a motion profile is used to generate a trajectory (through both time and space) of “setpoints” (targets in space to move to). This will improve the safety, consistency, and effectiveness of the controller.\n\n" +
 					"To start, to make motions smooth and direct, I used the inverse kinematics model to generate a linear trajectory, meaning that the “hand” will travel in a straight line from start to finish. This is distinct from the common practice of moving each motor to their final angular positions irrespective of what the other one was doing, which can cause jerky motions. In addition, I placed limits on both the maximum speed and acceleration that the arm could move in: limiting the force on the chains, increasing control authority, and again creating more consistent and smooth motion.\n\n" +
-					"\n\n![Motion Profile Animation](/about-me/arm4.gif)\n\n" +
+					"\n\n![Motion Profile Animation](/arm4.gif)\n\n" +
 					"This animation shows the motion of the arm through two different trajectories: the blue/orange running with no acceleration constraint but a max speed, and the green/red running with both max acceleration and max speed constraints. Notice how the blue/orange arm starts and stops instantaneously, while the green/red arm speeds up and slows down (they have the same max speed).\n\n" +
 					"All of the above simulations (along with many other less interesting graphs) played a key role in the software development for our two-jointed arm. They provided an easy way to debug code by being able to see what’s going wrong, and being able to visually confirm that the code works the way we want it to. Python and matplotlib make it easy to manipulate outputs and dive into what’s going wrong in a way that can be difficult in a full java project. Plus, it’s a really cool way to see what your code is doing.\n\n"
 			}
@@ -214,7 +233,7 @@ const INFO = {
 			description:
 				"For an intro electrical engineering final project, I decided to take it a bit further and make a self-balancing two-wheel robot. " +
 				"I used an IMU with a complementary filter to get the tilt of the robot, and used PID to keep it upright.",
-			photo: "/about-me/balance.png",
+			photo: "/balance.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
 			],

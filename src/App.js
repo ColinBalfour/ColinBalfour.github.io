@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ReactGA from "react-ga4";
 
 import Homepage from "./pages/homepage";
@@ -25,7 +25,6 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <Router basename="/about-me"> */}
 				<Routes>
 					<Route path="/" element={<Homepage />} />
 					<Route path="/about" element={<About />} />
@@ -39,7 +38,6 @@ function App() {
 					<Route path="/*" element={<Notfound />} />
 					<Route path="*" element={<Notfound />} />
 				</Routes>
-			{/* </Router> */}
 		</div>
 	);
 }
