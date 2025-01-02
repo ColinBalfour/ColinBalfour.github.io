@@ -1,6 +1,6 @@
 const INFO = {
 	main: {
-		title: "Colin's Portfolio",
+		title: "Colin Balfour's Portfolio",
 		name: "Colin Balfour",
 		email: "colinbalfour@gmail.com",
 		logo: "/logo.png",
@@ -9,7 +9,7 @@ const INFO = {
 	socials: {
 		// twitter: "https://twitter.com/",
 		github: "https://github.com/ColinBalfour",
-		linkedin: "https://www.linkedin.com/in/colin-balfour-1b1a43217/",
+		linkedin: "https://www.linkedin.com/in/colin-d-balfour/",
 		// instagram: "https://instagram.com/",
 		// stackoverflow: "https://stackoverflow.com/",
 		// facebook: "https://facebook.com/",
