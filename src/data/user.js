@@ -100,10 +100,28 @@ const INFO = {
 
 	projects: [
 		{
+			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
+			description:
+				"Coming soon! Developing pipelines to create 3D models from 2D images using both classical and deep learning methods.",
+			photo: "/sfm.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+				"/opencv_logo.png",
+				"/pytorch_logo.png",
+			],
+			linkText: "View Project",
+			link: "#",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+		{
 			title: "Ultrasonic-Based Drone Obstacle Avoidance",
 			description:
 				"In my work at the PeAR Lab, I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
-				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g.",
+				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
+				"Researching deep-learning methods for depth estimation with ultrasound",
 			photo: "/drone.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
@@ -141,23 +159,6 @@ const INFO = {
 		},
 
 		{
-			title: "Adversarial Attack on Monocular Depth Neural Network",
-			description:
-				"For a project in my Deep Learning for Perception course, I optimized an adversarial patch that tricked a state-of-the-art depth network. " +
-				"The patch was optimized to give incorrect depth values at its pixels, with losses for printability and smoothness to improve real-world performance.",
-			photo: "/adversarial.png",
-			logo: [
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/pytorch_logo.png",
-			],
-			linkText: "View Project",
-			link: "https://github.com/FelixNgFender/rbe474x_p3",
-			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
-			],
-		},
-
-		{
 			title: "Sim2Real Image Segmentation",
 			description:
 				"For a project in my Deep Learning for Perception course, I trained an implemented a U-Net model from scratch in pytorch using only simulated images. " +
@@ -169,10 +170,83 @@ const INFO = {
 				"/blender_logo.png",
 			],
 			linkText: "View Project",
-			link: "https://github.com/ColinBalfour/Group5_p2",
+			link: "https://github.com/ColinBalfour/Group5_p2/tree/FCN",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
+		},
+
+		{
+			title: "Adversarial Attack on Monocular Depth Neural Network",
+			description:
+				"For a project in my Deep Learning for Perception course, I optimized an adversarial patch that tricked a state-of-the-art depth network. " +
+				"The patch was optimized to give incorrect depth values at its pixels, with losses for printability and smoothness to improve real-world performance.",
+			photo: "/adversarial.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "https://github.com/FelixNgFender/rbe474x_p3",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+		
+
+		{
+			title: "Probability of Boundary Edge Detection",
+			description:
+				"This project implemented a novel method for detecting boundary edges by estimating the probability that a given pixel is an edge" +
+				"it is based on the work Contour Detection and Hierarchical Image Segmentation by Pablo Arbelaez et al. " +
+				"It uses a large filter bank to create texture, brightness, and color maps, and combines their gradients" + 
+				"with canny and sobel baselines to produce a final filtered result",
+			photo: "/pblite.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/opencv_logo.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "#",
+		},
+
+		{
+			title: "Auto Panogram: Classical & DL Panoramic Image Stitching",
+			description:
+				"For a project in my Computer Vision course, I implemented a classical panoramic image stitching pipeline using" + 
+				"corner feature matching, Asynchronous Non-Maximum Suppression (ANMS), and RANSAC outlier rejection." +
+				"Images were then stitched together using homography transforms and Poisson blending." +
+				"I also implemented a deep learning-based pipeline, based on the paper Deep Image Homography Estimation by Daniel DeTone et al., " +
+				"using both a supervised and unsupervised approach.",
+			photo: "/pano.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+				"/opencv_logo.png",
+				"/pytorch_logo.png",
+				"/scipy_logo.png",
+				"/scikit_learn_logo.png",
+
+			],
+			linkText: "View Project",
+			link: "#"
+		},
+
+		{
+			title: "CIFAR-10 Image Classification (ResNet, ResNeXt, DenseNet)",
+			description:
+				"For a project in my Computer Vision course, I implemented and compared the performance of ResNet, ResNeXt, and DenseNet on the CIFAR-10 dataset." +
+				"These models were all custom-built using only pytorch layers, but no built-in models",
+			photo: "/densenet.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "#",
 		},
 
 		{
