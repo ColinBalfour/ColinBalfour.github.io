@@ -394,7 +394,7 @@ const INFO = {
 			src: "./WPI_logo.png",
 			alt: "WPI",
 			title: "Worcester Polytechnic Institute (WPI)",
-			subtitle: "Bachelors of Science in Robotics Engineering (2024 - 2027)\nMaster of Science in Robotics Engineering (2024 - 2028)",
+			subtitle: "Bachelors of Science in Robotics Engineering (2026)\nMaster of Science in Robotics Engineering (2027)",
 			duration: "2024 - Present",
 		},
 		{
