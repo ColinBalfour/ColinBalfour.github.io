@@ -43,17 +43,17 @@ const Project = (props) => {
 	);
 
 	return (
-		// <React.Fragment>
+		<React.Fragment>
 			<div className="project">
 				{link ? (
 					<Link to={link} {...(page ? {} : { target: "_blank", rel: "noopener noreferrer" })}>
 						{inner}
 					</Link>
 				) : (
-					{inner}
+					inner
 				)}
 			</div>
-		// </React.Fragment>
+		</React.Fragment>
 	);
 };
 
