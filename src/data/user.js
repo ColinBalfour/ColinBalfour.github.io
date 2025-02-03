@@ -111,7 +111,7 @@ const INFO = {
 				"/pytorch_logo.png",
 			],
 			linkText: "View Project",
-			link: "#",
+			// link: "#",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
@@ -209,7 +209,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "#",
+			// link: "#",
 		},
 
 		{
@@ -231,7 +231,7 @@ const INFO = {
 
 			],
 			linkText: "View Project",
-			link: "#"
+			// link: "#"
 		},
 
 		{
@@ -246,7 +246,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "#",
+			// link: "#",
 		},
 
 		{
@@ -273,7 +273,7 @@ const INFO = {
 			date: "7 May 2023",
 			logo: ["https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",],
 			linkText: "View Project",
-			link: "/projects/5", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
+			link: "/projects/", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
 			photo: "/arm2.png",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
@@ -312,7 +312,7 @@ const INFO = {
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
 			],
 			linkText: "View Project",
-			link: "#",
+			// link: "#",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],

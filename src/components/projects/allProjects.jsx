@@ -20,6 +20,7 @@ const AllProjects = () => {
 							linkText={project.linkText}
 							link={project.link}
 							page={project.page}
+							idx = {index}
 						/>
 					</div>
 				)
