@@ -9,7 +9,7 @@ const Project = (props) => {
 	let { logos, title, description, photo, linkText, link, page, idx } = props;
 
 	if (link === "/projects/") {
-	    link = `/projects/${idx}`;
+	    link = `/projects/${idx+1}`;
 	}
 
 	let inner = (
