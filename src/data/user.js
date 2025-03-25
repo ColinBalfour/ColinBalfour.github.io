@@ -209,7 +209,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			// link: "#",
+			link: "https://github.com/ColinBalfour/Pb-Edge-Detection/",
 		},
 
 		{
@@ -231,7 +231,7 @@ const INFO = {
 
 			],
 			linkText: "View Project",
-			// link: "#"
+			link: "https://github.com/ColinBalfour/Panoramic-Image-Stitching"
 		},
 
 		{
@@ -246,7 +246,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			// link: "#",
+			link: "https://github.com/ColinBalfour/Custom-CIFAR-Classifiers/",
 		},
 
 		{
