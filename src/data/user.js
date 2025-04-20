@@ -161,7 +161,7 @@ const INFO = {
 		{
 			title: "Sim2Real Image Segmentation",
 			description:
-				"For a project in my Deep Learning for Perception course, I trained an implemented a U-Net model from scratch in pytorch using only simulated images. " +
+				"I trained an implemented a U-Net model from scratch in pytorch using only simulated images. " +
 				"The model was able to generalize to real data it had never seen before.",
 			photo: "/segmentation.png",
 			logo: [
@@ -179,8 +179,9 @@ const INFO = {
 		{
 			title: "Adversarial Attack on Monocular Depth Neural Network",
 			description:
-				"For a project in my Deep Learning for Perception course, I optimized an adversarial patch that tricked a state-of-the-art depth network. " +
-				"The patch was optimized to give incorrect depth values at its pixels, with losses for printability and smoothness to improve real-world performance.",
+				"I optimized a real-world adversarial patch that tricked a state-of-the-art depth network into giving wrong predictions. " +
+				"The patch was optimized so the model predicts a particular depth in that region, with losses for printability " +
+				"and smoothness to improve real-world performance.",
 			photo: "/adversarial.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
@@ -189,6 +190,26 @@ const INFO = {
 			],
 			linkText: "View Project",
 			link: "https://github.com/FelixNgFender/rbe474x_p3",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+
+		{
+			title: "FRC Competition Robot",
+			description:
+				"For our 2023-2024 season, I created a robust vision pipeline using a Jetson for pose estimation using AprilTags " +
+				"and a Kalman Filter, and object detection with YOLOv8. Additionally, I developed code for each subsystem of the robot, " +
+				"from a holonomic drive-steer indepdenent drivetrain to an intake/handoff mechanism with an arm, as well as robust fully-autonomous routines (GIF above)",
+			photo: "/frc.gif",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/java/java.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/opencv_logo.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "https://github.com/CCHS-FIRST-Robotics/2024RobotCode/tree/final-bot-testing", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
@@ -215,7 +236,7 @@ const INFO = {
 		{
 			title: "Auto Panogram: Classical & DL Panoramic Image Stitching",
 			description:
-				"For a project in my Computer Vision course, I implemented a classical panoramic image stitching pipeline using" + 
+				"I implemented a classical panoramic image stitching pipeline using" + 
 				"corner feature matching, Asynchronous Non-Maximum Suppression (ANMS), and RANSAC outlier rejection." +
 				"Images were then stitched together using homography transforms and Poisson blending." +
 				"I also implemented a deep learning-based pipeline, based on the paper Deep Image Homography Estimation by Daniel DeTone et al., " +
@@ -237,7 +258,7 @@ const INFO = {
 		{
 			title: "CIFAR-10 Image Classification (ResNet, ResNeXt, DenseNet)",
 			description:
-				"For a project in my Computer Vision course, I implemented and compared the performance of ResNet, ResNeXt, and DenseNet on the CIFAR-10 dataset." +
+				"I implemented and compared the performance of ResNet, ResNeXt, and DenseNet on the CIFAR-10 dataset." +
 				"These models were all custom-built using only pytorch layers, but no built-in models",
 			photo: "/densenet.png",
 			logo: [
@@ -267,9 +288,9 @@ const INFO = {
 		},
 
 		{
-			title: "Robotics Two-Jointed Arm Simulation",
+			title: "Robotics Two-Jointed Arm",
 			description:
-				"For our 2022-2023 season, my FIRST robotics team decided to use a two-jointed arm to pick up the cone and cube game pieces. While I bugged the mechanical group every few hours about getting a prototype we could test code with, I made a simulation in python to iron out as many bugs as possible before then.",
+				"For our 2022-2023 season, I developed the controls and planning for our 2.5 DOF (wrist had only 3 positions) arm. I developed a simulation in python to test the kinematics, motion profile, and control before we had a physical prototype.",
 			date: "7 May 2023",
 			logo: ["https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",],
 			linkText: "View Project",
