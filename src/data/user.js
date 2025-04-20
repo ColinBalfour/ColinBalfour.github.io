@@ -102,8 +102,8 @@ const INFO = {
 		{
 			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
 			description:
-				"Coming soon! Developing pipelines to create 3D models from 2D images using both classical and deep learning methods.",
-			photo: "/sfm.png",
+				"Reconstructing a scene, both classically and with deep learning. Developed a omplete classical Structure-from-Motion pipeline, as well as a custom Neural Radiance Field (NeRF) model in PyTorch, trained on a lego dataset",
+			photo: "/sfm-nerf.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/numpy.svg",
@@ -230,7 +230,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			// link: "#",
+			link: "https://github.com/ColinBalfour/Pb-Edge-Detection/",
 		},
 
 		{
@@ -252,7 +252,7 @@ const INFO = {
 
 			],
 			linkText: "View Project",
-			// link: "#"
+			link: "https://github.com/ColinBalfour/Panoramic-Image-Stitching"
 		},
 
 		{
@@ -267,7 +267,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			// link: "#",
+			link: "https://github.com/ColinBalfour/Custom-CIFAR-Classifiers/",
 		},
 
 		{
