@@ -100,24 +100,7 @@ const INFO = {
 
 	projects: [
 		{
-			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
-			description:
-				"Reconstructing a scene, both classically and with deep learning. Developed a omplete classical Structure-from-Motion pipeline, as well as a custom Neural Radiance Field (NeRF) model in PyTorch, trained on a lego dataset",
-			photo: "/sfm-nerf.png",
-			logo: [
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/numpy.svg",
-				"/opencv_logo.png",
-				"/pytorch_logo.png",
-			],
-			linkText: "View Project",
-			// link: "#",
-			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
-			],
-		},
-		{
-			title: "Ultrasonic-Based Drone Obstacle Avoidance",
+			title: "[Paper Submitted — Science Robotics] Ultrasonic-Based Drone Obstacle Avoidance",
 			description:
 				"In my work at the PeAR Lab, I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
 				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
@@ -131,6 +114,46 @@ const INFO = {
 			],
 			linkText: "View Project",
 			link: "https://pear.wpi.edu/index.html",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+
+		{
+			title: "Einstein Vision: a Full-Self Driving Perception Stack",
+			description:
+				"FSD perception stack for a self-driving car, using a variety of models with only a single camera. " +
+				"Pre-trained models were used for object detection, depth estimation, optical flow, and instance segmentation. " +
+				"Objects are tracked in 3D, along with collision prediction, motion detection, and lane detection. ",
+
+			photo: "/einstein-vision.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/blender_logo.png",
+				"/opencv_logo.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "https://github.com/ColinBalfour/Einstein-Vision",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Computer Vision", "Self Driving", "Autonomous Car", "AI", "Deep Learning", 
+			],
+		},
+
+		{
+			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
+			description:
+				"Reconstructing a scene, both classically and with deep learning. Developed a omplete classical Structure-from-Motion pipeline, as well as a custom Neural Radiance Field (NeRF) model in PyTorch, trained on a lego dataset",
+			photo: "/sfm-nerf.png",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+				"/opencv_logo.png",
+				"/pytorch_logo.png",
+			],
+			linkText: "View Project",
+			link: "https://github.com/ColinBalfour/SfM-NeRF",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
