@@ -29,9 +29,55 @@ const Homepage = () => {
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
 
+	// Carousel images for the third photo
+	const carouselImages = ["/drone.png", "/sfm.png", "/pano.png", "/nerf.png"];
+	const [nextImageIndex, setNextImageIndex] = useState(1);
+	const [frontImageIndex, setFrontImageIndex] = useState(0);
+	const [backImageIndex, setBackImageIndex] = useState(1);
+	const [currentAnimation, setCurrentAnimation] = useState('flip-to-back');
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
+
+	// Carousel rotation effect using animation events
+	useEffect(() => {
+		const photoCard = document.querySelector('.photo-3 .photo-card');
+		
+		const handleAnimationStart = (e) => {
+			if (e.animationName === 'flipToBack3') {
+				// Starting to flip to back, set back to next image in sequence
+				setBackImageIndex(nextImageIndex);
+				setNextImageIndex((nextImageIndex + 1) % carouselImages.length);
+			} else if (e.animationName === 'flipToFront3') {
+				// Starting to flip to front, set front to next image in sequence
+				setFrontImageIndex(nextImageIndex);
+				setNextImageIndex((nextImageIndex + 1) % carouselImages.length);
+			}
+		};
+		
+		const handleAnimationEnd = (e) => {
+			if (e.animationName === 'flipToBack3') {
+				// Finished showing back, now flip back to front
+				setCurrentAnimation('flip-to-front');
+			} else if (e.animationName === 'flipToFront3') {
+				// Finished showing front, now flip to back
+				setCurrentAnimation('flip-to-back');
+			}
+		};
+
+		if (photoCard) {
+			photoCard.addEventListener('animationstart', handleAnimationStart);
+			photoCard.addEventListener('animationend', handleAnimationEnd);
+		}
+
+		return () => {
+			if (photoCard) {
+				photoCard.removeEventListener('animationstart', handleAnimationStart);
+				photoCard.removeEventListener('animationend', handleAnimationEnd);
+			}
+		};
+	}, [carouselImages.length, nextImageIndex]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -103,12 +149,31 @@ const Homepage = () => {
 
 							<div className="homepage-first-area-right-side">
 								<div className="homepage-image-container">
-									<div className="homepage-image-wrapper">
-										<img
-											src="/homepage.jpg"
-											alt="about"
-											className="homepage-image"
-										/>
+									<div className="hanging-photos">
+										<div className="photo-wrapper photo-1">
+											{/* pin + short string */}
+											<span className="pin" aria-hidden="true"></span>
+											<span className="string" aria-hidden="true"></span>
+
+											<div className="photo-card">
+												<img src="/homepage.jpg" alt="Portfolio 1 Front" />
+												<img src="/about.jpg" alt="Portfolio 1 Back" />
+											</div>
+											</div>
+										<div className="photo-wrapper photo-2">
+											<div className="string"></div>
+											<div className="photo-card">
+												<img src="/flying.webp" alt="Portfolio 2 Front" />
+												<img src="/apnews.png" alt="Portfolio 2 Back" />
+											</div>
+										</div>
+										<div className="photo-wrapper photo-3">
+											<div className="string"></div>
+											<div className={`photo-card ${currentAnimation}`}>
+												<img src={carouselImages[frontImageIndex]} alt={`Portfolio 3 - Front`} />
+												<img src={carouselImages[backImageIndex]} alt={`Portfolio 3 - Back`} />
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

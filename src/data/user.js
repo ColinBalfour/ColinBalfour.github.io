@@ -102,9 +102,9 @@ const INFO = {
 		{
 			title: "[Under Second Review — Science Robotics] Ultrasonic-Based Drone Obstacle Avoidance",
 			description:
-				"In my work at the PeAR Lab, I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
-				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
-				"Researching deep-learning methods for depth estimation with ultrasound",
+				"I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
+				"I employ deep-learning based signal processing to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
+				"Researching deep-learning methods for depth estimation with ultrasound. \n(Media not publicly available yet)",
 			photo: "/drone.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
@@ -122,9 +122,9 @@ const INFO = {
 		{
 			title: "[Under Review — RA-L] ActiveNav: Learning Active Monocular Flight in Forests",
 			description:
-				"My most recent research paper involved a novel approach for quadrotor navigation using active perception. " +
-				"A hierarchical RL policy was trained to actively control the drone's camera along with its movement. " +
-				"With flow and its uncertainty as an input, the policy was able to actively point the camera to areas " +
+				"ActiveNav is a novel approach for quadrotor navigation using active perception. " +
+				"With flow and its uncertainty as an input, a hierarchical RL policy actively " +
+				"controls the drone's camera along with its movement. The policy is able to actively point the camera to areas " +
 				"that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, " +
 				"running onboard a Jetson Nano.",
 			photo: "/SpeedMeter.gif",
@@ -145,7 +145,7 @@ const INFO = {
 		{
 			title: "Learning High Speed Drone Navigation using Events",
 			description:
-				"My active research project at the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
+				"My current research in the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
 				"The above shows a policy trained using events to fly through a dense forest at high speed. ",
 			photo: "/Events_Video.gif",
 			logo: [
