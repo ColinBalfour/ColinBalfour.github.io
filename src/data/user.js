@@ -124,7 +124,7 @@ const INFO = {
 			description:
 				"My active research project at the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
 				"The above shows a policy trained using events to fly through a dense forest at high speed. ",
-			photo: "/Event_Video.gif",
+			photo: "/Events_Video.gif",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/pytorch_logo.png",
