@@ -131,7 +131,7 @@ const INFO = {
 			logo: [
 				"/pytorch_logo.png",
 				"/blender_logo.png",
-				"/opencv_logo.svg",
+				"/opencv_logo.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/numpy.svg",
 			],
