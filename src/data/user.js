@@ -120,6 +120,29 @@ const INFO = {
 		},
 
 		{
+			title: "[Under Review — RA-L] ActiveNav: Learning Active Monocular Flight in Forests",
+			description:
+				"My most recent research paper involved a novel approach for quadrotor navigation using active perception. " +
+				"A hierarchical RL policy was trained to actively control the drone's camera along with its movement. " +
+				"With flow and its uncertainty as an input, the policy was able to actively point the camera to areas " +
+				"that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, " +
+				"running onboard a Jetson Nano.",
+			photo: "/SpeedMeter.gif",
+			logo: [
+				"/pytorch_logo.png",
+				"/blender_logo.png",
+				"/opencv_logo.svg",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			link: "https://pear.wpi.edu/index.html",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+
+		{
 			title: "Learning High Speed Drone Navigation using Events",
 			description:
 				"My active research project at the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
@@ -129,7 +152,8 @@ const INFO = {
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/pytorch_logo.png",
 				"/numpy.svg",
-				"./cuda.svg",
+				"/cuda.svg",
+				"/blender_logo.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
 			],
