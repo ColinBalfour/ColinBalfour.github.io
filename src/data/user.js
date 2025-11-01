@@ -100,7 +100,7 @@ const INFO = {
 
 	projects: [
 		{
-			title: "[Paper Submitted — Science Robotics] Ultrasonic-Based Drone Obstacle Avoidance",
+			title: "[Under Second Review — Science Robotics] Ultrasonic-Based Drone Obstacle Avoidance",
 			description:
 				"In my work at the PeAR Lab, I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
 				"I employ signal processing techniques to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
@@ -116,6 +116,27 @@ const INFO = {
 			link: "https://pear.wpi.edu/index.html",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			],
+		},
+
+		{
+			title: "Learning High Speed Drone Navigation using Events",
+			description:
+				"My active research project at the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
+				"The above shows a policy trained using events to fly through a dense forest at high speed. ",
+			photo: "/Event_Video.gif",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/numpy.svg",
+				"./cuda.svg",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
+			],
+			linkText: "View Project",
+			link: "https://pear.wpi.edu/index.html",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Reinforcement Learning", "Simulation", "Python", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
 			],
 		},
 
