@@ -10,6 +10,8 @@ const INFO = {
 		// twitter: "https://twitter.com/",
 		github: "https://github.com/ColinBalfour",
 		linkedin: "https://www.linkedin.com/in/colin-d-balfour/",
+		scholar: "https://scholar.google.com/citations?user=j4OPF1YAAAAJ&hl=en",
+		orcid: "https://orcid.org/0009-0009-5809-5165",
 		// instagram: "https://instagram.com/",
 		// stackoverflow: "https://stackoverflow.com/",
 		// facebook: "https://facebook.com/",
@@ -32,6 +34,12 @@ const INFO = {
 
 	homepage: {
 		status: "Robotics Software Intern @ NVIDIA",
+		featured: {
+			videoId: "RiHRGeWW9Ck",
+			label: "Featured Research · Science Robotics 2026",
+			title: "Saranga: autonomous flight in complete darkness, smoke, and snow — using only palm-sized ultrasound sensing.",
+			link: "https://pear.wpi.edu/research/saranga.html",
+		},
 		title: "Robotics software engineer and researcher in perception & autonomy.",
 		description:
 			"I'm Colin Balfour, a robotics engineer and deep-learning researcher focused on perception and autonomous flight. I'm currently building simulation tooling for robot learning at NVIDIA (Isaac Sim), and I research reinforcement learning for high-speed drone navigation at WPI's PeAR Lab — where my work on ultrasound-based navigation in visually degraded environments was published in Science Robotics. I've built palm-sized drones that fly autonomously in complete darkness, smoke, and snow, optimized vision models on embedded TPUs and GPUs, and written custom CUDA kernels for real-time depth rendering. I care about robust systems, elegant code, and pushing what small autonomous robots can do.",
@@ -115,7 +123,7 @@ const INFO = {
 			venue: "Science Robotics",
 			year: "2026",
 			status: "Published",
-			link: "", // add DOI / article URL when available
+			link: "https://pear.wpi.edu/research/saranga.html",
 		},
 		{
 			title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
@@ -143,7 +151,7 @@ const INFO = {
 				"Saranga is the first palm-sized aerial robot capable of autonomous navigation in complete darkness, smoke, and snow — using only onboard milliWatt ultrasound sensing and compute, at just 140g. " +
 				"I employ deep-learning signal processing to suppress noise and estimate depth in real time, achieving 84% success across 10 scenes (200+ trials). " +
 				"Published in Science Robotics (2026).",
-			photo: "/drone.png",
+			photo: "/saranga.jpg",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
@@ -151,9 +159,9 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "https://pear.wpi.edu/index.html",
+			link: "https://pear.wpi.edu/research/saranga.html",
 			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
 			],
 		},
 

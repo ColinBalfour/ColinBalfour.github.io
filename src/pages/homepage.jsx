@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faGithub,
 	faLinkedin,
+	faGoogleScholar,
+	faOrcid,
 } from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../components/common/logo";
@@ -172,6 +174,26 @@ const Homepage = () => {
 									className="homepage-social-icon"
 								/>
 							</a>
+							<a
+								href={INFO.socials.scholar}
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FontAwesomeIcon
+									icon={faGoogleScholar}
+									className="homepage-social-icon"
+								/>
+							</a>
+							<a
+								href={INFO.socials.orcid}
+								target="_blank"
+								rel="noreferrer"
+							>
+								<FontAwesomeIcon
+									icon={faOrcid}
+									className="homepage-social-icon"
+								/>
+							</a>
 							{/* <a
 								href={INFO.socials.instagram}
 								target="_blank"
@@ -204,6 +226,31 @@ const Homepage = () => {
 										{skill}
 									</span>
 								))}
+							</div>
+						)}
+
+						{INFO.homepage.featured && (
+							<div className="homepage-featured">
+								<div className="homepage-featured-label">
+									{INFO.homepage.featured.label}
+								</div>
+								<div className="homepage-featured-video">
+									<iframe
+										src={`https://www.youtube-nocookie.com/embed/${INFO.homepage.featured.videoId}`}
+										title={INFO.homepage.featured.title}
+										loading="lazy"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+										allowFullScreen
+									></iframe>
+								</div>
+								<a
+									className="homepage-featured-caption"
+									href={INFO.homepage.featured.link}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{INFO.homepage.featured.title}
+								</a>
 							</div>
 						)}
 
