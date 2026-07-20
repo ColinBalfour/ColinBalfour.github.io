@@ -1,55 +1,114 @@
+// Per-page SEO metadata. Each page component looks up its entry by `page`
+// (SEO.find((item) => item.page === "...")) and feeds `description` / `keywords`
+// into react-helmet. Keep descriptions distinct and under ~160 characters so
+// search engines show them in full.
 const SEO = [
 	{
 		page: "home",
 		description:
-			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
+			"Colin Balfour is a robotics software engineer focused on computer vision, perception, and autonomous quadrotors, with research at WPI's PeAR Lab. Explore projects in SLAM, control theory, and deep learning.",
 		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			"Colin Balfour",
+			"robotics software engineer",
+			"computer vision",
+			"perception",
+			"autonomous drones",
+			"quadrotor",
+			"SLAM",
+			"control theory",
+			"deep learning",
+			"PeAR Lab",
+			"WPI",
+			"FIRST Robotics",
 		],
 	},
 
 	{
 		page: "about",
 		description:
-			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
+			"About Colin Balfour — a robotics engineering student at WPI researching perception and autonomous flight at the PeAR Lab, former FIRST Robotics team captain, and self-taught in control theory and mathematics.",
 		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			"Colin Balfour",
+			"about",
+			"robotics engineer",
+			"WPI robotics",
+			"PeAR Lab",
+			"perception",
+			"autonomous flight",
+			"control theory",
+			"FIRST Robotics",
+			"Boston",
 		],
 	},
 
 	{
 		page: "robotics",
 		description:
-			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
+			"Colin Balfour's work on FIRST Robotics Team 3205 as captain and programming lead: command-based architecture, swerve drive, Kalman-filter localization, vision-based game-piece detection, and advanced autonomous routines.",
 		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
-		],
-	},
-
-	{
-		page: "articles",
-		description:
-			"Chronological collection of my long-form thoughts on programming, leadership, product design, and more.",
-		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			"Colin Balfour",
+			"FIRST Robotics",
+			"Team 3205",
+			"swerve drive",
+			"command-based",
+			"WPILib",
+			"Kalman filter",
+			"robot programming",
+			"autonomous",
+			"motion planning",
 		],
 	},
 
 	{
 		page: "projects",
 		description:
-			"I've worked on a variety of projects over the years and I'm proud of the progress I've made. Many of these projects are open-source and available for others to explore and contribute to.",
+			"A collection of Colin Balfour's robotics and computer-vision projects: drone obstacle avoidance, monocular SLAM and NeRF, structure from motion, image segmentation, and deep-learning classifiers. Many are open source.",
 		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			"Colin Balfour",
+			"projects",
+			"computer vision",
+			"SLAM",
+			"NeRF",
+			"structure from motion",
+			"drone obstacle avoidance",
+			"image segmentation",
+			"deep learning",
+			"PyTorch",
+			"OpenCV",
+		],
+	},
+
+	{
+		page: "publications",
+		description:
+			"Peer-reviewed and in-review research by Colin Balfour on perception and autonomous flight, including Saranga (Science Robotics), AttentionSeeker (RA-L), and ActiveNav (ICRA).",
+		keywords: [
+			"Colin Balfour",
+			"publications",
+			"research",
+			"Science Robotics",
+			"Saranga",
+			"AttentionSeeker",
+			"ActiveNav",
+			"aerial robotics",
+			"drone navigation",
+			"PeAR Lab",
 		],
 	},
 
 	{
 		page: "contact",
 		description:
-			"If you're interested in collaborating on a project, feel free to reach out to me. I'm always open to new ideas and opportunities.",
+			"Get in touch with Colin Balfour — open to robotics and software collaboration, research, and new opportunities. Reach out by email or connect on GitHub and LinkedIn.",
 		keywords: [
-			"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+			"Colin Balfour",
+			"contact",
+			"robotics collaboration",
+			"email",
+			"GitHub",
+			"LinkedIn",
+			"hire",
+			"research",
 		],
 	},
 ];

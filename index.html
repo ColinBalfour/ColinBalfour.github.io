@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!--
+			Restore the path encoded by 404.html (GitHub Pages SPA redirect).
+			Must run before the app so react-router sees the real URL.
+		-->
+		<script type="text/javascript">
+			(function (l) {
+				if (l.search[1] === "/") {
+					var decoded = l.search
+						.slice(1)
+						.split("&")
+						.map(function (s) {
+							return s.replace(/~and~/g, "&");
+						})
+						.join("?");
+					window.history.replaceState(
+						null,
+						null,
+						l.pathname.slice(0, -1) + decoded + l.hash
+					);
+				}
+			})(window.location);
+		</script>
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+
+		<title>Colin Balfour | Robotics Software Engineer</title>
+		<meta
+			name="description"
+			content="Colin Balfour is a robotics software engineer focused on computer vision, perception, and autonomous quadrotors, with research at WPI's PeAR Lab. Explore projects in SLAM, control theory, and deep learning."
+		/>
+		<meta name="author" content="Colin Balfour" />
+		<link rel="canonical" href="https://colinbalfour.github.io/" />
+
+		<!-- Open Graph (Facebook, LinkedIn, Slack link previews) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Colin Balfour" />
+		<meta property="og:title" content="Colin Balfour | Robotics Software Engineer" />
+		<meta
+			property="og:description"
+			content="Robotics software engineer focused on computer vision, perception, and autonomous quadrotors. Projects in SLAM, control theory, and deep learning."
+		/>
+		<meta property="og:url" content="https://colinbalfour.github.io/" />
+		<meta property="og:image" content="https://colinbalfour.github.io/drone.png" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Colin Balfour | Robotics Software Engineer" />
+		<meta
+			name="twitter:description"
+			content="Robotics software engineer focused on computer vision, perception, and autonomous quadrotors. Projects in SLAM, control theory, and deep learning."
+		/>
+		<meta name="twitter:image" content="https://colinbalfour.github.io/drone.png" />
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+		<script type="module" src="/src/index.jsx"></script>
+	</body>
+</html>

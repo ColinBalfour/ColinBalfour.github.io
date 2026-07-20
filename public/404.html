@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Colin Balfour</title>
+		<!--
+			GitHub Pages SPA redirect (https://github.com/rafgraph/spa-github-pages).
+			Pages serves this 404 for any unknown path; we encode the path into a query
+			string and bounce to the root index.html, which restores it (see index.html).
+			pathSegmentsToKeep = 0 because this is served from the domain root
+			(colinbalfour.github.io/...), not a project subpath.
+		-->
+		<script type="text/javascript">
+			var pathSegmentsToKeep = 0;
+			var l = window.location;
+			l.replace(
+				l.protocol +
+					"//" +
+					l.hostname +
+					(l.port ? ":" + l.port : "") +
+					l.pathname
+						.split("/")
+						.slice(0, 1 + pathSegmentsToKeep)
+						.join("/") +
+					"/?/" +
+					l.pathname
+						.slice(1)
+						.split("/")
+						.slice(pathSegmentsToKeep)
+						.join("/")
+						.replace(/&/g, "~and~") +
+					(l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+					l.hash
+			);
+		</script>
+	</head>
+	<body></body>
+</html>

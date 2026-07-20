@@ -15,16 +15,32 @@ const INFO = {
 		// facebook: "https://facebook.com/",
 	},
 
+	skills: [
+		"Python",
+		"C / C++",
+		"ROS 2",
+		"PyTorch",
+		"CUDA",
+		"Isaac Sim",
+		"OpenCV",
+		"Reinforcement Learning",
+		"Computer Vision",
+		"Docker",
+		"Jetson",
+		"TensorFlow",
+	],
+
 	homepage: {
-		title: "Robotics software engineer and mathematics enthusiast.",
+		status: "Robotics Software Intern @ NVIDIA",
+		title: "Robotics software engineer and researcher in perception & autonomy.",
 		description:
-			"My name is Colin Balfour, and I'm an aspiring robotics software engineer with interets in control theory and perception. My focus lately has been in Computer Vision and autonomous quadrotors through my work at the PeAR Lab. I also have experience developing complex controllers, motion planning and implementing various SLAM algorithms through my FIRST robotics team. I enjoy solving complex problems and learning new skills. I am passionate about creating high-quality code that follows best practices and industry standards. I am always looking for new challenges and opportunities to grow as a developer.",
+			"I'm Colin Balfour, a robotics engineer and deep-learning researcher focused on perception and autonomous flight. I'm currently building simulation tooling for robot learning at NVIDIA (Isaac Sim), and I research reinforcement learning for high-speed drone navigation at WPI's PeAR Lab — where my work on ultrasound-based navigation in visually degraded environments was published in Science Robotics. I've built palm-sized drones that fly autonomously in complete darkness, smoke, and snow, optimized vision models on embedded TPUs and GPUs, and written custom CUDA kernels for real-time depth rendering. I care about robust systems, elegant code, and pushing what small autonomous robots can do.",
 	},
 
 	about: {
-		title: "I’m Colin Balfour, I live in the Boston area, where I design the future.",
+		title: "I’m Colin Balfour — a robotics engineer and researcher in the Boston area, teaching machines to perceive and fly.",
 		description:
-			"I've worked on a variety of projects over the years and I'm proud of the progress I've made. Many of these projects are open-source and available for others to explore. If you're interested in any of the projects I've worked on, please feel free to check out the code and suggest any improvements or enhancements you might have in mind. Collaborating with others is a great way to learn and grow, and I'm always open to new ideas and feedback.",
+			"I'm pursuing my B.S. and M.S. in Robotics Engineering at WPI, with a minor in mathematics. My work spans deep learning, perception, and autonomous systems — from research and engineering internships at NVIDIA, Magna Electronics, and RTX BBN to published research at the PeAR Lab. Much of my project work is open-source; if something here catches your eye, feel free to explore the code, reach out, or share ideas. I'm always open to new challenges and collaboration.",
 	},
 
 	robotics: {
@@ -92,19 +108,41 @@ const INFO = {
 		]
 	},
 
-	articles: {
-		title: "I'm passionate about pushing the boundaries of what's possible and inspiring the next generation of innovators.",
-		description:
-			"Chronological collection of my long-form thoughts on programming, leadership, product design, and more.",
-	},
+	publications: [
+		{
+			title: "Saranga: milliWatt Ultrasound for Navigation in Visually Degraded Environments on Palm-Sized Aerial Robots",
+			authors: "M. Velmurugan, P. Brush, Colin Balfour, R. Pryzbala, N. Sanket",
+			venue: "Science Robotics",
+			year: "2026",
+			status: "Published",
+			link: "", // add DOI / article URL when available
+		},
+		{
+			title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
+			authors: "Colin Balfour*, D. Singh*, N. Sanket",
+			venue: "IEEE Robotics and Automation Letters (RA-L)",
+			year: "2026",
+			status: "Under Review",
+			note: "* Equal contribution",
+			link: "", // add arXiv / PDF when available
+		},
+		{
+			title: "ActiveNav: Learning Active Monocular Flight in Forests",
+			authors: "Colin Balfour, K. Srivastava, D. Singh, N. Sanket",
+			venue: "IEEE International Conference on Robotics and Automation (ICRA)",
+			year: "2027",
+			status: "Under Review",
+			link: "", // add arXiv / PDF when available
+		},
+	],
 
 	projects: [
 		{
-			title: "[Under Second Review — Science Robotics] Ultrasonic-Based Drone Obstacle Avoidance",
+			title: "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
 			description:
-				"I designed and built a drone, equipped with an ultrasonic sensor, to autonomously navigate through a cluttered environment. " +
-				"I employ deep-learning based signal processing to filter out noise and detect obstacles in real-time. The entire drone, with compute, weighs only 140g. " +
-				"Researching deep-learning methods for depth estimation with ultrasound. \n(Media not publicly available yet)",
+				"Saranga is the first palm-sized aerial robot capable of autonomous navigation in complete darkness, smoke, and snow — using only onboard milliWatt ultrasound sensing and compute, at just 140g. " +
+				"I employ deep-learning signal processing to suppress noise and estimate depth in real time, achieving 84% success across 10 scenes (200+ trials). " +
+				"Published in Science Robotics (2026).",
 			photo: "/drone.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
@@ -120,7 +158,7 @@ const INFO = {
 		},
 
 		{
-			title: "[Under Review — RA-L] ActiveNav: Learning Active Monocular Flight in Forests",
+			title: "[Under Review — ICRA 2027] ActiveNav: Learning Active Monocular Flight in Forests",
 			description:
 				"ActiveNav is a novel approach for quadrotor navigation using active perception. " +
 				"With flow and its uncertainty as an input, a hierarchical RL policy actively " +
@@ -143,10 +181,10 @@ const INFO = {
 		},
 
 		{
-			title: "Learning High Speed Drone Navigation using Events",
+			title: "[Under Review — RA-L 2026] AttentionSeeker: Passive Attention-Based Aerial Navigation with Events",
 			description:
-				"My current research in the PeAR Lab involves developing a high-speed drone navigation system using event cameras and reinforcement learning. " +
-				"The above shows a policy trained using events to fly through a dense forest at high speed. ",
+				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
+				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
 			photo: "/Events_Video.gif",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
@@ -277,7 +315,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "https://github.com/CCHS-FIRST-Robotics/2024RobotCode/tree/final-bot-testing", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
+			link: "https://github.com/CCHS-FIRST-Robotics/2024RobotCode/tree/final-bot-testing",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
@@ -362,7 +400,8 @@ const INFO = {
 			date: "7 May 2023",
 			logo: ["https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",],
 			linkText: "View Project",
-			link: "/projects/", // TODO: SHOULD BE UPDATED, LINK SHOULD NOT DEPEND ON ORDER OF PROJECTS
+			slug: "two-jointed-arm",
+			link: "/projects/", // sentinel: resolves to /projects/<slug> (see project.jsx)
 			photo: "/arm2.png",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
@@ -453,14 +492,38 @@ const INFO = {
 	work: [
 		{
 			id: 0,
-			src: "./pear_logo.png",
-			alt: "PeAR",
-			title: "Perception and Autonomous Robotics (PeAR) Group",
-			subtitle: "Student Researcher",
-			duration: "2024 - Present",
+			src: "./nvidia_logo.svg",
+			alt: "NVIDIA",
+			title: "NVIDIA",
+			subtitle: "Robotics Software Intern — Isaac Sim",
+			duration: "May 2026 - Present",
 		},
 		{
 			id: 1,
+			src: "./magna_logo.svg",
+			alt: "Magna Electronics",
+			title: "Magna Electronics",
+			subtitle: "Machine Learning Intern — ADAS Perception",
+			duration: "Jan 2026 - May 2026",
+		},
+		{
+			id: 2,
+			src: "./bbn_logo.png",
+			alt: "RTX BBN Technologies",
+			title: "RTX BBN Technologies",
+			subtitle: "Research Intern — Physical Sciences & Systems",
+			duration: "May 2025 - Dec 2025",
+		},
+		{
+			id: 3,
+			src: "./pear_logo.png",
+			alt: "PeAR",
+			title: "Perception and Autonomous Robotics (PeAR) Group",
+			subtitle: "Perception & Deep Learning Researcher",
+			duration: "May 2024 - Present",
+		},
+		{
+			id: 4,
 			src: "./3205_logo.jpg",
 			alt: "3205",
 			title: "FIRST Robotics Team 3205",
@@ -468,7 +531,7 @@ const INFO = {
 			duration: "2021 - 2024",
 		},
 		{
-			id: 2,
+			id: 5,
 			src: "./sakon_fav.ico",
 			alt: "sakon",
 			title: "Sakon",
@@ -483,7 +546,7 @@ const INFO = {
 			src: "./WPI_logo.png",
 			alt: "WPI",
 			title: "Worcester Polytechnic Institute (WPI)",
-			subtitle: "Bachelors of Science in Robotics Engineering (2026)\nMaster of Science in Robotics Engineering (2027)",
+			subtitle: "B.S. Robotics Engineering, Minor in Mathematics — 3.82 GPA (Dec 2026)\nM.S. Robotics Engineering — 4.0 GPA (May 2027)",
 			duration: "2024 - Present",
 		},
 		{
@@ -507,14 +570,14 @@ const INFO = {
 			src: "./harvard_logo.png",
 			alt: "Harvard",
 			title: "Harvard University",
-			subtitle: "Supplemental Coursework: Linear Algebra, Vector Calculus, Real Analysis, and Probabiliy Theory/Statistics",
+			subtitle: "Supplemental Coursework: Linear Algebra, Vector Calculus, Real Analysis, and Probability Theory/Statistics",
 			duration: "Fall 2022, Spring 2023",
 		},
 		{
 			id: 4,
 			src: "./uml_logo.png",
 			alt: "UML",
-			title: "University of Massachussetts - Lowell",
+			title: "University of Massachusetts - Lowell",
 			subtitle: "Supplemental Coursework: Computational Mathematics (Graduate)",
 			duration: "Spring 2023",
 		},

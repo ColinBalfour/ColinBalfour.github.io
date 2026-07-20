@@ -7,7 +7,6 @@ import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
 
 import INFO from "../data/user";
-import SEO from "../data/seo";
 
 import "./styles/learning.css";
 

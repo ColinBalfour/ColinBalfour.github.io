@@ -6,10 +6,12 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import "./styles/project.css";
 
 const Project = (props) => {
-	let { logos, title, description, photo, linkText, link, page, idx } = props;
+	let { logos, title, description, photo, linkText, link, page, idx, slug } = props;
 
+	// Internal project pages use the sentinel link "/projects/". Prefer a stable
+	// named slug; fall back to the 1-based index only if no slug is defined.
 	if (link === "/projects/") {
-	    link = `/projects/${idx+1}`;
+	    link = `/projects/${slug ?? idx + 1}`;
 	}
 
 	let inner = (

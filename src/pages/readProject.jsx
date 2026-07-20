@@ -1,34 +1,35 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import ReactMarkdown from 'react-markdown';
-import styled from "styled-components";
 
 import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
+import Notfound from "./404";
 
 import INFO from "../data/user";
-// import myArticles from "../data/articles";
 
 import "./styles/readProject.css";
 
-// let ArticleStyle = styled.div``;
-
 const ReadProject = () => {
-	const navigate = useNavigate();
 	let { slug } = useParams();
 
-	const project = INFO.projects[slug - 1];
-    const page = project.page;
+	// Resolve by named slug; fall back to the legacy 1-based array index so
+	// any older /projects/<number> links stay valid.
+	const project =
+		INFO.projects.find((p) => p.slug === slug) ||
+		INFO.projects[Number(slug) - 1];
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [project]);
 
-	// ArticleStyle = styled.div`
-	// 	${article().style}
-	// `;
+	if (!project || !project.page) {
+		return <Notfound />;
+	}
+
+	const page = project.page;
 
 	return (
 		<React.Fragment>
@@ -49,15 +50,6 @@ const ReadProject = () => {
 					</div>
 
 					<div className="read-project-container">
-						{/* <div className="read-project-back">
-							<img
-								src="../back-button.png"
-								alt="back"
-								className="read-project-back-button"
-								onClick={() => navigate(-1)}
-							/>
-						</div> */}
-
 						<div className="read-project-wrapper">
 							<div className="read-project-date-container">
 								<div className="read-project-date">

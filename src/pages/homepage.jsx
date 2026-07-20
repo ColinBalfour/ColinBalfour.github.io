@@ -4,24 +4,18 @@ import { Helmet } from "react-helmet";
 import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faTwitter,
 	faGithub,
-	faStackOverflow,
-	faInstagram,
 	faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../components/common/logo";
 import Footer from "../components/common/footer";
 import NavBar from "../components/common/navBar";
-import Article from "../components/homepage/article";
-import Works from "../components/homepage/works";
 import AllProjects from "../components/projects/allProjects";
 import FlippingPhoto from "../components/homepage/flippingPhoto";
 
 import INFO from "../data/user";
 import SEO from "../data/seo";
-import myArticles from "../data/articles";
 
 import "./styles/homepage.css";
 
@@ -93,6 +87,12 @@ const Homepage = () => {
 					<div className="homepage-container">
 						<div className="homepage-first-area">
 							<div className="homepage-first-area-left-side">
+								{INFO.homepage.status && (
+									<div className="homepage-status">
+										<span className="homepage-status-dot"></span>
+										{INFO.homepage.status}
+									</div>
+								)}
 								<div className="title homepage-title">
 									{INFO.homepage.title}
 								</div>
@@ -194,31 +194,21 @@ const Homepage = () => {
 							</a>
 						</div>
 
+						{INFO.skills && INFO.skills.length > 0 && (
+							<div className="homepage-skills">
+								{INFO.skills.map((skill, index) => (
+									<span
+										className="homepage-skill"
+										key={index}
+									>
+										{skill}
+									</span>
+								))}
+							</div>
+						)}
+
 						<div className="homepage-projects">
 							<AllProjects />
-						</div>
-
-						<div className="homepage-after-title">
-							{/* <div className="homepage-articles">
-								{myArticles.map((article, index) => (
-									<div
-										className="homepage-article"
-										key={(index + 1).toString()}
-									>
-										<Article
-											key={(index + 1).toString()}
-											date={article().date}
-											title={article().title}
-											description={article().description}
-											link={"/article/" + (index + 1)}
-										/>
-									</div>
-								))}
-							</div> */}
-
-							{/* <div className="homepage-works">
-								<Works />
-							</div> */}
 						</div>
 
 						<div className="page-footer">
