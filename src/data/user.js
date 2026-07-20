@@ -38,9 +38,9 @@ const INFO = {
 			video: "/research_clips.mp4",
 			poster: "/research_clips_poster.jpg",
 			label: "Research Highlights",
-			playerLabel: "Saranga · ActiveNav · autonomous flight",
+			playerLabel: "Saranga · ActiveNav · MQP",
 			duration: "0:34",
-			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (ActiveNav), and autonomous obstacle-course flight.",
+			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (ActiveNav), and agile event-based flight through an obstacle course (my MQP).",
 		},
 		title: "Robotics software engineer and researcher in perception & autonomy.",
 		description:
