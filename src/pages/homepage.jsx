@@ -36,7 +36,15 @@ const Homepage = () => {
 		const handleScroll = () => {
 			let scroll = Math.round(window.pageYOffset, 2);
 
-			setScrolled(scroll > 60);
+			// Keep the scroll cue up until the projects grid actually enters
+			// the viewport, then fade it out.
+			const projects = document.querySelector(".homepage-projects");
+			setScrolled(
+				projects
+					? projects.getBoundingClientRect().top <
+							window.innerHeight * 0.8
+					: scroll > 60
+			);
 
 			let newLogoSize = 80 - (scroll * 4) / 10;
 
