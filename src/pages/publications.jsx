@@ -66,55 +66,116 @@ const Publications = () => {
 						</div>
 
 						<div className="publications-list">
-							{publications.map((pub, index) => (
-								<div className="publication" key={index}>
-									<div className="publication-meta">
-										<span
-											className={
-												"publication-badge " +
-												(pub.status === "Published"
-													? "published"
-													: "in-review")
-											}
-										>
-											{pub.status}
-										</span>
-										<span className="publication-venue">
-											{pub.venue} · {pub.year}
-										</span>
-									</div>
+							{publications.map((pub, index) => {
+								const primaryUrl =
+									(pub.links &&
+										pub.links[0] &&
+										pub.links[0].url) ||
+									pub.link ||
+									"";
 
-									<div className="publication-title">
-										{pub.link ? (
-											<a
-												href={pub.link}
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												{pub.title}
-												<FontAwesomeIcon
-													icon={
-														faArrowUpRightFromSquare
+								return (
+									<div className="publication" key={index}>
+										{pub.image &&
+											(primaryUrl ? (
+												<a
+													className="publication-media"
+													href={primaryUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													<img
+														src={pub.image}
+														alt={pub.title}
+														loading="lazy"
+													/>
+												</a>
+											) : (
+												<div className="publication-media">
+													<img
+														src={pub.image}
+														alt={pub.title}
+														loading="lazy"
+													/>
+												</div>
+											))}
+
+										<div className="publication-content">
+											<div className="publication-meta">
+												<span
+													className={
+														"publication-badge " +
+														(pub.status ===
+														"Published"
+															? "published"
+															: "in-review")
 													}
-													className="publication-link-icon"
-												/>
-											</a>
-										) : (
-											pub.title
-										)}
-									</div>
+												>
+													{pub.status}
+												</span>
+												<span className="publication-venue">
+													{pub.venue} · {pub.year}
+												</span>
+											</div>
 
-									<div className="publication-authors">
-										<Authors authors={pub.authors} />
-									</div>
+											<div className="publication-title">
+												{primaryUrl ? (
+													<a
+														href={primaryUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														{pub.title}
+													</a>
+												) : (
+													pub.title
+												)}
+											</div>
 
-									{pub.note && (
-										<div className="publication-note">
-											{pub.note}
+											<div className="publication-authors">
+												<Authors authors={pub.authors} />
+											</div>
+
+											{pub.blurb && (
+												<div className="publication-blurb">
+													{pub.blurb}
+												</div>
+											)}
+
+											{pub.note && (
+												<div className="publication-note">
+													{pub.note}
+												</div>
+											)}
+
+											{pub.links &&
+												pub.links.length > 0 && (
+													<div className="publication-links">
+														{pub.links.map(
+															(l, i) => (
+																<a
+																	className="publication-link-btn"
+																	href={l.url}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																	key={i}
+																>
+																	{l.label}
+																	<FontAwesomeIcon
+																		icon={
+																			faArrowUpRightFromSquare
+																		}
+																		className="publication-link-btn-icon"
+																	/>
+																</a>
+															)
+														)}
+													</div>
+												)}
 										</div>
-									)}
-								</div>
-							))}
+									</div>
+								);
+							})}
 						</div>
 					</div>
 					<div className="page-footer">

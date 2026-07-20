@@ -119,11 +119,21 @@ const INFO = {
 	publications: [
 		{
 			title: "Saranga: milliWatt Ultrasound for Navigation in Visually Degraded Environments on Palm-Sized Aerial Robots",
-			authors: "M. Velmurugan, P. Brush, Colin Balfour, R. Pryzbala, N. Sanket",
+			authors: "M. Velmurugan, P. Brush, Colin Balfour, R. Przybyla, N. Sanket",
 			venue: "Science Robotics",
 			year: "2026",
 			status: "Published",
-			link: "https://pear.wpi.edu/research/saranga.html",
+			image: "/saranga.jpg",
+			blurb:
+				"A bat-inspired, low-power ultrasound perception stack that lets a 140g drone localize obstacles and fly through fog, snow, and total darkness using only onboard sensing — pairing physical propeller-noise suppression with a deep denoising network trained on synthetic data.",
+			links: [
+				{
+					label: "Paper",
+					url: "https://www.science.org/doi/10.1126/scirobotics.adz9609",
+				},
+				{ label: "arXiv", url: "https://arxiv.org/abs/2603.24699" },
+				{ label: "Code", url: "https://github.com/pearwpi/Saranga" },
+			],
 		},
 		{
 			title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
@@ -132,7 +142,9 @@ const INFO = {
 			year: "2026",
 			status: "Under Review",
 			note: "* Equal contribution",
-			link: "", // add arXiv / PDF when available
+			image: "/Events_Video.gif",
+			blurb:
+				"Passive, attention-based aerial navigation that reads defocus cues in event-camera streams, training reinforcement-learning policies to fly through dense forest at high speed using only events.",
 		},
 		{
 			title: "ActiveNav: Learning Active Monocular Flight in Forests",
@@ -140,7 +152,9 @@ const INFO = {
 			venue: "IEEE International Conference on Robotics and Automation (ICRA)",
 			year: "2027",
 			status: "Under Review",
-			link: "", // add arXiv / PDF when available
+			image: "/activenav.jpg",
+			blurb:
+				"A hierarchical reinforcement-learning policy that actively steers a quadrotor's camera along with its motion — pointing it to reduce perception uncertainty — for zero-shot sim-to-real flight through cluttered, unseen forests.",
 		},
 	],
 
