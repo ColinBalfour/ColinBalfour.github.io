@@ -35,10 +35,10 @@ const INFO = {
 	homepage: {
 		status: "Robotics Software Intern @ NVIDIA",
 		featured: {
-			videoId: "RiHRGeWW9Ck",
-			label: "Featured Research · Science Robotics 2026",
-			title: "Saranga: autonomous flight in complete darkness, smoke, and snow — using only palm-sized ultrasound sensing.",
-			link: "https://pear.wpi.edu/research/saranga.html",
+			video: "/research_clips.mp4",
+			poster: "/research_clips_poster.jpg",
+			label: "Research Highlights",
+			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (ActiveNav), and autonomous obstacle-course flight.",
 		},
 		title: "Robotics software engineer and researcher in perception & autonomy.",
 		description:

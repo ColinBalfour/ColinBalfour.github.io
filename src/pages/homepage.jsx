@@ -235,22 +235,20 @@ const Homepage = () => {
 									{INFO.homepage.featured.label}
 								</div>
 								<div className="homepage-featured-video">
-									<iframe
-										src={`https://www.youtube-nocookie.com/embed/${INFO.homepage.featured.videoId}`}
-										title={INFO.homepage.featured.title}
-										loading="lazy"
-										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-										allowFullScreen
-									></iframe>
+									<video
+										controls
+										preload="none"
+										poster={INFO.homepage.featured.poster}
+									>
+										<source
+											src={INFO.homepage.featured.video}
+											type="video/mp4"
+										/>
+									</video>
 								</div>
-								<a
-									className="homepage-featured-caption"
-									href={INFO.homepage.featured.link}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
+								<div className="homepage-featured-caption">
 									{INFO.homepage.featured.title}
-								</a>
+								</div>
 							</div>
 						)}
 
