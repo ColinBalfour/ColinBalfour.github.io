@@ -319,8 +319,8 @@ const INFO = {
 						primary: true,
 					},
 					{
-						label: "Watch the Demo",
-						url: "https://youtu.be/vZI_f9TqJVw",
+						label: "▶ Skip to the Flight Tests",
+						url: "https://youtu.be/vZI_f9TqJVw?t=155",
 					},
 				],
 				video: "vZI_f9TqJVw",
