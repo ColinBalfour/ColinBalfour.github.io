@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: left;
 	align-items: center;
-	padding-top: 70px;
+	padding-top: 130px;
 }
 
 .homepage-container {
@@ -81,7 +81,7 @@
 	display: flex;
 	justify-content: left;
 	align-items: center;
-	padding-top: 20px;
+	padding-top: 30px;
 }
 
 .homepage-social-icon {
@@ -134,7 +134,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	padding-top: 22px;
+	padding-top: 34px;
 }
 
 .homepage-skill {
@@ -155,7 +155,7 @@
 }
 
 .homepage-featured {
-	padding-top: 34px;
+	padding-top: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -198,7 +198,7 @@
 
 .homepage-projects {
 	flex-basis: 300px;
-	padding-top: 16px;
+	padding-top: 40px;
 }
 
 .homepage-articles {
