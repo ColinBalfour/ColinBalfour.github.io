@@ -383,9 +383,8 @@ const INFO = {
 		{
 			title: "Depth Camera Data Collection Rig",
 			description:
-				"In order to get ground-truth depth data for a novel depth model, I designed and built a data-collection rig with a small team at the PeAR Lab. " +
-				"It uses stitched pointclouds from 3 Intel Realsense D430 cameras to create a 160x40 degree FOV depth image, as well as an L515 LIDAR and an Oak-D Lite. " +
-				"The camera and other sensor data is collected through a ROS2 pipeline",
+				"I designed and built a multi-sensor data-collection rig at the PeAR Lab to produce ground-truth depth for a novel depth model — from the physical design and assembly through drivers, precise inter-sensor calibration, and a heavily optimized ROS 2 pipeline. " +
+				"Point clouds from 3 Intel RealSense D430s are stitched via torch-based optimization into a 160x40 degree FOV depth image, alongside an L515 LIDAR and an OAK-D Lite.",
 			photo: "/stitched_depth.png",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
@@ -404,15 +403,16 @@ const INFO = {
 			page: {
 				title: "Depth Camera Data Collection Rig",
 				subtitle:
-					"A custom multi-sensor rig built with a small team at the PeAR Lab to collect ground-truth depth data for training a novel depth model.",
+					"A custom multi-sensor rig I designed and built at the PeAR Lab to collect ground-truth depth data for training a novel depth model — hardware, drivers, calibration, and an optimized data pipeline.",
 				description:
-					"Training a depth network is only as good as its ground truth — and no single off-the-shelf sensor gave us the wide field of view we needed. So we built our own rig.\n\n" +
+					"Training a depth network is only as good as its ground truth — and no single off-the-shelf sensor gave us the wide field of view we needed. So I designed and built our own rig, owning it end to end: the physical layout and assembly, the (frequently uncooperative) sensor drivers, the inter-sensor calibration, and the software pipeline that turned raw streams into usable ground truth.\n\n" +
 					"## The sensor suite\n\n" +
-					"The rig stitches point clouds from **three Intel RealSense D430 stereo cameras** into a single 160°×40° field-of-view depth image, complemented by an **Intel L515 solid-state LIDAR** for high-accuracy reference depth and an **OAK-D Lite** for RGB and onboard stereo. All streams are time-synchronized and recorded through a **ROS 2** pipeline.\n\n" +
+					"The rig combines **three Intel RealSense D430 stereo cameras**, an **Intel L515 solid-state LIDAR** for high-accuracy reference depth, and an **OAK-D Lite** for RGB and onboard stereo. All streams are time-synchronized and recorded through a **ROS 2** pipeline. Keeping five depth sensors alive on one machine meant wrangling USB bandwidth limits and driver instabilities — much of the rig's reliability came from hardening that layer.\n\n" +
 					"![The data collection rig](/data_rig.png)\n\n" +
-					"## Stitched wide-FOV depth\n\n" +
-					"Calibrating the three RealSense units against each other and fusing their point clouds produces a seamless wide-FOV depth image — the ground truth used downstream for training and evaluating depth-estimation models at the lab.\n\n" +
-					"![Stitched depth output](/stitched_depth.png)",
+					"## Calibration & torch-based point-cloud stitching\n\n" +
+					"Fusing three overlapping RealSense units into one seamless 160°×40° depth image required **precise extrinsic calibration** between all sensors. I formulated the stitching as a **PyTorch-based optimization**, refining the inter-camera transforms directly against the overlapping point clouds — and spent significant time optimizing the pipeline so it could keep up with the large volume of incoming sensor data.\n\n" +
+					"![Stitched depth output](/stitched_depth.png)\n\n" +
+					"The resulting wide-FOV depth images serve as the ground truth for training and evaluating depth-estimation models at the lab.",
 			},
 		},
 
