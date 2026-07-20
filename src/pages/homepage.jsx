@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
+import { faMailBulk, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faGithub,
@@ -242,6 +242,21 @@ const Homepage = () => {
 								))}
 							</div>
 						)}
+
+						<button
+							className="homepage-scroll-cue"
+							onClick={() =>
+								document
+									.querySelector(".homepage-projects")
+									?.scrollIntoView({ behavior: "smooth" })
+							}
+						>
+							<span>See my research & projects</span>
+							<FontAwesomeIcon
+								icon={faChevronDown}
+								className="homepage-scroll-cue-icon"
+							/>
+						</button>
 
 						{INFO.homepage.featured && (
 							<div className="homepage-featured">
