@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
 
 import Homepage from "./pages/homepage";
@@ -16,11 +16,26 @@ import { TRACKING_ID } from "./data/tracking";
 import "./app.css";
 
 function App() {
+	const location = useLocation();
+
 	useEffect(() => {
 		if (TRACKING_ID !== "") {
-			ReactGA.initialize(TRACKING_ID);
+			// Disable the auto first-hit; we send every pageview manually below
+			// so client-side route changes are also tracked (and not double-counted).
+			ReactGA.initialize(TRACKING_ID, {
+				gtagOptions: { send_page_view: false },
+			});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (TRACKING_ID !== "") {
+			ReactGA.send({
+				hitType: "pageview",
+				page: location.pathname + location.search,
+			});
+		}
+	}, [location]);
 
 	return (
 		<div className="App">
