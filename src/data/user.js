@@ -225,7 +225,7 @@ const INFO = {
 				"controls the drone's camera along with its movement. The policy is able to actively point the camera to areas " +
 				"that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, " +
 				"running onboard a Jetson Nano.",
-			photo: "/SpeedMeter.gif",
+			photo: "/activenav.jpg",
 			logo: [
 				"/pytorch_logo.png",
 				"/blender_logo.png",
@@ -234,10 +234,24 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "https://pear.wpi.edu/index.html",
+			slug: "activenav",
+			link: "/projects/",
 			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+				"Colin Balfour", "Balfour", "ActiveNav", "Active Perception", "Reinforcement Learning", "Drone", "Quadrotor", "Monocular", "Optical Flow", "Robotics", "ICRA",
 			],
+			page: {
+				title: "ActiveNav: Learning Active Monocular Flight in Forests",
+				subtitle:
+					"Under review at **ICRA 2027** (with K. Srivastava, D. Singh, and N. Sanket, PeAR Lab). A hierarchical RL policy that actively points the drone's camera — not just its body — to see better and fly further.",
+				description:
+					"Most drones treat their camera as a fixed sensor bolted to the airframe: wherever the body points, that's what they see. ActiveNav borrows a trick from birds — which constantly move their heads to gather the most useful visual information — and learns to control the camera's gaze *as part of the flight policy itself*.\n\n" +
+					"## How it works\n\n" +
+					"The policy takes optical flow and its uncertainty as input, and a **hierarchical reinforcement-learning** controller outputs both flight commands and an active camera (neck) yaw. The camera is steered toward regions that reduce perception uncertainty — peeking around occlusions and checking gaps before committing — which directly improves obstacle avoidance in dense clutter.\n\n" +
+					"![ActiveNav forest flight](/speedmeter_web.gif)\n\n" +
+					"## Results\n\n" +
+					"Trained entirely in simulation, the policy transfers **zero-shot** to the real world, achieving 80% success in cluttered, previously unseen forest environments — running fully onboard a Jetson Nano.\n\n" +
+					"![Onboard view](/activenav.jpg)",
+			},
 		},
 
 		{
@@ -246,6 +260,7 @@ const INFO = {
 				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
 				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
 			photo: "/Events_Video.gif",
+			slug: "attentionseeker",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/pytorch_logo.png",
@@ -256,10 +271,22 @@ const INFO = {
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
 			],
 			linkText: "View Project",
-			link: "https://pear.wpi.edu/index.html",
+			link: "/projects/",
 			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Reinforcement Learning", "Simulation", "Python", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
+				"Colin Balfour", "Balfour", "AttentionSeeker", "Event Camera", "Defocus", "Attention", "Reinforcement Learning", "Drone", "Aerial Navigation", "RA-L", "Robotics",
 			],
+			page: {
+				title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
+				subtitle:
+					"Under review at **RA-L 2026** (with D. Singh* and N. Sanket, PeAR Lab; *equal contribution). Passive attention for drones: letting the optics themselves say what matters.",
+				description:
+					"Event cameras only report *change* — asynchronous, per-pixel brightness events at microsecond latency, with no frames at all. That makes them ideal for fast flight, but it also means most of the stream is clutter: everything moves when the camera does. AttentionSeeker asks a simple question — what if the lens itself could tell us what to pay attention to?\n\n" +
+					"## Defocus as attention\n\n" +
+					"By exploiting **defocus cues** in the event stream, objects at the depth of interest produce sharp, distinctive event signatures while the rest blurs away — a *passive*, optics-driven attention mechanism that requires no extra compute, power, or moving parts. The result is a naturally foveated input that highlights obstacles at exactly the range that matters for avoidance.\n\n" +
+					"![Event stream visualization](/Events_Video.gif)\n\n" +
+					"## Learning to fly on events\n\n" +
+					"On top of this attention signal we train **reinforcement-learning policies** that fly a quadrotor through dense forest at high speed using only events — no frames, no depth sensor. The GIF above shows a policy navigating a dense simulated forest from the event stream alone.",
+			},
 		},
 
 		{
@@ -359,10 +386,24 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
-			link: "https://pear.wpi.edu/index.html",
+			slug: "depth-rig",
+			link: "/projects/",
 			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
+				"Colin Balfour", "Balfour", "Depth Camera", "Realsense", "LIDAR", "Point Cloud", "ROS2", "Sensor Fusion", "Data Collection", "Robotics",
 			],
+			page: {
+				title: "Depth Camera Data Collection Rig",
+				subtitle:
+					"A custom multi-sensor rig built with a small team at the PeAR Lab to collect ground-truth depth data for training a novel depth model.",
+				description:
+					"Training a depth network is only as good as its ground truth — and no single off-the-shelf sensor gave us the wide field of view we needed. So we built our own rig.\n\n" +
+					"## The sensor suite\n\n" +
+					"The rig stitches point clouds from **three Intel RealSense D430 stereo cameras** into a single 160°×40° field-of-view depth image, complemented by an **Intel L515 solid-state LIDAR** for high-accuracy reference depth and an **OAK-D Lite** for RGB and onboard stereo. All streams are time-synchronized and recorded through a **ROS 2** pipeline.\n\n" +
+					"![The data collection rig](/data_rig.png)\n\n" +
+					"## Stitched wide-FOV depth\n\n" +
+					"Calibrating the three RealSense units against each other and fusing their point clouds produces a seamless wide-FOV depth image — the ground truth used downstream for training and evaluating depth-estimation models at the lab.\n\n" +
+					"![Stitched depth output](/stitched_depth.png)",
+			},
 		},
 
 		{
