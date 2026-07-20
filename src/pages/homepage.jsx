@@ -15,6 +15,7 @@ import Footer from "../components/common/footer";
 import NavBar from "../components/common/navBar";
 import AllProjects from "../components/projects/allProjects";
 import FlippingPhoto from "../components/homepage/flippingPhoto";
+import VideoPlayer from "../components/homepage/videoPlayer";
 
 import INFO from "../data/user";
 import SEO from "../data/seo";
@@ -248,16 +249,12 @@ const Homepage = () => {
 									{INFO.homepage.featured.label}
 								</div>
 								<div className="homepage-featured-video">
-									<video
-										controls
-										preload="none"
+									<VideoPlayer
+										src={INFO.homepage.featured.video}
 										poster={INFO.homepage.featured.poster}
-									>
-										<source
-											src={INFO.homepage.featured.video}
-											type="video/mp4"
-										/>
-									</video>
+										label={INFO.homepage.featured.playerLabel}
+										duration={INFO.homepage.featured.duration}
+									/>
 								</div>
 								<div className="homepage-featured-caption">
 									{INFO.homepage.featured.title}

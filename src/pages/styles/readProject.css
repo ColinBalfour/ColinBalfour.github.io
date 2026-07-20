@@ -65,6 +65,44 @@
 	width: 80% !important;
 }
 
+.read-project-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 4px 0 30px;
+}
+
+.read-project-link-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--link-color);
+	border: 1px solid var(--quaternary-color);
+	border-radius: 10px;
+	padding: 9px 18px;
+	text-decoration: none;
+	transition: background 0.2s ease, border-color 0.2s ease,
+		transform 0.2s ease;
+}
+
+.read-project-link-btn:hover {
+	background: #f0fdfa;
+	border-color: var(--link-color);
+	transform: translateY(-1px);
+}
+
+.read-project-link-btn.primary {
+	background: var(--link-color);
+	border-color: var(--link-color);
+	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+.read-project-link-btn.primary:hover {
+	background: #0d9488;
+}
+
 .read-project-video {
 	position: relative;
 	width: 100%;

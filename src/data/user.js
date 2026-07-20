@@ -38,6 +38,8 @@ const INFO = {
 			video: "/research_clips.mp4",
 			poster: "/research_clips_poster.jpg",
 			label: "Research Highlights",
+			playerLabel: "Saranga · ActiveNav · autonomous flight",
+			duration: "0:34",
 			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (ActiveNav), and autonomous obstacle-course flight.",
 		},
 		title: "Robotics software engineer and researcher in perception & autonomy.",
@@ -289,7 +291,7 @@ const INFO = {
 		{
 			title: "Agile Event-based Flight through Cluttered Environments",
 			description:
-				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered forests using only onboard sensing — inspired by how birds fly through trees.",
+				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered environments using only onboard sensing — inspired by how birds fly through trees.",
 			date: "2025 - 2026",
 			logo: [
 				"/pytorch_logo.png",
@@ -309,7 +311,18 @@ const INFO = {
 			page: {
 				title: "Agile Event-based Flight through Cluttered Environments",
 				subtitle:
-					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab). [Watch the 3-minute demo](https://youtu.be/vZI_f9TqJVw) · [Project report (PDF)](https://drive.google.com/file/d/1a4dQrtl8_N-TtYmtHigq0v0pnoG3NXzc/view).",
+					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab).",
+				links: [
+					{
+						label: "📄 Read the Project Report",
+						url: "https://drive.google.com/file/d/1a4dQrtl8_N-TtYmtHigq0v0pnoG3NXzc/view",
+						primary: true,
+					},
+					{
+						label: "Watch the Demo",
+						url: "https://youtu.be/vZI_f9TqJVw",
+					},
+				],
 				video: "vZI_f9TqJVw",
 				description:
 					"Birds fly through dense forests at high speed with nothing but their eyes. Our MQP asked whether a palm-sized quadrotor could do the same — navigating hazardous, cluttered, and dynamic environments using only lightweight **event-camera** perception and onboard compute, instead of the bulky LIDAR or stereo rigs that agile drones usually rely on. We built the full stack end to end: perception, planning, control, and the aircraft itself.\n\n" +
@@ -322,8 +335,8 @@ const INFO = {
 					"To carry the event camera and onboard compute, we designed and built a custom carbon-fiber quadrotor, iterating from CAD to a flight-ready platform tuned for agile flight.\n\n" +
 					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
 					"## Results\n\n" +
-					"The system flew autonomously through cluttered indoor courses and real forest environments using only onboard sensing and computation, and was recognized as a Best MQP Award Finalist at WPI.\n\n" +
-					"![Forest flight](/mqp_flight.jpg)",
+					"The system flew autonomously through dense, cluttered obstacle courses using only onboard sensing and computation — below, the drone (bottom right) threads the arena while the onboard point cloud builds in real time (inset). The project was recognized as a Best MQP Award Finalist at WPI.\n\n" +
+					"![Autonomous arena flight](/mqp_flight.jpg)",
 			},
 		},
 
@@ -640,6 +653,14 @@ const INFO = {
 		},
 		{
 			id: 1,
+			src: "./pear_logo.png",
+			alt: "PeAR",
+			title: "Perception and Autonomous Robotics (PeAR) Group",
+			subtitle: "Perception & Deep Learning Researcher",
+			duration: "May 2024 - Present",
+		},
+		{
+			id: 2,
 			src: "./magna_logo.svg",
 			alt: "Magna Electronics",
 			wide: true,
@@ -648,21 +669,12 @@ const INFO = {
 			duration: "Jan 2026 - May 2026",
 		},
 		{
-			id: 2,
+			id: 3,
 			src: "./bbn_logo.png",
 			alt: "RTX BBN Technologies",
 			title: "RTX BBN Technologies",
 			subtitle: "Research Intern — Physical Sciences & Systems",
 			duration: "May 2025 - Dec 2025",
-		},
-		{
-			id: 3,
-			src: "./pear_logo.png",
-			alt: "PeAR",
-			wide: true,
-			title: "Perception and Autonomous Robotics (PeAR) Group",
-			subtitle: "Perception & Deep Learning Researcher",
-			duration: "May 2024 - Present",
 		},
 		{
 			id: 4,
@@ -688,7 +700,7 @@ const INFO = {
 			src: "./WPI_logo.png",
 			alt: "WPI",
 			title: "Worcester Polytechnic Institute (WPI)",
-			subtitle: "B.S. Robotics Engineering, Minor in Mathematics — 3.82 GPA (Dec 2026)\nM.S. Robotics Engineering — 4.0 GPA (May 2027)",
+			subtitle: "B.S. Robotics Engineering, Minor in Mathematics (May 2027)\nM.S. Robotics Engineering (May 2027)",
 			duration: "2024 - Present",
 		},
 		{

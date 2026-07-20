@@ -1,0 +1,99 @@
+@import "../../../data/styles.css";
+
+.video-player {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 14px;
+	overflow: hidden;
+	background: #000;
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+	transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.video-player:not(.playing) {
+	cursor: pointer;
+}
+
+.video-player:not(.playing):hover {
+	transform: translateY(-2px);
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.video-player video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background: #000;
+}
+
+.video-player-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Soft gradient so the play button and label read on any poster. */
+.video-player-scrim {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.55) 0%,
+		rgba(0, 0, 0, 0.08) 40%,
+		rgba(0, 0, 0, 0.05) 100%
+	);
+}
+
+.video-player-play {
+	position: relative;
+	width: 74px;
+	height: 74px;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.94);
+	color: var(--link-color);
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding-left: 5px; /* optically center the triangle */
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+	transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.video-player:not(.playing):hover .video-player-play {
+	transform: scale(1.08);
+	background: #ffffff;
+}
+
+.video-player-label {
+	position: absolute;
+	left: 18px;
+	bottom: 14px;
+	font-family: var(--secondary-font);
+	font-size: 13.5px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	color: #ffffff;
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+	max-width: 70%;
+}
+
+.video-player-duration {
+	position: absolute;
+	right: 14px;
+	bottom: 14px;
+	font-family: var(--secondary-font);
+	font-size: 12px;
+	font-weight: 700;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.65);
+	border-radius: 6px;
+	padding: 3px 8px;
+}

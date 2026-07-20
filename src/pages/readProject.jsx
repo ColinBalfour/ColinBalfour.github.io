@@ -65,6 +65,25 @@ const ReadProject = () => {
 								<ReactMarkdown>{page.subtitle}</ReactMarkdown>
 							</div>
 
+							{page.links && page.links.length > 0 && (
+								<div className="read-project-links">
+									{page.links.map((l, i) => (
+										<a
+											key={i}
+											className={
+												"read-project-link-btn" +
+												(l.primary ? " primary" : "")
+											}
+											href={l.url}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{l.label}
+										</a>
+									))}
+								</div>
+							)}
+
 							{page.video && (
 								<div className="read-project-video">
 									<iframe
