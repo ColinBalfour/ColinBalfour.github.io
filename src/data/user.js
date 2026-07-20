@@ -630,6 +630,9 @@ const INFO = {
 			],
 		},
 
+		/* Retired from display (kept for reference) — older non-robotics web
+		   projects: Gilded Age Museum and CCHS AP Stats.
+
 		{
 			title: "Gilded Age Museum",
 			tagline:
@@ -639,6 +642,7 @@ const INFO = {
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/html/html.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/css/css.png",
+
 			],
 			linkText: "View Project",
 			link: "https://colinbalfour.github.io/GildedAgeMuseum",
@@ -664,6 +668,7 @@ const INFO = {
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics", 
 			],
 		},
+		*/
 
 	],
 
@@ -747,28 +752,33 @@ const INFO = {
 			subtitle: "High School Diploma, Engineering Certificate",
 			duration: "2020 - 2024",
 		},
+	],
+
+	// Individual university courses taken alongside the degrees above —
+	// rendered as a separate "Supplemental Coursework" card.
+	supplementalEducation: [
 		{
-			id: 2,
-			src: "./neu_logo.png",
-			alt: "NEU",
-			title: "Northeastern University",
-			subtitle: "Supplemental Coursework: Advanced Group Theory",
-			duration: "Fall 2023",
-		},
-		{
-			id: 3,
+			id: 0,
 			src: "./harvard_logo.png",
 			alt: "Harvard",
 			title: "Harvard University",
-			subtitle: "Supplemental Coursework: Linear Algebra, Vector Calculus, Real Analysis, and Probability Theory/Statistics",
+			subtitle: "Linear Algebra, Vector Calculus, Real Analysis, and Probability Theory/Statistics",
 			duration: "Fall 2022, Spring 2023",
 		},
 		{
-			id: 4,
+			id: 1,
+			src: "./neu_logo.png",
+			alt: "NEU",
+			title: "Northeastern University",
+			subtitle: "Advanced Group Theory",
+			duration: "Fall 2023",
+		},
+		{
+			id: 2,
 			src: "./uml_logo.png",
 			alt: "UML",
 			title: "University of Massachusetts - Lowell",
-			subtitle: "Supplemental Coursework: Computational Mathematics (Graduate)",
+			subtitle: "Computational Mathematics (Graduate)",
 			duration: "Spring 2023",
 		},
 	],

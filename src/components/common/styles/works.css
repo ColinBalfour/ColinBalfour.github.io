@@ -107,3 +107,8 @@
 		margin-top: 2px;
 	}
 }
+
+/* Space between the Education and Supplemental Coursework cards. */
+.education-supplemental {
+	margin-top: 26px;
+}
