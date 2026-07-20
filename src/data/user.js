@@ -250,7 +250,7 @@ const INFO = {
 					"Most drones treat their camera as a fixed sensor bolted to the airframe: wherever the body points, that's what they see. ActiveNav borrows a trick from birds — which constantly move their heads to gather the most useful visual information — and learns to control the camera's gaze *as part of the flight policy itself*.\n\n" +
 					"## How it works\n\n" +
 					"The policy takes optical flow and its uncertainty as input, and a **hierarchical reinforcement-learning** controller outputs both flight commands and an active camera (neck) yaw. The camera is steered toward regions that reduce perception uncertainty — peeking around occlusions and checking gaps before committing — which directly improves obstacle avoidance in dense clutter.\n\n" +
-					"![ActiveNav forest flight](/speedmeter_web.gif)\n\n" +
+					"![ActiveNav forest flight](/speedmeter_web.webp)\n\n" +
 					"## Results\n\n" +
 					"Trained entirely in simulation, the policy transfers **zero-shot** to the real world, achieving 80% success in cluttered, previously unseen forest environments — running fully onboard a Jetson Nano.\n\n" +
 					"![Onboard view](/activenav.jpg)",
@@ -312,7 +312,7 @@ const INFO = {
 			linkText: "View Project",
 			slug: "agile-event-flight",
 			link: "/projects/",
-			photo: "/mqp_flight.jpg",
+			photo: "/mqp_flight.webp",
 			keywords: [
 				"Colin Balfour", "Balfour", "MQP", "WPI", "Event Camera", "Drone", "Quadrotor", "Autonomous Navigation", "Motion Planning", "Deep Learning", "Reinforcement Learning", "Robotics",
 			],
@@ -344,7 +344,7 @@ const INFO = {
 					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
 					"## Results\n\n" +
 					"The system flew autonomously through dense, cluttered obstacle courses using only onboard sensing and computation — below, the drone (bottom right) threads the arena while the onboard point cloud builds in real time (inset). The project was recognized as a Best MQP Award Finalist at WPI.\n\n" +
-					"![Autonomous arena flight](/mqp_flight.jpg)",
+					"![Autonomous arena flight](/mqp_flight.webp)",
 			},
 		},
 
@@ -479,7 +479,7 @@ const INFO = {
 				"For our 2023-2024 season, I created a robust vision pipeline using a Jetson for pose estimation using AprilTags " +
 				"and a Kalman Filter, and object detection with YOLOv8. Additionally, I developed code for each subsystem of the robot, " +
 				"from a holonomic drive-steer indepdenent drivetrain to an intake/handoff mechanism with an arm, as well as robust fully-autonomous routines (GIF above)",
-			photo: "/frc.gif",
+			photo: "/frc.webp",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/java/java.png",
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
@@ -561,7 +561,7 @@ const INFO = {
 			description:
 				"In an independent study in machine learning, I developed neural nets from scratch in numpy, compared optimization using Gradient Descent and Newton's Method, and presented to the mathematics department." +
 				"Part of this independent study was developing an A* algorithm that used a neural net trained via genetic algorithm to improve the performance of A* and visualize NN learning.",
-			photo: "/AStar.gif",
+			photo: "/AStar.webp",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 				"/numpy.svg",
@@ -606,7 +606,7 @@ const INFO = {
 					"## Motion Profile\n\n" +
 					"Moving on, the next problem was to create a motion profile for the arm to follow. When moving from one point to the other (often large differences), it can be dangerous (both for humans and tensioned chains) if the arm suddenly zips to its next location as fast as it pleases. In addition, it makes it harder to control, since you have less control authority (harder to respond to disturbances). To combat this, a motion profile is used to generate a trajectory (through both time and space) of “setpoints” (targets in space to move to). This will improve the safety, consistency, and effectiveness of the controller.\n\n" +
 					"To start, to make motions smooth and direct, I used the inverse kinematics model to generate a linear trajectory, meaning that the “hand” will travel in a straight line from start to finish. This is distinct from the common practice of moving each motor to their final angular positions irrespective of what the other one was doing, which can cause jerky motions. In addition, I placed limits on both the maximum speed and acceleration that the arm could move in: limiting the force on the chains, increasing control authority, and again creating more consistent and smooth motion.\n\n" +
-					"\n\n![Motion Profile Animation](/arm4.gif)\n\n" +
+					"\n\n![Motion Profile Animation](/arm4.webp)\n\n" +
 					"This animation shows the motion of the arm through two different trajectories: the blue/orange running with no acceleration constraint but a max speed, and the green/red running with both max acceleration and max speed constraints. Notice how the blue/orange arm starts and stops instantaneously, while the green/red arm speeds up and slows down (they have the same max speed).\n\n" +
 					"All of the above simulations (along with many other less interesting graphs) played a key role in the software development for our two-jointed arm. They provided an easy way to debug code by being able to see what’s going wrong, and being able to visually confirm that the code works the way we want it to. Python and matplotlib make it easy to manipulate outputs and dive into what’s going wrong in a way that can be difficult in a full java project. Plus, it’s a really cool way to see what your code is doing.\n\n"
 			}
