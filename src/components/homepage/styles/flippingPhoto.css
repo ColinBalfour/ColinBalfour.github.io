@@ -59,7 +59,13 @@
 	aspect-ratio: 1 / 1;
 }
 
-.photo-card img:nth-child(2) {
+/* Anchor wrappers (linked photos) contribute no box of their own. */
+.photo-card a {
+	display: contents;
+}
+
+.photo-card img:nth-child(2),
+.photo-card > *:nth-child(2) img {
 	transform: rotateY(180deg);
 }
 

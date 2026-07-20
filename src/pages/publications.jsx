@@ -35,6 +35,7 @@ const Publications = () => {
 
 	const currentSEO = SEO.find((item) => item.page === "publications");
 	const publications = INFO.publications || [];
+	const press = INFO.press || [];
 
 	return (
 		<React.Fragment>
@@ -177,6 +178,51 @@ const Publications = () => {
 								);
 							})}
 						</div>
+
+						{press.length > 0 && (
+							<React.Fragment>
+								<div className="title publications-press-title">
+									In the News
+								</div>
+								<div className="subtitle publications-subtitle">
+									Media coverage of my research.
+								</div>
+								<div className="press-list">
+									{press.map((item, index) => (
+										<a
+											className="press-item"
+											href={item.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											key={index}
+										>
+											<div className="press-meta">
+												<span className="press-outlet">
+													{item.outlet}
+												</span>
+												<span className="press-date">
+													{item.date}
+												</span>
+											</div>
+											<div className="press-headline">
+												{item.title}
+												<FontAwesomeIcon
+													icon={
+														faArrowUpRightFromSquare
+													}
+													className="press-link-icon"
+												/>
+											</div>
+											{item.summary && (
+												<div className="press-summary">
+													{item.summary}
+												</div>
+											)}
+										</a>
+									))}
+								</div>
+							</React.Fragment>
+						)}
 					</div>
 					<div className="page-footer">
 						<Footer />

@@ -171,6 +171,72 @@
 	font-size: 10px;
 }
 
+.publications-press-title {
+	margin-top: 30px;
+}
+
+.press-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-top: 26px;
+	margin-bottom: 50px;
+}
+
+.press-item {
+	display: block;
+	border: 1px solid var(--quaternary-color);
+	border-radius: 10px;
+	padding: 16px 20px;
+	text-decoration: none;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.press-item:hover {
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+	transform: translateY(-1px);
+}
+
+.press-meta {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	margin-bottom: 6px;
+}
+
+.press-outlet {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--link-color);
+}
+
+.press-date {
+	font-size: 12px;
+	color: var(--tertiary-color);
+}
+
+.press-headline {
+	font-size: 15.5px;
+	font-weight: 700;
+	color: var(--primary-color);
+	line-height: 1.4;
+}
+
+.press-link-icon {
+	font-size: 11px;
+	margin-left: 8px;
+	color: var(--link-color);
+}
+
+.press-summary {
+	margin-top: 6px;
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--secondary-color);
+}
+
 @media (max-width: 700px) {
 	.publications-container {
 		padding-top: 60px;

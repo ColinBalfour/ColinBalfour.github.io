@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./styles/flippingPhoto.css";
 
-const FlippingPhoto = ({ 
-	images, 
-	photoNumber, 
+const FlippingPhoto = ({
+	images,
+	links = [],
+	photoNumber,
 	animationDelay = 0,
 	animationDuration = 8,
 	pendulumDuration = 6
@@ -63,8 +64,27 @@ const FlippingPhoto = ({
 		>
 			<div className="string"></div>
 			<div className={`photo-card ${isCarousel ? currentAnimation : ''}`}>
-				<img src={images[frontImageIndex]} alt={`Portfolio ${photoNumber} - Front`} />
-				<img src={images[backImageIndex]} alt={`Portfolio ${photoNumber} - Back`} />
+				{[frontImageIndex, backImageIndex].map((imgIndex, i) => {
+					const img = (
+						<img
+							src={images[imgIndex]}
+							alt={`Portfolio ${photoNumber} - ${i === 0 ? "Front" : "Back"}`}
+						/>
+					);
+					// links[] is parallel to images[]; wrap when a link exists.
+					return links[imgIndex] ? (
+						<a
+							key={i}
+							href={links[imgIndex]}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{img}
+						</a>
+					) : (
+						<React.Fragment key={i}>{img}</React.Fragment>
+					);
+				})}
 			</div>
 		</div>
 	);

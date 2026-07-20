@@ -107,22 +107,35 @@ const Homepage = () => {
 							<div className="homepage-first-area-right-side">
 								<div className="homepage-image-container">
 									<div className="hanging-photos">
-										<FlippingPhoto 
+										<FlippingPhoto
 											images={["/homepage.jpg", "/about.jpg"]}
+											links={[
+												INFO.socials.linkedin,
+												INFO.socials.linkedin,
+											]}
 											photoNumber={1}
 											animationDelay={0}
 											animationDuration={8}
 											pendulumDuration={6}
 										/>
-										<FlippingPhoto 
+										<FlippingPhoto
 											images={["/flying.webp", "/apnews.png"]}
+											links={[
+												"https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
+												"https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
+											]}
 											photoNumber={2}
 											animationDelay={4}
 											animationDuration={8}
 											pendulumDuration={10}
 										/>
-										<FlippingPhoto 
+										<FlippingPhoto
 											images={["/drone.png", "/neck_movement.gif", "/throwing_ball.gif"]}
+											links={[
+												"https://pear.wpi.edu/research/saranga.html",
+												"https://pear.wpi.edu/research/saranga.html",
+												"https://pear.wpi.edu/research/saranga.html",
+											]}
 											photoNumber={3}
 											animationDelay={6}
 											animationDuration={10}

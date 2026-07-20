@@ -158,6 +158,44 @@ const INFO = {
 		},
 	],
 
+	press: [
+		{
+			title: "How tiny drones inspired by bats could save lives in dark and stormy conditions",
+			outlet: "Associated Press",
+			date: "October 2025",
+			// NOTE: this is a verified AP-credited syndicated reprint
+			// (© 2025 The Associated Press). Swap in the canonical apnews.com
+			// permalink when available.
+			url: "https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
+			summary:
+				"The AP visited the PeAR Lab to cover our bat-inspired, palm-sized drones that navigate darkness, smoke, and fog using ultrasound — including photos of me flying one at WPI.",
+		},
+		{
+			title: "Bats master the dark with sound. WPI engineers hope their drones do the same in dangerous situations.",
+			outlet: "CBS News Boston",
+			date: "April 2026",
+			url: "https://www.cbsnews.com/boston/news/bats-drones-wpi-engineers/",
+			summary:
+				"A televised segment on the lab's ultrasound navigation work, including my walkthrough of the 1.2 milliwatt sensor.",
+		},
+		{
+			title: "Bats Inspire Advance in Aerial Robots",
+			outlet: "WPI News",
+			date: "March 2026",
+			url: "https://www.wpi.edu/news/bats-inspire-advance-aerial-robots",
+			summary:
+				"WPI's feature on the Science Robotics paper behind Saranga.",
+		},
+		{
+			title: "WPI's Bat-Inspired Drones Could Transform Search and Rescue",
+			outlet: "DroneLife",
+			date: "October 2025",
+			url: "https://dronelife.com/2025/10/31/how-tiny-bat-inspired-drones-could-transform-search-and-rescue-operations/",
+			summary:
+				"How the ultrasound-based perception stack could support search-and-rescue operations.",
+		},
+	],
+
 	projects: [
 		{
 			title: "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
