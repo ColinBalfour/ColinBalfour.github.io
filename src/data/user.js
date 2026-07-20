@@ -225,6 +225,47 @@ const INFO = {
 		},
 
 		{
+			title: "Agile Event-based Flight through Cluttered Environments",
+			description:
+				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered forests using only onboard sensing — inspired by how birds fly through trees.",
+			date: "2025 - 2026",
+			logo: [
+				"/pytorch_logo.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+				"/ros2_logo.png",
+				"/opencv_logo.png",
+				"/cuda.svg",
+			],
+			linkText: "View Project",
+			slug: "agile-event-flight",
+			link: "/projects/",
+			photo: "/mqp_flight.jpg",
+			keywords: [
+				"Colin Balfour", "Balfour", "MQP", "WPI", "Event Camera", "Drone", "Quadrotor", "Autonomous Navigation", "Motion Planning", "Deep Learning", "Reinforcement Learning", "Robotics",
+			],
+			page: {
+				title: "Agile Event-based Flight through Cluttered Environments",
+				subtitle:
+					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab). [Watch the 3-minute demo](https://youtu.be/vZI_f9TqJVw) · [Project report (PDF)](https://drive.google.com/file/d/1a4dQrtl8_N-TtYmtHigq0v0pnoG3NXzc/view).",
+				video: "vZI_f9TqJVw",
+				description:
+					"Birds fly through dense forests at high speed with nothing but their eyes. Our MQP asked whether a palm-sized quadrotor could do the same — navigating hazardous, cluttered, and dynamic environments using only lightweight **event-camera** perception and onboard compute, instead of the bulky LIDAR or stereo rigs that agile drones usually rely on. We built the full stack end to end: perception, planning, control, and the aircraft itself.\n\n" +
+					"## Event-based depth perception\n\n" +
+					"Event cameras report asynchronous, per-pixel brightness changes at microsecond latency — ideal for fast flight, but their sparse, unconventional data breaks standard vision pipelines. We treat the event stream as a 3D point cloud and learn to predict dense depth from it, using a multi-resolution feature grid (L = 4 levels) with trilinear interpolation and a Deep Sets–style spatial pooling that turns sparse events into a dense feature map for the network to reason over.\n\n" +
+					"## Planning: topological replanning\n\n" +
+					"From the predicted depth we build an occupancy ESDF and plan with a Fast-Planner–style topological search. A sparse roadmap of “guards” defines free-space regions, connectors link distinct passages, and each distinct route is shortened, pruned, and optimized into a smooth, dynamically feasible B-spline. When visibility changes mid-flight, the planner replans in real time rather than re-searching from scratch.\n\n" +
+					"![Topological replanning](/mqp_planner.jpg)\n\n" +
+					"## The aircraft\n\n" +
+					"To carry the event camera and onboard compute, we designed and built a custom carbon-fiber quadrotor, iterating from CAD to a flight-ready platform tuned for agile flight.\n\n" +
+					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
+					"## Results\n\n" +
+					"The system flew autonomously through cluttered indoor courses and real forest environments using only onboard sensing and computation, and was recognized as a Best MQP Award Finalist at WPI.\n\n" +
+					"![Forest flight](/mqp_flight.jpg)",
+			},
+		},
+
+		{
 			title: "Einstein Vision: a Full-Self Driving Perception Stack",
 			description:
 				"FSD perception stack for a self-driving car, using a variety of models with only a single camera. " +

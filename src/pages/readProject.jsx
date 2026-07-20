@@ -65,6 +65,18 @@ const ReadProject = () => {
 								<ReactMarkdown>{page.subtitle}</ReactMarkdown>
 							</div>
 
+							{page.video && (
+								<div className="read-project-video">
+									<iframe
+										src={`https://www.youtube-nocookie.com/embed/${page.video}`}
+										title={page.title}
+										loading="lazy"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+										allowFullScreen
+									></iframe>
+								</div>
+							)}
+
 							<div className="read-project-body">
 								<ReactMarkdown>{page.description}</ReactMarkdown>
 							</div>
