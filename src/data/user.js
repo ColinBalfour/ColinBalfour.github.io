@@ -163,10 +163,7 @@ const INFO = {
 			title: "How tiny drones inspired by bats could save lives in dark and stormy conditions",
 			outlet: "Associated Press",
 			date: "October 2025",
-			// NOTE: this is a verified AP-credited syndicated reprint
-			// (© 2025 The Associated Press). Swap in the canonical apnews.com
-			// permalink when available.
-			url: "https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
+			url: "https://apnews.com/article/bat-robots-drones-search-rescue-48981f2065f36600e426db9d441a894b",
 			summary:
 				"The AP visited the PeAR Lab to cover our bat-inspired, palm-sized drones that navigate darkness, smoke, and fog using ultrasound — including photos of me flying one at WPI.",
 		},

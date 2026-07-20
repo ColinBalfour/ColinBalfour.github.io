@@ -121,8 +121,8 @@ const Homepage = () => {
 										<FlippingPhoto
 											images={["/flying.webp", "/apnews.png"]}
 											links={[
-												"https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
-												"https://techxplore.com/news/2025-10-tiny-drones-dark-stormy-conditions.html",
+												"https://apnews.com/article/bat-robots-drones-search-rescue-48981f2065f36600e426db9d441a894b",
+												"https://apnews.com/article/bat-robots-drones-search-rescue-48981f2065f36600e426db9d441a894b",
 											]}
 											photoNumber={2}
 											animationDelay={4}
