@@ -142,7 +142,7 @@ const Homepage = () => {
 											pendulumDuration={10}
 										/>
 										<FlippingPhoto
-											images={["/drone.jpg", "/neck_movement.gif", "/throwing_ball.gif"]}
+											images={["/drone.jpg", "/neck_movement.webp", "/throwing_ball.webp"]}
 											links={[
 												"https://pear.wpi.edu/research/saranga.html",
 												"https://pear.wpi.edu/research/saranga.html",
