@@ -2,20 +2,22 @@ import React from "react";
 
 import "../common/styles/works.css";
 
-const Work = ({info}) => {
+// `info.wide` selects a wider container for horizontal wordmark logos
+// (NVIDIA, Magna, ...); square/round emblem logos use the default square tile.
+const Work = ({ info }) => {
 	return (
 		<div className="work">
-			<div className="work-info">
-				<img
-					src={info.src}
-					alt={info.alt}
-					className="work-image"
-				/>
-				<div className="work-title">{info.title}</div>
-			</div>
-			<div className="work-info">
+			<img
+				src={info.src}
+				alt={info.alt}
+				className={"work-image" + (info.wide ? " wide" : "")}
+			/>
+			<div className="work-body">
+				<div className="work-header">
+					<div className="work-title">{info.title}</div>
+					<div className="work-duration">{info.duration}</div>
+				</div>
 				<div className="work-subtitle">{info.subtitle}</div>
-				<div className="work-duration">{info.duration}</div>
 			</div>
 		</div>
 	);
