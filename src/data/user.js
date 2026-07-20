@@ -700,7 +700,7 @@ const INFO = {
 			src: "./WPI_logo.png",
 			alt: "WPI",
 			title: "Worcester Polytechnic Institute (WPI)",
-			subtitle: "B.S. Robotics Engineering, Minor in Mathematics (May 2027)\nM.S. Robotics Engineering (May 2027)",
+			subtitle: "M.S. Robotics Engineering (May 2027)\nB.S. Robotics Engineering, Minor in Mathematics (May 2027)",
 			duration: "2024 - Present",
 		},
 		{
