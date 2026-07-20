@@ -31,3 +31,10 @@
 		width: calc(100% / 2);
 	}
 }
+
+
+@media (max-width: 600px) {
+	.projects-container {
+		padding-top: 84px;
+	}
+}

@@ -121,3 +121,37 @@
 		width: 100%;
 	}
 }
+
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+	.page-content {
+		overflow-x: hidden;
+	}
+
+	.content-wrapper {
+		max-width: 100%;
+		padding: 0 20px;
+	}
+}
+
+@media (max-width: 600px) {
+	.title {
+		font-size: 31px;
+		line-height: 1.15;
+		width: 100%;
+	}
+
+	.subtitle {
+		font-size: 15px;
+		line-height: 25px;
+		margin-top: 16px;
+		width: 100%;
+	}
+}
+
+@media (max-width: 400px) {
+	.title {
+		font-size: 27px;
+	}
+}

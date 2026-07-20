@@ -61,3 +61,28 @@
 		width: 100%;
 	}
 }
+
+
+@media (max-width: 600px) {
+	.footer {
+		height: auto;
+		margin-top: 30px;
+		gap: 10px;
+	}
+
+	.footer-links {
+		margin-left: 0;
+	}
+
+	.footer-nav-link-list {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+		padding-left: 0;
+	}
+
+	.footer-credits-text {
+		text-align: center;
+		font-size: 12px;
+	}
+}

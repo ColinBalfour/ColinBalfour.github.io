@@ -363,3 +363,75 @@
 		margin-right: -25px;
 	}
 }
+
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+	.homepage-logo-container {
+		padding-top: 88px;
+	}
+
+	.homepage-container {
+		padding-top: 10px;
+	}
+
+	.homepage-image-container {
+		max-width: 260px !important;
+		min-height: 0 !important;
+		height: auto !important;
+		padding-top: 24px !important;
+		padding-bottom: 24px !important;
+	}
+
+	.hanging-photos {
+		gap: 10px !important;
+		padding: 8px !important;
+	}
+
+	.photo-card {
+		height: 140px !important;
+	}
+
+	.homepage-status {
+		font-size: 11.5px;
+		padding: 5px 12px;
+		margin-bottom: 14px;
+	}
+
+	.homepage-socials {
+		padding-top: 22px;
+	}
+
+	.homepage-social-icon {
+		font-size: 22px;
+		padding-right: 16px;
+	}
+
+	.homepage-skills {
+		gap: 7px;
+		padding-top: 22px;
+	}
+
+	.homepage-skill {
+		font-size: 11.5px;
+		padding: 5px 9px;
+	}
+
+	.homepage-featured {
+		padding-top: 30px;
+	}
+
+	.homepage-featured-caption {
+		font-size: 13px;
+	}
+
+	.homepage-scroll-cue {
+		bottom: 12px;
+		font-size: 11px;
+		padding: 7px 15px 5px;
+	}
+
+	.homepage-projects {
+		padding-top: 10px;
+	}
+}

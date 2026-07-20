@@ -254,3 +254,32 @@
 		max-height: 220px;
 	}
 }
+
+
+@media (max-width: 600px) {
+	.publications-container {
+		padding-top: 84px;
+	}
+
+	.publication {
+		padding: 14px;
+		gap: 14px;
+	}
+
+	.publication-title {
+		font-size: 15.5px;
+	}
+
+	.publication-authors,
+	.publication-blurb {
+		font-size: 13px;
+	}
+
+	.press-item {
+		padding: 14px 16px;
+	}
+
+	.press-headline {
+		font-size: 14.5px;
+	}
+}

@@ -146,3 +146,41 @@
 .read-project-body a {
 	color: var(--link-color);
 }
+
+
+@media (max-width: 600px) {
+	.read-project-container {
+		padding-top: 84px;
+	}
+
+	.read-project-wrapper {
+		width: 100%;
+		padding-top: 16px;
+	}
+
+	.read-project-title {
+		padding-top: 22px;
+		padding-bottom: 18px;
+	}
+
+	.read-project-subtitle {
+		width: 100% !important;
+		padding-top: 0;
+		padding-bottom: 22px;
+	}
+
+	.read-project-links {
+		gap: 10px;
+		margin-bottom: 22px;
+	}
+
+	.read-project-link-btn {
+		font-size: 13px;
+		padding: 8px 14px;
+	}
+
+	.read-project-body {
+		font-size: 15px;
+		line-height: 27px;
+	}
+}

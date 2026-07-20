@@ -97,3 +97,29 @@
 	border-radius: 6px;
 	padding: 3px 8px;
 }
+
+
+@media (max-width: 600px) {
+	.video-player {
+		border-radius: 10px;
+	}
+
+	.video-player-play {
+		width: 56px;
+		height: 56px;
+		font-size: 18px;
+	}
+
+	.video-player-label {
+		font-size: 11px;
+		left: 12px;
+		bottom: 10px;
+		max-width: 62%;
+	}
+
+	.video-player-duration {
+		font-size: 10.5px;
+		right: 10px;
+		bottom: 10px;
+	}
+}

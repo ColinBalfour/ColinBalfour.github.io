@@ -20,3 +20,19 @@
 		width: calc(100% / 2);
 	}
 }
+
+
+/* One project per row on phones (the template's 2-up is far too cramped). */
+@media (max-width: 600px) {
+	.all-projects-container {
+		margin-left: 0;
+		margin-right: 0;
+		padding-top: 14px;
+		padding-bottom: 14px;
+	}
+
+	.all-projects-project {
+		width: 100%;
+		padding: 0;
+	}
+}

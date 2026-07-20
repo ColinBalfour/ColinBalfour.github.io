@@ -131,3 +131,63 @@
 		width: 80%;
 	}
 }
+
+
+@media (max-width: 600px) {
+	.about-container {
+		padding-top: 84px;
+	}
+
+	.about-image-container {
+		width: 72%;
+		padding-bottom: 26px;
+	}
+
+	.about-education,
+	.about-work {
+		width: 100%;
+		padding-top: 22px;
+	}
+
+	.about-subtitle {
+		width: 100% !important;
+	}
+}
+
+/* Stacked order: photo -> intro -> work -> education.
+   `display: contents` promotes the column children to flex items of
+   .about-main so they can be ordered independently. */
+@media (max-width: 1024px) {
+	.about-main {
+		flex-direction: column;
+	}
+
+	.about-left-side,
+	.about-right-side {
+		display: contents;
+	}
+
+	.about-image-container {
+		order: 1;
+	}
+
+	.about-title {
+		order: 2;
+	}
+
+	.about-subtitle {
+		order: 3;
+	}
+
+	.about-work {
+		order: 4;
+	}
+
+	.about-education {
+		order: 5;
+	}
+
+	.about-socials {
+		display: none;
+	}
+}

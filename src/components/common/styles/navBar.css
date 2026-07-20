@@ -72,3 +72,44 @@
 		font-weight: bold;
 	}
 }
+
+
+/* Center the pill and keep every item on-screen at phone widths. */
+@media (max-width: 600px) {
+	.navbar {
+		top: 2vh;
+		left: 50%;
+		transform: translateX(-50%);
+		margin: 0;
+		width: auto;
+		max-width: 94vw;
+		font-size: 100%;
+	}
+
+	.nav-background {
+		width: auto;
+		max-width: 94vw;
+		height: auto;
+		padding: 0 4px;
+	}
+
+	.nav-list {
+		margin: 0;
+		padding: 9px 8px;
+		gap: 2px;
+		flex-wrap: nowrap;
+	}
+
+	.nav-item {
+		font-size: 11.5px;
+		padding: 0 5px;
+		white-space: nowrap;
+	}
+}
+
+@media (max-width: 360px) {
+	.nav-item {
+		font-size: 10.5px;
+		padding: 0 3px;
+	}
+}
