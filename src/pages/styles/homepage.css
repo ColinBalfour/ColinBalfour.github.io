@@ -154,27 +154,41 @@
 	border-color: var(--tertiary-color);
 }
 
+/* Fixed to the viewport bottom so it's visible on first load;
+   fades out once the user starts scrolling. */
 .homepage-scroll-cue {
+	position: fixed;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 900;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 4px;
-	margin: 34px auto 0;
-	padding: 8px 16px;
-	border: 0;
-	background: none;
+	gap: 2px;
+	padding: 9px 20px 6px;
+	border: 1px solid var(--quaternary-color);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.88);
+	backdrop-filter: blur(6px);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
 	font-family: var(--secondary-font);
 	font-size: 12.5px;
 	font-weight: 600;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	color: var(--tertiary-color);
-	transition: color 0.2s ease;
+	color: var(--secondary-color);
+	transition: color 0.2s ease, opacity 0.35s ease;
 }
 
 .homepage-scroll-cue:hover {
 	color: var(--link-color);
+}
+
+.homepage-scroll-cue.hidden {
+	opacity: 0;
+	pointer-events: none;
 }
 
 .homepage-scroll-cue-icon {

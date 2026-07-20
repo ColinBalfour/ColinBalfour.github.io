@@ -26,6 +26,7 @@ const Homepage = () => {
 	const [stayLogo, setStayLogo] = useState(false);
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
+	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -34,6 +35,8 @@ const Homepage = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			let scroll = Math.round(window.pageYOffset, 2);
+
+			setScrolled(scroll > 60);
 
 			let newLogoSize = 80 - (scroll * 4) / 10;
 
@@ -244,7 +247,10 @@ const Homepage = () => {
 						)}
 
 						<button
-							className="homepage-scroll-cue"
+							className={
+								"homepage-scroll-cue" +
+								(scrolled ? " hidden" : "")
+							}
 							onClick={() =>
 								document
 									.querySelector(".homepage-projects")
