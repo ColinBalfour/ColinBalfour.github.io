@@ -6,7 +6,9 @@ import INFO from "../../data/user";
 
 import "./styles/allProjects.css";
 
-const AllProjects = () => {
+// variant="short" renders each project's punchy `tagline` (falling back to the
+// full description) — used on the homepage; the projects page shows the full text.
+const AllProjects = ({ variant }) => {
 	return (
 		<div className="all-projects-container">
 			{INFO.projects.map((project, index) => {
@@ -15,7 +17,11 @@ const AllProjects = () => {
 						<Project
 							logos={project.logo}
 							title={project.title}
-							description={project.description}
+							description={
+								variant === "short" && project.tagline
+									? project.tagline
+									: project.description
+							}
 							photo={project.photo}
 							linkText={project.linkText}
 							link={project.link}

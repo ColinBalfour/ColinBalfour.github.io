@@ -198,6 +198,8 @@ const INFO = {
 	projects: [
 		{
 			title: "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
+			tagline:
+				"The first palm-sized drone to fly itself through total darkness, smoke, and snow — navigating like a bat on milliwatts of ultrasound. Published in Science Robotics.",
 			description:
 				"Saranga is the first palm-sized aerial robot capable of autonomous navigation in complete darkness, smoke, and snow — using only onboard milliWatt ultrasound sensing and compute, at just 140g. " +
 				"I employ deep-learning signal processing to suppress noise and estimate depth in real time, achieving 84% success across 10 scenes (200+ trials). " +
@@ -218,6 +220,8 @@ const INFO = {
 
 		{
 			title: "[Under Review — ICRA 2027] ActiveNav: Learning Active Monocular Flight in Forests",
+			tagline:
+				"A drone that learns where to look — aiming its camera mid-flight like a bird to thread forests it has never seen, zero-shot from simulation.",
 			description:
 				"ActiveNav is a novel approach for quadrotor navigation using active perception. " +
 				"With flow and its uncertainty as an input, a hierarchical RL policy actively " +
@@ -255,6 +259,8 @@ const INFO = {
 
 		{
 			title: "[Under Review — RA-L 2026] AttentionSeeker: Passive Attention-Based Aerial Navigation with Events",
+			tagline:
+				"High-speed forest flight with no frames and no depth sensor — just an event camera and the physics of defocus.",
 			description:
 				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
 				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
@@ -290,6 +296,8 @@ const INFO = {
 
 		{
 			title: "Agile Event-based Flight through Cluttered Environments",
+			tagline:
+				"A bird-inspired quadrotor — built from the carbon fiber up — that sees with an event camera and threads obstacle courses entirely on its own. Best MQP Award Finalist.",
 			description:
 				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered environments using only onboard sensing — inspired by how birds fly through trees.",
 			date: "2025 - 2026",
@@ -342,6 +350,8 @@ const INFO = {
 
 		{
 			title: "Einstein Vision: a Full-Self Driving Perception Stack",
+			tagline:
+				"A self-driving perception stack from a single camera: 3D object tracking, lane detection, depth, and collision prediction.",
 			description:
 				"FSD perception stack for a self-driving car, using a variety of models with only a single camera. " +
 				"Pre-trained models were used for object detection, depth estimation, optical flow, and instance segmentation. " +
@@ -364,6 +374,8 @@ const INFO = {
 
 		{
 			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
+			tagline:
+				"Reconstructing 3D scenes twice — a full classical Structure-from-Motion pipeline, then a NeRF built from scratch in PyTorch.",
 			description:
 				"Reconstructing a scene, both classically and with deep learning. Developed a omplete classical Structure-from-Motion pipeline, as well as a custom Neural Radiance Field (NeRF) model in PyTorch, trained on a lego dataset",
 			photo: "/sfm-nerf.png",
@@ -382,6 +394,8 @@ const INFO = {
 
 		{
 			title: "Depth Camera Data Collection Rig",
+			tagline:
+				"Five depth sensors fused into one 160° ground-truth eye — designed, assembled, calibrated, and torch-optimized end to end.",
 			description:
 				"I designed and built a multi-sensor data-collection rig at the PeAR Lab to produce ground-truth depth for a novel depth model — from the physical design and assembly through drivers, precise inter-sensor calibration, and a heavily optimized ROS 2 pipeline. " +
 				"Point clouds from 3 Intel RealSense D430s are stitched via torch-based optimization into a 160x40 degree FOV depth image, alongside an L515 LIDAR and an OAK-D Lite.",
@@ -418,6 +432,8 @@ const INFO = {
 
 		{
 			title: "Sim2Real Image Segmentation",
+			tagline:
+				"A U-Net trained on nothing but simulated images that segments the real world zero-shot.",
 			description:
 				"I trained an implemented a U-Net model from scratch in pytorch using only simulated images. " +
 				"The model was able to generalize to real data it had never seen before.",
@@ -436,6 +452,8 @@ const INFO = {
 
 		{
 			title: "Adversarial Attack on Monocular Depth Neural Network",
+			tagline:
+				"A printable patch that tricks a state-of-the-art depth network into seeing any depth I choose — in the real world.",
 			description:
 				"I optimized a real-world adversarial patch that tricked a state-of-the-art depth network into giving wrong predictions. " +
 				"The patch was optimized so the model predicts a particular depth in that region, with losses for printability " +
@@ -455,6 +473,8 @@ const INFO = {
 
 		{
 			title: "FRC Competition Robot",
+			tagline:
+				"Our 2024 competition robot: swerve drive, AprilTag + Kalman localization, YOLOv8 detection, and fully autonomous routines.",
 			description:
 				"For our 2023-2024 season, I created a robust vision pipeline using a Jetson for pose estimation using AprilTags " +
 				"and a Kalman Filter, and object detection with YOLOv8. Additionally, I developed code for each subsystem of the robot, " +
@@ -476,6 +496,8 @@ const INFO = {
 
 		{
 			title: "Probability of Boundary Edge Detection",
+			tagline:
+				"Edge detection that beats Canny and Sobel by estimating the probability each pixel is a true boundary.",
 			description:
 				"This project implemented a novel method for detecting boundary edges by estimating the probability that a given pixel is an edge" +
 				"it is based on the work Contour Detection and Hierarchical Image Segmentation by Pablo Arbelaez et al. " +
@@ -493,6 +515,8 @@ const INFO = {
 
 		{
 			title: "Auto Panogram: Classical & DL Panoramic Image Stitching",
+			tagline:
+				"Panoramas two ways: hand-rolled classical geometry (ANMS, RANSAC, Poisson blending) versus deep homography estimation.",
 			description:
 				"I implemented a classical panoramic image stitching pipeline using" + 
 				"corner feature matching, Asynchronous Non-Maximum Suppression (ANMS), and RANSAC outlier rejection." +
@@ -515,6 +539,8 @@ const INFO = {
 
 		{
 			title: "CIFAR-10 Image Classification (ResNet, ResNeXt, DenseNet)",
+			tagline:
+				"ResNet, ResNeXt, and DenseNet built layer-by-layer from raw PyTorch and raced head-to-head on CIFAR-10.",
 			description:
 				"I implemented and compared the performance of ResNet, ResNeXt, and DenseNet on the CIFAR-10 dataset." +
 				"These models were all custom-built using only pytorch layers, but no built-in models",
@@ -530,6 +556,8 @@ const INFO = {
 
 		{
 			title: "A* Pathfinding with an MLP Heuristic",
+			tagline:
+				"A* with a learned heuristic — neural nets written from scratch in NumPy and trained by a genetic algorithm.",
 			description:
 				"In an independent study in machine learning, I developed neural nets from scratch in numpy, compared optimization using Gradient Descent and Newton's Method, and presented to the mathematics department." +
 				"Part of this independent study was developing an A* algorithm that used a neural net trained via genetic algorithm to improve the performance of A* and visualize NN learning.",
@@ -547,6 +575,8 @@ const INFO = {
 
 		{
 			title: "Robotics Two-Jointed Arm",
+			tagline:
+				"Kinematics, motion profiling, and control for our FRC arm — fully simulated in Python before the hardware even existed.",
 			description:
 				"For our 2022-2023 season, I developed the controls and planning for our 2.5 DOF (wrist had only 3 positions) arm. I developed a simulation in python to test the kinematics, motion profile, and control before we had a physical prototype.",
 			date: "7 May 2023",
@@ -584,6 +614,8 @@ const INFO = {
 
 		{
 			title: "Self-balancing Two Wheel Robot",
+			tagline:
+				"An intro-EE final taken a bit too far: a two-wheel robot that balances itself with an IMU and PID.",
 			description:
 				"For an intro electrical engineering final project, I decided to take it a bit further and make a self-balancing two-wheel robot. " +
 				"I used an IMU with a complementary filter to get the tilt of the robot, and used PID to keep it upright.",
@@ -600,6 +632,8 @@ const INFO = {
 
 		{
 			title: "Gilded Age Museum",
+			tagline:
+				"A US History project taken way too far: a full virtual museum of the Gilded Age.",
 			description:
 				"A website I made after getting too deep into a US History project. It's a virtual museum of the Gilded Age, with information and primary sources about industrialization and immigration in the late 1800s.",
 			logo: [
@@ -615,6 +649,8 @@ const INFO = {
 
 		{
 			title: "CCHS AP Stats",
+			tagline:
+				"A site where AP Stats students publish their experiments at custom links — built for my school, still running.",
 			description:
 				"Website so students taking AP Stats could easily advertise their final projects (experimental studies) with customized links (e.g., cchsstats.com/cbalfour) and organized homepage so others could participate in them -- currently working on a 'teacher portal' so my school can use it without me managing it.",
 			logo: [

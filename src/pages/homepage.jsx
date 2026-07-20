@@ -263,7 +263,7 @@ const Homepage = () => {
 						)}
 
 						<div className="homepage-projects">
-							<AllProjects />
+							<AllProjects variant="short" />
 						</div>
 
 						<div className="page-footer">
