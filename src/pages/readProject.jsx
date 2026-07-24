@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
+import Media from "../components/common/media";
 import Notfound from "./404";
 
 import INFO from "../data/user";
@@ -97,7 +98,15 @@ const ReadProject = () => {
 							)}
 
 							<div className="read-project-body">
-								<ReactMarkdown>{page.description}</ReactMarkdown>
+								<ReactMarkdown
+									components={{
+										img: ({ src, alt }) => (
+											<Media src={src} alt={alt || ""} />
+										),
+									}}
+								>
+									{page.description}
+								</ReactMarkdown>
 							</div>
 						</div>
 					</div>

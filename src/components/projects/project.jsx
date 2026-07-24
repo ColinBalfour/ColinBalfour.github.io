@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
+import Media from "../common/media";
 import "./styles/project.css";
 
 const Project = (props) => {
@@ -26,7 +27,7 @@ const Project = (props) => {
 			{/* conditionally write photo if it's supplied */}
 			{ photo && (
 				<div className="project-photo">
-					<img src={photo} alt="" />
+					<Media src={photo} alt="" />
 				</div>
 			)}
 	

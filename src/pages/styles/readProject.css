@@ -130,7 +130,8 @@
 	color: #52525b;
 }
 
-.read-project-body img {
+.read-project-body img,
+.read-project-body video {
 	max-width: 100%;
 	height: auto;
 	border-radius: 10px;

@@ -6,6 +6,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
+import Media from "../components/common/media";
 
 import INFO from "../data/user";
 import SEO from "../data/seo";
@@ -85,18 +86,16 @@ const Publications = () => {
 													target="_blank"
 													rel="noopener noreferrer"
 												>
-													<img
+													<Media
 														src={pub.image}
 														alt={pub.title}
-														loading="lazy"
 													/>
 												</a>
 											) : (
 												<div className="publication-media">
-													<img
+													<Media
 														src={pub.image}
 														alt={pub.title}
-														loading="lazy"
 													/>
 												</div>
 											))}
