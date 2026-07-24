@@ -759,14 +759,6 @@ const INFO = {
 	supplementalEducation: [
 		{
 			id: 0,
-			src: "./harvard_logo.png",
-			alt: "Harvard",
-			title: "Harvard University",
-			subtitle: "Linear Algebra, Vector Calculus, Real Analysis, and Probability Theory/Statistics",
-			duration: "Fall 2022, Spring 2023",
-		},
-		{
-			id: 1,
 			src: "./neu_logo.png",
 			alt: "NEU",
 			title: "Northeastern University",
@@ -774,12 +766,20 @@ const INFO = {
 			duration: "Fall 2023",
 		},
 		{
-			id: 2,
+			id: 1,
 			src: "./uml_logo.png",
 			alt: "UML",
 			title: "University of Massachusetts - Lowell",
 			subtitle: "Computational Mathematics (Graduate)",
 			duration: "Spring 2023",
+		},
+		{
+			id: 2,
+			src: "./harvard_logo.png",
+			alt: "Harvard",
+			title: "Harvard University",
+			subtitle: "Linear Algebra, Vector Calculus, Real Analysis, and Probability Theory/Statistics",
+			duration: "Fall 2022, Spring 2023",
 		},
 	],
 };
