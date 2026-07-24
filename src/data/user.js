@@ -144,7 +144,7 @@ const INFO = {
 			year: "2026",
 			status: "Under Review",
 			note: "* Equal contribution",
-			image: "/Events_Video.gif",
+			image: "/Events_Video.webp",
 			blurb:
 				"Passive, attention-based aerial navigation that reads defocus cues in event-camera streams, training reinforcement-learning policies to fly through dense forest at high speed using only events.",
 		},
@@ -264,7 +264,7 @@ const INFO = {
 			description:
 				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
 				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
-			photo: "/Events_Video.gif",
+			photo: "/Events_Video.webp",
 			slug: "attentionseeker",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
@@ -288,7 +288,7 @@ const INFO = {
 					"Event cameras only report *change* — asynchronous, per-pixel brightness events at microsecond latency, with no frames at all. That makes them ideal for fast flight, but it also means most of the stream is clutter: everything moves when the camera does. AttentionSeeker asks a simple question — what if the lens itself could tell us what to pay attention to?\n\n" +
 					"## Defocus as attention\n\n" +
 					"By exploiting **defocus cues** in the event stream, objects at the depth of interest produce sharp, distinctive event signatures while the rest blurs away — a *passive*, optics-driven attention mechanism that requires no extra compute, power, or moving parts. The result is a naturally foveated input that highlights obstacles at exactly the range that matters for avoidance.\n\n" +
-					"![Event stream visualization](/Events_Video.gif)\n\n" +
+					"![Event stream visualization](/Events_Video.webp)\n\n" +
 					"## Learning to fly on events\n\n" +
 					"On top of this attention signal we train **reinforcement-learning policies** that fly a quadrotor through dense forest at high speed using only events — no frames, no depth sensor. The GIF above shows a policy navigating a dense simulated forest from the event stream alone.",
 			},
