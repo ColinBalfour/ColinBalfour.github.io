@@ -110,8 +110,13 @@ Crash penalty is −10 and terminates. Truncation at `maxSteps` is *not* a crash
 Per-episode resampling of mass, thrust authority, constant wind, actuator
 latency (via an action queue) and observation noise, **plus transient gusts**
 sampled during the episode. Every deviation is multiplied by `drScale`, the UI
-strength slider (0.5–1.5, default 1). Off by default; toggling it or changing
-the strength **resets training**, because it changes the rollout distribution.
+strength slider (0.5–1.5, default 1). Off by default.
+
+Both are **live-tunable** — they go through `setHP`, not a reset. `reset()`
+reads them at the next episode boundary, and they touch nothing the network,
+the optimizer state or the return statistics depend on. That makes the
+interesting workflow possible: converge on the nominal model, then switch
+randomization on mid-run and watch the policy adapt, rather than starting over.
 
 `setDisturbance()` is separate from wind on purpose: it is the *run-time*
 cursor gust, deliberately outside the training distribution, so the sim2real

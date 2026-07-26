@@ -78,6 +78,9 @@ self.onmessage = (e) => {
 		case "setHP":
 			// Live-tunable knobs only; anything that changes tensor shapes or
 			// the rollout layout needs a reset, which the UI enforces.
+			// `randomize` and `drScale` are safe here: they are read by
+			// reset() at the next episode boundary and touch nothing the
+			// optimizer or the return statistics depend on.
 			if (trainer) Object.assign(trainer.hp, msg.hp);
 			break;
 

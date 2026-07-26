@@ -124,15 +124,19 @@ const RLLab = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// Push live-tunable knobs without restarting training.
+	// Push live-tunable knobs without restarting training. randomize/drScale
+	// belong here too: they only change what reset() samples for the *next*
+	// episode, so the network, optimizer state and return statistics all stay
+	// valid. That makes "converge nominally, then switch DR on and watch it
+	// adapt" a usable curriculum rather than a restart.
 	useEffect(() => {
 		if (workerRef.current) {
 			workerRef.current.postMessage({
 				type: "setHP",
-				hp: { lr, clipEps, entCoef, lam, normalizeAdv },
+				hp: { lr, clipEps, entCoef, lam, normalizeAdv, randomize, drScale },
 			});
 		}
-	}, [lr, clipEps, entCoef, lam, normalizeAdv]);
+	}, [lr, clipEps, entCoef, lam, normalizeAdv, randomize, drScale]);
 
 	const toggleRun = () => {
 		const w = workerRef.current;
@@ -382,14 +386,10 @@ const RLLab = () => {
 						<input
 							type="checkbox"
 							checked={randomize}
-							onChange={(e) => {
-								const v = e.target.checked;
-								setRandomize(v);
-								doReset({ randomize: v, drScale });
-							}}
+							onChange={(e) => setRandomize(e.target.checked)}
 						/>
 						Domain randomization
-						<em>resets training</em>
+						<em>applies from the next episode</em>
 					</label>
 
 					{randomize && (
@@ -403,11 +403,9 @@ const RLLab = () => {
 								max={1.5}
 								step={0.1}
 								value={drScale}
-								onChange={(e) => {
-									const v = parseFloat(e.target.value);
-									setDrScale(v);
-									doReset({ randomize: true, drScale: v });
-								}}
+								onChange={(e) =>
+									setDrScale(parseFloat(e.target.value))
+								}
 							/>
 						</label>
 					)}
