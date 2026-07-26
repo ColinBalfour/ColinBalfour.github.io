@@ -57,15 +57,8 @@ const NavBar = (props) => {
 							>
 								<Link to="/publications">Publications</Link>
 							</li>
-							<li
-								className={
-									active === "playground"
-										? "nav-item active"
-										: "nav-item"
-								}
-							>
-								<Link to="/playground">Playground</Link>
-							</li>
+							{/* Playground is surfaced from the homepage and the
+							    projects grid rather than the nav. */}
 							{/* <li
 								className={
 									active === "learning"

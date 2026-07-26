@@ -260,6 +260,22 @@
 	background: #ef4444;
 }
 
+.evcam-credit {
+	font-family: var(--secondary-font);
+	font-size: 11.5px;
+	line-height: 1.5;
+	color: var(--tertiary-color);
+}
+
+.evcam-credit a {
+	color: var(--tertiary-color);
+	text-decoration: underline;
+}
+
+.evcam-credit a:hover {
+	color: var(--link-color);
+}
+
 @media (max-width: 600px) {
 	.evcam-stage {
 		border-radius: 10px;

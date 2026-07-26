@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
-import { faMailBulk, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+	faMailBulk,
+	faChevronDown,
+	faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faGithub,
@@ -290,6 +295,32 @@ const Homepage = () => {
 								</div>
 							</div>
 						)}
+
+						<Link to="/playground" className="homepage-playground">
+							<div className="homepage-playground-glow" />
+							<div className="homepage-playground-body">
+								<div className="homepage-playground-label">
+									Interactive · Playground
+								</div>
+								<div className="homepage-playground-title">
+									See the world like an event camera
+								</div>
+								<div className="homepage-playground-text">
+									The sensor behind my event-based flight
+									research, running live on your webcam —
+									every pixel fires only when the light
+									hitting it changes. Nothing moves, nothing
+									is reported.
+								</div>
+								<div className="homepage-playground-cta">
+									Try the demo
+									<FontAwesomeIcon
+										icon={faArrowRight}
+										className="homepage-playground-arrow"
+									/>
+								</div>
+							</div>
+						</Link>
 
 						<div className="homepage-projects">
 							<AllProjects variant="short" />

@@ -9,7 +9,19 @@ import "./styles/eventCamera.css";
 // the resulting events — ON green, OFF red — onto a canvas.
 
 const PROC_WIDTH = 480; // processing resolution (height follows source aspect)
-const FALLBACK_VIDEO = "/research_clips.mp4";
+
+// Fixed-camera traffic footage: the road, sky and skyline stay perfectly
+// still (and so stay black) while every car outlines itself in events —
+// the clearest illustration of what the sensor does.
+const SAMPLE_VIDEO = "/sample_traffic.mp4";
+
+// Sensible starting points per source. The sample is a 10x timelapse, so a
+// lot moves between frames and it needs a higher contrast threshold than a
+// real-time webcam to stay legible.
+const DEFAULTS = {
+	webcam: { threshold: 0.18, persistence: 0.72 },
+	video: { threshold: 0.34, persistence: 0.55 },
+};
 
 const EventCamera = () => {
 	const canvasRef = useRef(null);
@@ -21,8 +33,8 @@ const EventCamera = () => {
 	const stateRef = useRef({ w: 0, h: 0, sensor: null, imageData: null });
 
 	// Live control values read inside the animation loop (refs avoid restarting it).
-	const [threshold, setThreshold] = useState(0.18);
-	const [persistence, setPersistence] = useState(0.72);
+	const [threshold, setThreshold] = useState(DEFAULTS.webcam.threshold);
+	const [persistence, setPersistence] = useState(DEFAULTS.webcam.persistence);
 	const [showGhost, setShowGhost] = useState(false);
 	const [paused, setPaused] = useState(false);
 	const ctrl = useRef({ threshold, persistence, showGhost, paused });
@@ -126,6 +138,8 @@ const EventCamera = () => {
 			video.removeAttribute("src");
 			video.muted = true;
 			stateRef.current.w = 0; // force re-alloc for the new source
+			setThreshold(DEFAULTS.webcam.threshold);
+			setPersistence(DEFAULTS.webcam.persistence);
 			setSource("webcam");
 			setPaused(false);
 			startLoop();
@@ -135,7 +149,7 @@ const EventCamera = () => {
 		} catch (e) {
 			setError(
 				"Couldn't access the camera — it may be blocked or in use. " +
-					"You can still run the sensor on my drone footage below."
+					"You can still run the sensor on the sample footage instead."
 			);
 		}
 	}, [startLoop]);
@@ -145,10 +159,12 @@ const EventCamera = () => {
 		stopEverything();
 		const video = videoRef.current;
 		video.srcObject = null;
-		video.src = FALLBACK_VIDEO;
+		video.src = SAMPLE_VIDEO;
 		video.loop = true;
 		video.muted = true;
 		stateRef.current.w = 0;
+		setThreshold(DEFAULTS.video.threshold);
+		setPersistence(DEFAULTS.video.persistence);
 		setSource("video");
 		setPaused(false);
 		startLoop();
@@ -207,7 +223,7 @@ const EventCamera = () => {
 								className="evcam-btn"
 								onClick={startSampleVideo}
 							>
-								Use drone footage
+								Use sample footage
 							</button>
 						</div>
 					</div>
@@ -290,7 +306,7 @@ const EventCamera = () => {
 							}
 						>
 							{source === "webcam"
-								? "Switch to drone footage"
+								? "Switch to sample footage"
 								: "Switch to my camera"}
 						</button>
 					)}
@@ -305,6 +321,28 @@ const EventCamera = () => {
 					<i className="evcam-swatch off" /> OFF — brightness decreased
 				</span>
 			</div>
+
+			{source === "video" && (
+				<div className="evcam-credit">
+					Sample footage:{" "}
+					<a
+						href="https://commons.wikimedia.org/wiki/File:Congested_traffic_on_the_Dan_Ryan_Expy_(10x_timelapse)_-_April_2026.webm"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						“Congested traffic on the Dan Ryan Expy”
+					</a>{" "}
+					by AlphaBeta135, licensed{" "}
+					<a
+						href="https://creativecommons.org/licenses/by/4.0/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						CC BY 4.0
+					</a>{" "}
+					via Wikimedia Commons.
+				</div>
+			)}
 		</div>
 	);
 };

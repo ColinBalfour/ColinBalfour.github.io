@@ -15,6 +15,9 @@ const Project = (props) => {
 	    link = `/projects/${slug ?? idx + 1}`;
 	}
 
+	// Same-site routes navigate in-app; external URLs open in a new tab.
+	const isInternal = !!page || (typeof link === "string" && link.startsWith("/"));
+
 	let inner = (
 		<div className="project-container">
 			<div className="project-logo">
@@ -49,7 +52,12 @@ const Project = (props) => {
 		<React.Fragment>
 			<div className="project">
 				{link ? (
-					<Link to={link} {...(page ? {} : { target: "_blank", rel: "noopener noreferrer" })}>
+					<Link
+						to={link}
+						{...(isInternal
+							? {}
+							: { target: "_blank", rel: "noopener noreferrer" })}
+					>
 						{inner}
 					</Link>
 				) : (
