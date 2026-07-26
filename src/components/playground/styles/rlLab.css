@@ -1,0 +1,270 @@
+@import "../../../data/styles.css";
+
+.rl-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.rl {
+	display: flex;
+	gap: 22px;
+	align-items: flex-start;
+}
+
+.rl-main {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.rl-stage-wrap {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	border-radius: 14px;
+	overflow: hidden;
+	background: #0b0f14;
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.rl-canvas {
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor: crosshair;
+	touch-action: none;
+}
+
+.rl-stage-hint {
+	position: absolute;
+	left: 12px;
+	bottom: 10px;
+	font-family: var(--secondary-font);
+	font-size: 11.5px;
+	color: rgba(255, 255, 255, 0.5);
+	pointer-events: none;
+}
+
+.rl-stage-badges {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	gap: 6px;
+	pointer-events: none;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.rl-badge {
+	font-family: var(--secondary-font);
+	font-size: 11px;
+	font-weight: 700;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.55);
+	border-radius: 999px;
+	padding: 4px 10px;
+}
+
+.rl-badge.dr {
+	background: rgba(20, 184, 166, 0.85);
+}
+
+.rl-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-top: 14px;
+}
+
+.rl-btn {
+	font-family: var(--secondary-font);
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--secondary-color);
+	background: #ffffff;
+	border: 1px solid var(--quaternary-color);
+	border-radius: 9px;
+	padding: 9px 18px;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.rl-btn:hover {
+	color: var(--link-color);
+	border-color: var(--link-color);
+}
+
+.rl-btn.primary {
+	background: var(--link-color);
+	border-color: var(--link-color);
+	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(20, 184, 166, 0.32);
+}
+
+.rl-btn.primary:hover {
+	background: #0d9488;
+	color: #ffffff;
+}
+
+.rl-btn.primary.on {
+	background: #ef4444;
+	border-color: #ef4444;
+	box-shadow: 0 4px 12px rgba(239, 68, 68, 0.32);
+}
+
+.rl-check {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--secondary-font);
+	font-size: 12.5px;
+	color: var(--secondary-color);
+	cursor: pointer;
+}
+
+.rl-check em {
+	font-style: normal;
+	font-size: 11px;
+	color: var(--tertiary-color);
+}
+
+.rl-check.inline {
+	margin-top: 4px;
+}
+
+/* ---- side panel ---- */
+
+.rl-side {
+	flex: 0 0 260px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.rl-metrics {
+	display: flex;
+	gap: 10px;
+}
+
+.rl-metric {
+	flex: 1;
+	border: 1px solid var(--quaternary-color);
+	border-radius: 10px;
+	padding: 8px 12px;
+}
+
+.rl-metric span {
+	display: block;
+	font-family: var(--secondary-font);
+	font-size: 10.5px;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--tertiary-color);
+}
+
+.rl-metric strong {
+	font-family: var(--secondary-font);
+	font-size: 17px;
+	color: var(--primary-color);
+	font-variant-numeric: tabular-nums;
+}
+
+.spark {
+	border: 1px solid var(--quaternary-color);
+	border-radius: 10px;
+	padding: 8px 10px 4px;
+}
+
+.spark-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-bottom: 2px;
+}
+
+.spark-label {
+	font-family: var(--secondary-font);
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--secondary-color);
+}
+
+.spark-value {
+	font-family: var(--secondary-font);
+	font-size: 12px;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Full width beneath the scene, so the sliders and their explanations get
+   room instead of stretching the side column past the canvas. */
+.rl-controls {
+	border: 1px solid var(--quaternary-color);
+	border-radius: 10px;
+	padding: 14px 16px;
+}
+
+.rl-controls-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+	gap: 16px 22px;
+	margin-top: 10px;
+}
+
+.rl-controls-title {
+	font-family: var(--secondary-font);
+	font-size: 11.5px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: var(--link-color);
+}
+
+.rl-slider {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.rl-slider > span {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	font-family: var(--secondary-font);
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--primary-color);
+}
+
+.rl-slider em {
+	font-style: normal;
+	font-weight: 700;
+	color: var(--link-color);
+	font-variant-numeric: tabular-nums;
+}
+
+.rl-slider input[type="range"] {
+	width: 100%;
+	accent-color: var(--link-color);
+	cursor: pointer;
+}
+
+.rl-slider small {
+	font-family: var(--secondary-font);
+	font-size: 10.5px;
+	line-height: 1.4;
+	color: var(--tertiary-color);
+}
+
+@media (max-width: 900px) {
+	.rl {
+		flex-direction: column;
+	}
+
+	.rl-side {
+		flex: 1 1 auto;
+		width: 100%;
+	}
+}

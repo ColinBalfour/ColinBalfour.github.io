@@ -99,18 +99,21 @@ const SEO = [
 	{
 		page: "playground",
 		description:
-			"Interactive browser demos from Colin Balfour's robotics research — including a live event-camera (DVS) simulator that turns your webcam into a stream of brightness-change events.",
+			"Interactive robotics demos running in your browser: a live event-camera (DVS) simulator, and a quadrotor that learns to fly from scratch via PPO — policy gradients, GAE and domain randomization, implemented in plain JavaScript.",
 		keywords: [
 			"Colin Balfour",
 			"playground",
+			"reinforcement learning",
+			"PPO",
+			"proximal policy optimization",
+			"GAE",
+			"domain randomization",
+			"sim2real",
 			"event camera",
 			"DVS",
-			"dynamic vision sensor",
 			"interactive demo",
-			"webcam",
-			"computer vision",
 			"robotics",
-			"simulation",
+			"quadrotor",
 		],
 	},
 

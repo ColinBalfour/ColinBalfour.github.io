@@ -43,6 +43,25 @@ Internal projects use the sentinel `link: "/projects/"` plus a `slug` field:
 
 **When adding a new internal project page, always give it a unique `slug`.** Historically these pages were addressed purely by array position, so reordering `projects` broke every internal URL; the `slug` field decouples the URL from array order. Do not reintroduce index-based internal links.
 
+### Playground demos (`/playground`)
+
+Self-contained interactive demos, each with its own pure "engine" module under
+`src/utils/` and a thin canvas component under `src/components/playground/`:
+
+- **Event camera** — `src/utils/eventSensor.js` (per-pixel DVS model) + `eventCamera.jsx`.
+- **RL lab** — `src/utils/rl/` holds a planar-quadrotor env, a hand-written MLP with
+  manual backprop and Adam, and the PPO maths (GAE, clipped surrogate, diagnostics).
+  `trainWorker.js` runs training in a **Web Worker** — an iteration takes ~200ms and
+  would freeze the page inline; the component animates the robot against the last
+  policy snapshot the worker posted.
+
+The engines are deliberately separate from the components so they can be unit-tested:
+`nn.test.js` includes a **finite-difference gradient check**, and `trainer.test.js`
+asserts the agent actually converges (and that the critic stays calibrated — value
+targets reach ~250, so the critic is trained on normalized returns; without that it
+underfits ~7x and explained variance collapses to zero). Those training tests take
+~40s, which dominates the suite runtime.
+
 ### Component layout
 
 `src/components/` is grouped by feature area (`about/`, `projects/`, `homepage/`, `common/`). `src/pages/` holds one component per route. Styling is plain CSS colocated per component/page in `styles/` subfolders. Static assets (images, gifs, videos, resume PDF) live in `public/` and are referenced by absolute path (e.g. `/logo.png`).
