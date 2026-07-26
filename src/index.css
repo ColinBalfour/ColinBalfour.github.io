@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Roboto:wght@500&display=swap");
+/* Web fonts are loaded via <link> in index.html, not an @import here: an
+   @import inside the bundled stylesheet is fetched serially (bundle -> font
+   CSS -> font files) and session-replay tools can't resolve the nested
+   cross-origin sheet, so replays render unstyled. */
 @import "./data/styles.css";
 
 body {
