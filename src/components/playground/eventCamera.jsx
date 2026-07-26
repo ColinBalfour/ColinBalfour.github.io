@@ -8,7 +8,9 @@ import "./styles/eventCamera.css";
 // component just pumps webcam (or sample video) frames through it and paints
 // the resulting events — ON green, OFF red — onto a canvas.
 
-const PROC_WIDTH = 480; // processing resolution (height follows source aspect)
+// Budget the sensor grid by pixel count rather than width, so a portrait phone
+// camera costs the same per frame as a 16:9 webcam (480x270 either way).
+const PROC_PIXELS = 480 * 270;
 
 // Fixed-camera traffic footage: the road, sky and skyline stay perfectly
 // still (and so stay black) while every car outlines itself in events —
@@ -45,6 +47,9 @@ const EventCamera = () => {
 	const [source, setSource] = useState("idle"); // idle | webcam | video
 	const [error, setError] = useState("");
 	const [eventRate, setEventRate] = useState(0);
+	// Aspect of the live source, so the stage matches the camera instead of
+	// cropping it into a fixed 16:9 box. Null until a source reports a size.
+	const [aspect, setAspect] = useState(null);
 
 	// ---- the sensor loop -------------------------------------------------
 	const startLoop = useCallback(() => {
@@ -69,8 +74,9 @@ const EventCamera = () => {
 			if (ctrl.current.paused) return;
 
 			const s = stateRef.current;
-			const w = PROC_WIDTH;
-			const h = Math.max(1, Math.round((vh / vw) * PROC_WIDTH));
+			const srcAspect = vw / vh;
+			const w = Math.max(1, Math.round(Math.sqrt(PROC_PIXELS * srcAspect)));
+			const h = Math.max(1, Math.round(w / srcAspect));
 
 			// (Re)allocate per-pixel state when the source size changes.
 			if (s.w !== w || s.h !== h) {
@@ -82,6 +88,8 @@ const EventCamera = () => {
 				s.h = h;
 				s.sensor = createSensorState(w, h);
 				s.imageData = outCtx.createImageData(w, h);
+				// Only fires when the source dimensions actually change.
+				setAspect(vw / vh);
 			}
 
 			workCtx.drawImage(video, 0, 0, w, h);
@@ -185,7 +193,10 @@ const EventCamera = () => {
 
 	return (
 		<div className="evcam">
-			<div className="evcam-stage">
+			<div
+				className="evcam-stage"
+				style={aspect ? { aspectRatio: String(aspect) } : undefined}
+			>
 				{/* Mirror the webcam so it reads as a selfie view; sample
 				    footage is left as-shot. */}
 				<canvas

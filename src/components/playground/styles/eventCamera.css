@@ -6,21 +6,28 @@
 	gap: 20px;
 }
 
+/* 16/9 is only the placeholder; once a source reports its size the component
+   sets aspect-ratio inline so the stage matches the camera. Portrait phone
+   cameras are capped so they can't swallow the page. */
 .evcam-stage {
 	position: relative;
 	width: 100%;
 	aspect-ratio: 16 / 9;
+	max-height: 70vh;
+	margin: 0 auto;
 	background: #000;
 	border-radius: 14px;
 	overflow: hidden;
 	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
+/* contain, not cover: if the height cap kicks in we letterbox rather than
+   crop — and the bars are invisible against the black stage anyway. */
 .evcam-canvas {
 	width: 100%;
 	height: 100%;
 	display: block;
-	object-fit: cover;
+	object-fit: contain;
 }
 
 /* Selfie view: what you move right should appear to move right. */
