@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
+import Clarity from "@microsoft/clarity";
 
 import Homepage from "./pages/homepage";
 import About from "./pages/about";
@@ -12,8 +13,8 @@ import Learning from "./pages/learning";
 import Contact from "./pages/contact";
 import Notfound from "./pages/404";
 
-import { TRACKING_ID } from "./data/tracking";
-import notifyVisit from "./utils/visitNotify";
+import { TRACKING_ID, CLARITY_ID } from "./data/tracking";
+import notifyVisit, { isExcludedVisitor } from "./utils/visitNotify";
 import "./app.css";
 
 function App() {
@@ -27,6 +28,11 @@ function App() {
 				gtagOptions: { send_page_view: false },
 			});
 		}
+		// Clarity session recordings — skip local dev and the owner's own devices.
+		if (CLARITY_ID && !isExcludedVisitor()) {
+			Clarity.init(CLARITY_ID);
+		}
+
 		notifyVisit();
 	}, []);
 

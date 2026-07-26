@@ -8,6 +8,25 @@
 
 const NTFY_TOPIC = "colin-visits-6b869dd03e";
 
+// True for local dev and for the owner's own devices — used to skip both the
+// ntfy ping and Clarity session recording. Load any page once with ?owner=1 on
+// each of your devices to permanently flag it.
+export function isExcludedVisitor() {
+	try {
+		if (
+			["localhost", "127.0.0.1", "0.0.0.0"].includes(
+				window.location.hostname
+			)
+		)
+			return true;
+		const params = new URLSearchParams(window.location.search);
+		if (params.get("owner") === "1") localStorage.setItem("cb_owner", "1");
+		return localStorage.getItem("cb_owner") === "1";
+	} catch (_) {
+		return false;
+	}
+}
+
 function deviceLabel() {
 	const ua = navigator.userAgent || "";
 	const os = /Android/i.test(ua)
@@ -37,15 +56,8 @@ function deviceLabel() {
 
 export default async function notifyVisit() {
 	try {
-		// Never fire during local development.
-		if (["localhost", "127.0.0.1", "0.0.0.0"].includes(window.location.hostname))
-			return;
-
-		// Owner exclusion: load any page once with ?owner=1 on each of your own
-		// devices to permanently silence your own visits on that device.
-		const params = new URLSearchParams(window.location.search);
-		if (params.get("owner") === "1") localStorage.setItem("cb_owner", "1");
-		if (localStorage.getItem("cb_owner") === "1") return;
+		// Skip local dev and the owner's own devices (see isExcludedVisitor).
+		if (isExcludedVisitor()) return;
 
 		// One ping per browser session (not per SPA route change).
 		if (sessionStorage.getItem("cb_notified")) return;
