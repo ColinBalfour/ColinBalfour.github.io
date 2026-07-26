@@ -13,6 +13,7 @@ import Contact from "./pages/contact";
 import Notfound from "./pages/404";
 
 import { TRACKING_ID } from "./data/tracking";
+import notifyVisit from "./utils/visitNotify";
 import "./app.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 				gtagOptions: { send_page_view: false },
 			});
 		}
+		notifyVisit();
 	}, []);
 
 	useEffect(() => {
