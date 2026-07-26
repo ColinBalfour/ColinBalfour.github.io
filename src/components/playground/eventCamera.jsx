@@ -170,7 +170,15 @@ const EventCamera = () => {
 	return (
 		<div className="evcam">
 			<div className="evcam-stage">
-				<canvas ref={canvasRef} className="evcam-canvas" />
+				{/* Mirror the webcam so it reads as a selfie view; sample
+				    footage is left as-shot. */}
+				<canvas
+					ref={canvasRef}
+					className={
+						"evcam-canvas" +
+						(source === "webcam" ? " mirrored" : "")
+					}
+				/>
 				{/* Source frames are never shown directly — only the events. */}
 				<video
 					ref={videoRef}

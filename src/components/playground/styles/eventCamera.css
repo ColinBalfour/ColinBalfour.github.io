@@ -23,6 +23,11 @@
 	object-fit: cover;
 }
 
+/* Selfie view: what you move right should appear to move right. */
+.evcam-canvas.mirrored {
+	transform: scaleX(-1);
+}
+
 /* The raw source is processed offscreen; only events are shown. */
 .evcam-hidden-video {
 	position: absolute;
