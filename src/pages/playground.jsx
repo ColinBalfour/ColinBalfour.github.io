@@ -242,6 +242,24 @@ A_t = Σ (γλ)^l · δ_(t+l)`}
 									those two teaches the agent that running out
 									of clock is as bad as falling out of the sky.
 								</p>
+								<p>
+									<strong>Training and what you see are
+									separate.</strong> Rollouts are collected in
+									a Web Worker against its own environment
+									instance, with actions sampled from the
+									policy distribution — that is the data the
+									gradients come from. The scene above is an
+									evaluation view: a second environment on the
+									page, flying the <em>greedy</em> action
+									(distribution mean, no exploration noise)
+									against whatever weights the worker last
+									posted. Your cursor pushes only that
+									evaluation copy, so the disturbance is
+									genuinely out-of-distribution and never
+									leaks into a policy update. Robustness to it
+									has to come from domain randomization at
+									training time, which is the whole point.
+								</p>
 								<p className="playground-methods-links">
 									Source, with unit tests including a
 									finite-difference gradient check:{" "}

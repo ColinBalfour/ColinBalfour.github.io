@@ -342,8 +342,13 @@ const RLLab = () => {
 						onPointerMove={onPointerMove}
 						onPointerLeave={onPointerLeave}
 					/>
+					{/* Be explicit that this is evaluation, not the rollout the
+					    gradients come from — otherwise it reads as though the
+					    cursor is perturbing training, which it never does. */}
 					<div className="rl-stage-hint">
-						Move your cursor over the scene to blow the robot around
+						<strong>Evaluation view</strong> — greedy policy, live
+						snapshot of training. Your cursor adds a disturbance the
+						agent never sees while learning.
 					</div>
 					<div className="rl-stage-badges">
 						<span className="rl-badge">

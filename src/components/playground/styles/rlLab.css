@@ -38,11 +38,18 @@
 .rl-stage-hint {
 	position: absolute;
 	left: 12px;
+	right: 12px;
 	bottom: 10px;
 	font-family: var(--secondary-font);
 	font-size: 11.5px;
+	line-height: 1.45;
 	color: rgba(255, 255, 255, 0.5);
 	pointer-events: none;
+}
+
+.rl-stage-hint strong {
+	color: rgba(255, 255, 255, 0.8);
+	font-weight: 700;
 }
 
 .rl-stage-badges {
