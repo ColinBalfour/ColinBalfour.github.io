@@ -97,6 +97,24 @@ const SEO = [
 	},
 
 	{
+		page: "playground",
+		description:
+			"Interactive browser demos from Colin Balfour's robotics research — including a live event-camera (DVS) simulator that turns your webcam into a stream of brightness-change events.",
+		keywords: [
+			"Colin Balfour",
+			"playground",
+			"event camera",
+			"DVS",
+			"dynamic vision sensor",
+			"interactive demo",
+			"webcam",
+			"computer vision",
+			"robotics",
+			"simulation",
+		],
+	},
+
+	{
 		page: "contact",
 		description:
 			"Get in touch with Colin Balfour — open to robotics and software collaboration, research, and new opportunities. Reach out by email or connect on GitHub and LinkedIn.",
