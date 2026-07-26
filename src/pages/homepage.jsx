@@ -282,45 +282,63 @@ const Homepage = () => {
 								<div className="homepage-featured-label">
 									{INFO.homepage.featured.label}
 								</div>
-								<div className="homepage-featured-video">
-									<VideoPlayer
-										src={INFO.homepage.featured.video}
-										poster={INFO.homepage.featured.poster}
-										label={INFO.homepage.featured.playerLabel}
-										duration={INFO.homepage.featured.duration}
-									/>
+
+								<div className="homepage-featured-row">
+									<div className="homepage-featured-video">
+										<VideoPlayer
+											src={INFO.homepage.featured.video}
+											poster={
+												INFO.homepage.featured.poster
+											}
+											label={
+												INFO.homepage.featured
+													.playerLabel
+											}
+											duration={
+												INFO.homepage.featured.duration
+											}
+										/>
+									</div>
+
+									{/* Sits in the empty column beside the reel,
+									    so it costs no extra vertical space. */}
+									<Link
+										to="/playground"
+										className="homepage-demo-tab"
+									>
+										<img
+											src="/playground_thumb.jpg"
+											alt="Event camera output: moving cars rendered as red and green events"
+											loading="lazy"
+										/>
+										<div className="homepage-demo-tab-body">
+											<div className="homepage-demo-tab-eyebrow">
+												Interactive
+											</div>
+											<div className="homepage-demo-tab-title">
+												Event camera demo
+											</div>
+											<div className="homepage-demo-tab-text">
+												Turn your webcam into the sensor
+												behind my event-based flight
+												research.
+											</div>
+											<span className="homepage-demo-tab-cta">
+												Try it
+												<FontAwesomeIcon
+													icon={faArrowRight}
+													className="homepage-demo-tab-arrow"
+												/>
+											</span>
+										</div>
+									</Link>
 								</div>
+
 								<div className="homepage-featured-caption">
 									{INFO.homepage.featured.title}
 								</div>
 							</div>
 						)}
-
-						<Link to="/playground" className="homepage-playground">
-							<div className="homepage-playground-glow" />
-							<div className="homepage-playground-body">
-								<div className="homepage-playground-label">
-									Interactive · Playground
-								</div>
-								<div className="homepage-playground-title">
-									See the world like an event camera
-								</div>
-								<div className="homepage-playground-text">
-									The sensor behind my event-based flight
-									research, running live on your webcam —
-									every pixel fires only when the light
-									hitting it changes. Nothing moves, nothing
-									is reported.
-								</div>
-								<div className="homepage-playground-cta">
-									Try the demo
-									<FontAwesomeIcon
-										icon={faArrowRight}
-										className="homepage-playground-arrow"
-									/>
-								</div>
-							</div>
-						</Link>
 
 						<div className="homepage-projects">
 							<AllProjects variant="short" />
