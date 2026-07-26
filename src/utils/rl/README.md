@@ -107,14 +107,60 @@ Crash penalty is −10 and terminates. Truncation at `maxSteps` is *not* a crash
 
 ### Domain randomization
 
-Per-episode resampling of mass (0.75–1.35×), thrust authority (0.85–1.15×),
-constant wind, actuator latency (0–2 steps, via an action queue) and Gaussian
-observation noise. Off by default; toggling it in the UI **resets training**,
-because it changes the distribution the rollout is drawn from.
+Per-episode resampling of mass, thrust authority, constant wind, actuator
+latency (via an action queue) and observation noise, **plus transient gusts**
+sampled during the episode. Every deviation is multiplied by `drScale`, the UI
+strength slider (0.5–1.5, default 1). Off by default; toggling it or changing
+the strength **resets training**, because it changes the rollout distribution.
 
 `setDisturbance()` is separate from wind on purpose: it is the *run-time*
 cursor gust, deliberately outside the training distribution, so the sim2real
 contrast is honest.
+
+#### Getting DR to actually buy robustness took three fixes
+
+The first version randomized, converged, and produced **no robustness at all**.
+Three separate causes, each worth remembering:
+
+1. **The training distribution didn't cover the test condition.** Wind was
+   capped at 2.2 N — 0.22 body weights — while the cursor could deliver 24 N.
+   Randomizing over a range that excludes the disturbance you care about buys
+   nothing. Wind/gusts are now sized in body-weight units against what the
+   cursor can apply.
+
+2. **Constant wind only teaches steady trim.** The cursor shove is a transient;
+   per-episode constant wind never taught transient rejection. Hence the gust
+   process (`gustProb` / `gustLen` / `gustMax`) in `step()`.
+
+3. **The reward punished the required behaviour.** Rejecting a lateral force
+   *requires* tilting — 8 N needs ~39° — but the upright bonus was
+   `0.6·exp(-3θ²)`, paying only 0.147/0.6 at that angle. The agent was being
+   fined for doing the one thing DR was trying to teach. Widened to
+   `exp(-1.2θ²)`.
+
+And one structural limit, fixed separately: a feedforward policy is a **PD
+controller** — against a constant unmodelled force it can only settle at an
+offset proportional to that force, no matter how much randomization it saw.
+Adding **integrated position error** to the observation (last two components,
+clamped for anti-windup) is what makes true rejection representable. Measured
+effect at a 4 N sustained push, 200 iterations:
+
+| | nominal | DR ×1 |
+|---|---|---|
+| before integral state | dist 1.76 | dist 1.78 |
+| after integral state | dist 1.14 | **dist 0.17** |
+
+> **Gotcha:** `OBS_DIM` is derived from `observe()`. The UI used to rebuild the
+> observation by hand, which silently breaks the moment a component is added —
+> it now calls `observe(env)` directly. Don't reintroduce the duplicate.
+
+#### Known weakness
+
+Crash-rate improvement under very large sustained pushes (≥8 N) is modest;
+station-keeping is where DR clearly wins. `drScale` above ~1.5 needs
+considerably more than the ~200 iterations a visitor will sit through, and
+undertrained heavy-DR policies look *worse* than nominal — which is why the
+slider is capped at 1.5. If you widen it, retrain for longer before judging.
 
 ---
 

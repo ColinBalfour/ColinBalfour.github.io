@@ -141,6 +141,33 @@
 	margin-top: 4px;
 }
 
+/* Appears next to the DR checkbox once randomization is on. */
+.rl-drscale {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--secondary-font);
+	font-size: 12.5px;
+	color: var(--secondary-color);
+}
+
+.rl-drscale > span {
+	white-space: nowrap;
+}
+
+.rl-drscale em {
+	font-style: normal;
+	font-weight: 700;
+	color: var(--link-color);
+	font-variant-numeric: tabular-nums;
+}
+
+.rl-drscale input[type="range"] {
+	width: 110px;
+	accent-color: var(--link-color);
+	cursor: pointer;
+}
+
 /* ---- side panel ---- */
 
 .rl-side {

@@ -1,6 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { createEnv, mulberry32, reset, setDisturbance, step } from "../../utils/rl/env";
+import {
+	createEnv,
+	mulberry32,
+	observe,
+	reset,
+	setDisturbance,
+	step,
+} from "../../utils/rl/env";
 import { forward } from "../../utils/rl/nn";
 import { DEFAULT_HP } from "../../utils/rl/trainer";
 import Sparkline from "./sparkline";
@@ -53,8 +60,9 @@ const RLLab = () => {
 	const [entCoef, setEntCoef] = useState(DEFAULT_HP.entCoef);
 	const [lam, setLam] = useState(DEFAULT_HP.lam);
 	const [normalizeAdv, setNormalizeAdv] = useState(true);
-	// Requires a reset (changes the data the rollout is drawn from).
+	// Require a reset (they change the distribution the rollout is drawn from).
 	const [randomize, setRandomize] = useState(false);
+	const [drScale, setDrScale] = useState(1);
 	const [gust, setGust] = useState(6);
 
 	const gustRef = useRef(gust);
@@ -96,13 +104,13 @@ const RLLab = () => {
 				type: "reset",
 				hp: {
 					...DEFAULT_HP,
-					lr, clipEps, entCoef, lam, normalizeAdv, randomize,
+					lr, clipEps, entCoef, lam, normalizeAdv, randomize, drScale,
 					...hpOverride,
 				},
 				seed: 42,
 			});
 		},
-		[lr, clipEps, entCoef, lam, normalizeAdv, randomize]
+		[lr, clipEps, entCoef, lam, normalizeAdv, randomize, drScale]
 	);
 
 	useEffect(() => {
@@ -196,13 +204,10 @@ const RLLab = () => {
 				const pol = policyRef.current;
 				let action = [0, 0];
 				if (pol) {
-					const obs = [
-						-env.x / 2, -env.y / 2,
-						env.vx / 3, env.vy / 3,
-						Math.sin(env.th), Math.cos(env.th),
-						env.om / 5,
-					];
-					const acts = forward(pol, obs);
+					// Use the env's own observation function rather than
+					// rebuilding it here — duplicating it silently breaks the
+					// moment the observation gains a component.
+					const acts = forward(pol, observe(env));
 					action = acts[pol.nLayers];
 				}
 				const res = step(env, action);
@@ -380,12 +385,32 @@ const RLLab = () => {
 							onChange={(e) => {
 								const v = e.target.checked;
 								setRandomize(v);
-								doReset({ randomize: v });
+								doReset({ randomize: v, drScale });
 							}}
 						/>
 						Domain randomization
 						<em>resets training</em>
 					</label>
+
+					{randomize && (
+						<label className="rl-drscale">
+							<span>
+								Strength <em>{drScale.toFixed(1)}×</em>
+							</span>
+							<input
+								type="range"
+								min={0.5}
+								max={1.5}
+								step={0.1}
+								value={drScale}
+								onChange={(e) => {
+									const v = parseFloat(e.target.value);
+									setDrScale(v);
+									doReset({ randomize: true, drScale: v });
+								}}
+							/>
+						</label>
+					)}
 				</div>
 			</div>
 

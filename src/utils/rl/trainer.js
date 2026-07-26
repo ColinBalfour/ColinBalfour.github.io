@@ -36,6 +36,8 @@ export const DEFAULT_HP = {
 	maxGradNorm: 0.5,
 	normalizeAdv: true,
 	targetKL: 0.03, // stop the epoch loop early if the update overshoots
+	randomize: false,
+	drScale: 1, // strength of domain randomization (0 = nominal)
 	hidden: 64,
 	initLogStd: -1.0,
 };
@@ -128,7 +130,7 @@ export function createTrainer(userHp = {}, seed = 20260726) {
 		rng,
 		env,
 		agent,
-		obs: reset(env, { randomize: hp.randomize }),
+		obs: reset(env, { randomize: hp.randomize, drScale: hp.drScale }),
 		iteration: 0,
 		totalSteps: 0,
 		episodeReturn: 0,
@@ -180,7 +182,7 @@ export function collectRollout(t) {
 			finishedReturns.push(t.episodeReturn);
 			t.episodeReturn = 0;
 			t.episodeLen = 0;
-			t.obs = reset(env, { randomize: hp.randomize });
+			t.obs = reset(env, { randomize: hp.randomize, drScale: hp.drScale });
 		} else {
 			needsNext[i] = true; // filled in from the next step's value
 			t.obs = res.obs;
