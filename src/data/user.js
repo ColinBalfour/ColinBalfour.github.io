@@ -212,6 +212,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
+			pdfFeatured: true,
 			link: "https://pear.wpi.edu/research/saranga.html",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
@@ -237,6 +238,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
+			pdfFeatured: true,
 			slug: "activenav",
 			link: "/projects/",
 			keywords: [
@@ -276,6 +278,7 @@ const INFO = {
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
 			],
 			linkText: "View Project",
+			pdfFeatured: true,
 			link: "/projects/",
 			keywords: [
 				"Colin Balfour", "Balfour", "AttentionSeeker", "Event Camera", "Defocus", "Attention", "Reinforcement Learning", "Drone", "Aerial Navigation", "RA-L", "Robotics",
@@ -366,6 +369,7 @@ const INFO = {
 				"/ros2_logo.png",
 			],
 			linkText: "View Project",
+			pdfFeatured: true,
 			slug: "learning-to-chase",
 			link: "/projects/",
 			keywords: [
@@ -434,6 +438,7 @@ const INFO = {
 				"/numpy.svg",
 			],
 			linkText: "View Project",
+			pdfFeatured: true,
 			link: "https://github.com/ColinBalfour/Einstein-Vision",
 			keywords: [
 				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Computer Vision", "Self Driving", "Autonomous Car", "AI", "Deep Learning", 
