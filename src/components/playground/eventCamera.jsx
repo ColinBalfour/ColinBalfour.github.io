@@ -39,10 +39,13 @@ const EventCamera = () => {
 	const [persistence, setPersistence] = useState(DEFAULTS.webcam.persistence);
 	const [showGhost, setShowGhost] = useState(false);
 	const [paused, setPaused] = useState(false);
-	const ctrl = useRef({ threshold, persistence, showGhost, paused });
+	// Whether the section is on-screen; the loop skips work entirely while
+	// it's scrolled away so the demo costs nothing off-screen.
+	const [inView, setInView] = useState(false);
+	const ctrl = useRef({ threshold, persistence, showGhost, paused, inView });
 	useEffect(() => {
-		ctrl.current = { threshold, persistence, showGhost, paused };
-	}, [threshold, persistence, showGhost, paused]);
+		ctrl.current = { threshold, persistence, showGhost, paused, inView };
+	}, [threshold, persistence, showGhost, paused, inView]);
 
 	const [source, setSource] = useState("idle"); // idle | webcam | video
 	const [error, setError] = useState("");
@@ -71,7 +74,7 @@ const EventCamera = () => {
 			const vw = video.videoWidth;
 			const vh = video.videoHeight;
 			if (!vw || !vh || video.readyState < 2) return;
-			if (ctrl.current.paused) return;
+			if (ctrl.current.paused || !ctrl.current.inView) return;
 
 			const s = stateRef.current;
 			const srcAspect = vw / vh;
@@ -133,8 +136,27 @@ const EventCamera = () => {
 		}
 	}, []);
 
+	const startSampleVideo = useCallback(() => {
+		setError("");
+		stopEverything();
+		const video = videoRef.current;
+		video.srcObject = null;
+		video.src = SAMPLE_VIDEO;
+		video.loop = true;
+		video.muted = true;
+		stateRef.current.w = 0;
+		setThreshold(DEFAULTS.video.threshold);
+		setPersistence(DEFAULTS.video.persistence);
+		setSource("video");
+		setPaused(false);
+		startLoop();
+		// Fire-and-forget for the same reason as the webcam path above.
+		Promise.resolve(video.play()).catch(() => {});
+	}, [startLoop, stopEverything]);
+
 	const startWebcam = useCallback(async () => {
 		setError("");
+		stopEverything();
 		try {
 			const stream = await navigator.mediaDevices.getUserMedia({
 				video: { facingMode: "user", width: { ideal: 1280 } },
@@ -153,46 +175,58 @@ const EventCamera = () => {
 			startLoop();
 			// Don't await: a hung play() must never leave the UI stuck. The
 			// render loop already waits for readyState on its own.
-			video.play().catch(() => {});
+			Promise.resolve(video.play()).catch(() => {});
 		} catch (e) {
+			// Fall back to the sample footage rather than leaving a dead stage.
+			startSampleVideo();
 			setError(
 				"Couldn't access the camera — it may be blocked or in use. " +
-					"You can still run the sensor on the sample footage instead."
+					"Showing sample footage instead."
 			);
 		}
-	}, [startLoop]);
-
-	const startSampleVideo = useCallback(() => {
-		setError("");
-		stopEverything();
-		const video = videoRef.current;
-		video.srcObject = null;
-		video.src = SAMPLE_VIDEO;
-		video.loop = true;
-		video.muted = true;
-		stateRef.current.w = 0;
-		setThreshold(DEFAULTS.video.threshold);
-		setPersistence(DEFAULTS.video.persistence);
-		setSource("video");
-		setPaused(false);
-		startLoop();
-		// Fire-and-forget for the same reason as the webcam path above.
-		video.play().catch(() => {});
-	}, [startLoop, stopEverything]);
-
-	// ?src=video deep-links straight into the demo running on the sample
-	// footage (no camera prompt) — handy for sharing.
-	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		if (params.get("src") === "video") startSampleVideo();
-	}, [startSampleVideo]);
+	}, [startLoop, startSampleVideo, stopEverything]);
 
 	useEffect(() => stopEverything, [stopEverything]);
 
+	// Start on the sample footage only once the section actually scrolls into
+	// view, and never touch the camera on our own.
+	const sectionRef = useRef(null);
+	useEffect(() => {
+		const el = sectionRef.current;
+		if (!el || typeof IntersectionObserver === "undefined") {
+			setInView(true);
+			return;
+		}
+		const observer = new IntersectionObserver(
+			([entry]) => setInView(entry.isIntersecting),
+			{ threshold: 0.15 }
+		);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
+
+	useEffect(() => {
+		if (inView && source === "idle") startSampleVideo();
+	}, [inView, source, startSampleVideo]);
+
+	// Pause playback while the section is off-screen so the demo costs
+	// nothing on homepage load or while scrolled away; resume when it comes
+	// back, unless the user froze it manually.
+	useEffect(() => {
+		const video = videoRef.current;
+		if (!video || source === "idle") return;
+		if (inView && !paused) {
+			Promise.resolve(video.play()).catch(() => {});
+		} else {
+			video.pause();
+		}
+	}, [inView, paused, source]);
+
 	const active = source !== "idle";
+	const isWebcam = source === "webcam";
 
 	return (
-		<div className="evcam">
+		<div className="evcam" ref={sectionRef}>
 			<div
 				className="evcam-stage"
 				style={aspect ? { aspectRatio: String(aspect) } : undefined}
@@ -214,38 +248,29 @@ const EventCamera = () => {
 					muted
 				/>
 
-				{!active && (
-					<div className="evcam-overlay">
-						<div className="evcam-overlay-title">
-							See the world like an event camera
-						</div>
-						<div className="evcam-overlay-text">
-							Your camera feed never leaves this page — every pixel
-							is processed locally in your browser.
-						</div>
-						<div className="evcam-overlay-actions">
-							<button
-								className="evcam-btn primary"
-								onClick={startWebcam}
-							>
-								Use my camera
-							</button>
-							<button
-								className="evcam-btn"
-								onClick={startSampleVideo}
-							>
-								Use sample footage
-							</button>
-						</div>
-					</div>
-				)}
+				<div className="evcam-badge" aria-live="polite">
+					<span className="evcam-dot" />
+					{isWebcam ? "LIVE — YOUR CAMERA" : "SAMPLE FOOTAGE"}
+				</div>
 
 				{active && (
 					<div className="evcam-readout">
-						<span className="evcam-dot" />
 						{eventRate.toLocaleString()} events/sec
 					</div>
 				)}
+			</div>
+
+			<div className="evcam-source-switch">
+				<button
+					className="evcam-btn primary evcam-camera-btn"
+					onClick={isWebcam ? startSampleVideo : startWebcam}
+				>
+					{isWebcam ? "Back to sample footage" : "📷 Use my own camera"}
+				</button>
+				<span className="evcam-privacy-note">
+					Your camera feed never leaves this page — every pixel is
+					processed locally in your browser.
+				</span>
 			</div>
 
 			{error && <div className="evcam-error">{error}</div>}
@@ -307,20 +332,6 @@ const EventCamera = () => {
 					>
 						{paused ? "Resume" : "Freeze"}
 					</button>
-					{active && (
-						<button
-							className="evcam-chip"
-							onClick={
-								source === "webcam"
-									? startSampleVideo
-									: startWebcam
-							}
-						>
-							{source === "webcam"
-								? "Switch to sample footage"
-								: "Switch to my camera"}
-						</button>
-					)}
 				</div>
 			</div>
 

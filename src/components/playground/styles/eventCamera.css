@@ -44,44 +44,23 @@
 	pointer-events: none;
 }
 
-.evcam-overlay {
+/* Always-on badge naming the current source, top-left of the stage. */
+.evcam-badge {
 	position: absolute;
-	inset: 0;
+	top: 12px;
+	left: 12px;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	text-align: center;
-	padding: 24px;
-	gap: 10px;
-	background: radial-gradient(
-		ellipse at center,
-		rgba(20, 184, 166, 0.10),
-		rgba(0, 0, 0, 0.86)
-	);
-}
-
-.evcam-overlay-title {
-	font-family: var(--primary-font);
-	font-size: 20px;
-	font-weight: 700;
-	color: #ffffff;
-}
-
-.evcam-overlay-text {
+	gap: 7px;
 	font-family: var(--secondary-font);
-	font-size: 13.5px;
-	line-height: 1.5;
-	color: rgba(255, 255, 255, 0.72);
-	max-width: 420px;
-}
-
-.evcam-overlay-actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	justify-content: center;
-	margin-top: 8px;
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 999px;
+	padding: 5px 12px;
 }
 
 .evcam-btn {
@@ -110,6 +89,29 @@
 
 .evcam-btn.primary:hover {
 	background: #0d9488;
+}
+
+/* Primary source-switch control, below the stage — visually the loudest
+   control in the demo since switching to a live camera is opt-in. */
+.evcam-source-switch {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px;
+}
+
+.evcam-camera-btn {
+	font-size: 14.5px;
+	font-weight: 700;
+	padding: 13px 24px;
+}
+
+.evcam-privacy-note {
+	font-family: var(--secondary-font);
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var(--tertiary-color);
+	max-width: 420px;
 }
 
 .evcam-readout {

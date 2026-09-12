@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import {
-	faMailBulk,
-	faChevronDown,
-	faArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMailBulk, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faGithub,
@@ -21,6 +17,7 @@ import NavBar from "../components/common/navBar";
 import AllProjects from "../components/projects/allProjects";
 import FlippingPhoto from "../components/homepage/flippingPhoto";
 import VideoPlayer from "../components/homepage/videoPlayer";
+import EventCamera from "../components/playground/eventCamera";
 
 import INFO from "../data/user";
 import SEO from "../data/seo";
@@ -32,10 +29,22 @@ const Homepage = () => {
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
 	const [scrolled, setScrolled] = useState(false);
+	const location = useLocation();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
+
+	// React Router doesn't scroll to hash fragments on its own — needed so
+	// the "/#event-camera" project link and the old /playground redirect
+	// both actually land on the demo section.
+	useEffect(() => {
+		if (!location.hash) return;
+		const el = document.querySelector(location.hash);
+		if (el && typeof el.scrollIntoView === "function") {
+			el.scrollIntoView({ behavior: "smooth" });
+		}
+	}, [location.hash]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -299,39 +308,6 @@ const Homepage = () => {
 											}
 										/>
 									</div>
-
-									{/* Sits in the empty column beside the reel,
-									    so it costs no extra vertical space. */}
-									<Link
-										to="/playground"
-										className="homepage-demo-tab"
-									>
-										<img
-											src="/playground_thumb.jpg"
-											alt="Event camera output: moving cars rendered as red and green events"
-											loading="lazy"
-										/>
-										<div className="homepage-demo-tab-body">
-											<div className="homepage-demo-tab-eyebrow">
-												Interactive
-											</div>
-											<div className="homepage-demo-tab-title">
-												Event camera demo
-											</div>
-											<div className="homepage-demo-tab-text">
-												Turn your webcam into the sensor
-												behind my event-based flight
-												research.
-											</div>
-											<span className="homepage-demo-tab-cta">
-												Try it
-												<FontAwesomeIcon
-													icon={faArrowRight}
-													className="homepage-demo-tab-arrow"
-												/>
-											</span>
-										</div>
-									</Link>
 								</div>
 
 								<div className="homepage-featured-caption">
@@ -339,6 +315,23 @@ const Homepage = () => {
 								</div>
 							</div>
 						)}
+
+						<div className="homepage-event-camera" id="event-camera">
+							<div className="homepage-eventcam-label">
+								Interactive Demo
+							</div>
+							<h2 className="homepage-eventcam-title">
+								See like an event camera
+							</h2>
+							<p className="homepage-eventcam-intro">
+								A conventional camera sends whole frames on a
+								clock; an event camera fires only when a
+								pixel's brightness crosses a threshold. This
+								runs that same per-pixel sensor model live, on
+								sample footage or your own webcam.
+							</p>
+							<EventCamera />
+						</div>
 
 						<div className="homepage-projects">
 							<AllProjects variant="short" />

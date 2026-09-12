@@ -97,27 +97,6 @@ const SEO = [
 	},
 
 	{
-		page: "playground",
-		description:
-			"Interactive robotics demos running in your browser: a live event-camera (DVS) simulator, and a quadrotor that learns to fly from scratch via PPO — policy gradients, GAE and domain randomization, implemented in plain JavaScript.",
-		keywords: [
-			"Colin Balfour",
-			"playground",
-			"reinforcement learning",
-			"PPO",
-			"proximal policy optimization",
-			"GAE",
-			"domain randomization",
-			"sim2real",
-			"event camera",
-			"DVS",
-			"interactive demo",
-			"robotics",
-			"quadrotor",
-		],
-	},
-
-	{
 		page: "contact",
 		description:
 			"Get in touch with Colin Balfour — open to robotics and software collaboration, research, and new opportunities. Reach out by email or connect on GitHub and LinkedIn.",
