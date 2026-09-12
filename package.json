@@ -33,6 +33,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "vitest",
+		"pdf": "node scripts/build-portfolio-pdf.mjs",
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build"
 	},
