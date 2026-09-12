@@ -446,25 +446,6 @@ const INFO = {
 		},
 
 		{
-			title: "Event Camera Simulator (Live Demo)",
-			tagline:
-				"A DVS sensor model running live on your webcam — per-pixel log-intensity events, entirely client-side.",
-			description:
-				"An interactive browser demo that turns your webcam into an event camera. Every pixel independently tracks the log of incoming brightness and fires an ON/OFF event only when it crosses a contrast threshold, advancing its own reference one step at a time — so static scenery produces nothing at all, exactly like real DVS hardware. Written in plain JavaScript on a canvas with tunable threshold and event persistence; no frame ever leaves the browser.",
-			date: "2026",
-			logo: [
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/html/html.png",
-			],
-			linkText: "Try the demo",
-			link: "/#event-camera",
-			photo: "/playground_events.mp4",
-			keywords: [
-				"Colin Balfour", "event camera", "DVS", "dynamic vision sensor", "interactive demo", "computer vision", "JavaScript", "canvas", "simulation", "robotics",
-			],
-		},
-
-		{
 			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
 			tagline:
 				"Full classical SfM pipeline + a NeRF implemented from scratch in PyTorch.",

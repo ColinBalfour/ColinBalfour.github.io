@@ -241,13 +241,11 @@
 	flex: 1 1 auto;
 	min-width: 0;
 	width: 100%;
-	max-width: 760px;
 }
 
 .homepage-featured-caption {
 	display: inline-block;
 	margin-top: 14px;
-	max-width: 760px;
 	font-size: 14px;
 	line-height: 1.5;
 	color: var(--secondary-color);
@@ -259,20 +257,10 @@
 	color: var(--link-color);
 }
 
-/* Full-width section housing the event camera demo, directly below the
-   featured reel and above the projects grid. */
+/* Full-width section housing the event camera demo, directly above the
+   featured reel. */
 .homepage-event-camera {
 	padding-top: 50px;
-}
-
-.homepage-eventcam-label {
-	font-family: var(--secondary-font);
-	font-size: 13px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--link-color);
-	margin-bottom: 10px;
 }
 
 .homepage-eventcam-title {
@@ -288,8 +276,7 @@
 	font-size: 15px;
 	line-height: 1.6;
 	color: var(--secondary-color);
-	max-width: 760px;
-	margin: 0 0 24px;
+	margin: 24px 0 0;
 }
 
 @media (max-width: 600px) {

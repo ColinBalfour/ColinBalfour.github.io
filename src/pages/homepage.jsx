@@ -36,7 +36,7 @@ const Homepage = () => {
 	}, []);
 
 	// React Router doesn't scroll to hash fragments on its own — needed so
-	// the "/#event-camera" project link and the old /playground redirect
+	// the old /playground redirect (or any other /#event-camera link)
 	// both actually land on the demo section.
 	useEffect(() => {
 		if (!location.hash) return;
@@ -286,6 +286,27 @@ const Homepage = () => {
 							/>
 						</button>
 
+						<div className="homepage-event-camera" id="event-camera">
+							<h2 className="homepage-eventcam-title">
+								Event Camera Demo
+							</h2>
+							<EventCamera />
+							<p className="homepage-eventcam-intro">
+								A few of my works use a unique sensor called an
+								Event Camera. Instead of a normal RGB camera,
+								which accumulates photons hitting the sensor
+								while the aperture is open into 0-255 pixels,
+								event cameras do the opposite. When the number
+								of photons hitting the sensor (the brightness)
+								changes, it fires an asynchronous 'event' at that
+								pixel: up or down. This is done at a hardware
+								level, with the sensor always open, giving
+								microsecond latency, no motion blur, and 120dB
+								dynamic range: exactly what you want for high
+								speed drone navigation.
+							</p>
+						</div>
+
 						{INFO.homepage.featured && (
 							<div className="homepage-featured">
 								<div className="homepage-featured-label">
@@ -315,23 +336,6 @@ const Homepage = () => {
 								</div>
 							</div>
 						)}
-
-						<div className="homepage-event-camera" id="event-camera">
-							<div className="homepage-eventcam-label">
-								Interactive Demo
-							</div>
-							<h2 className="homepage-eventcam-title">
-								See like an event camera
-							</h2>
-							<p className="homepage-eventcam-intro">
-								A conventional camera sends whole frames on a
-								clock; an event camera fires only when a
-								pixel's brightness crosses a threshold. This
-								runs that same per-pixel sensor model live, on
-								sample footage or your own webcam.
-							</p>
-							<EventCamera />
-						</div>
 
 						<div className="homepage-projects">
 							<AllProjects variant="short" />
