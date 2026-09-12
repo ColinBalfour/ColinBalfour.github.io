@@ -10,7 +10,7 @@ import { promisify } from "node:util";
 import path from "node:path";
 import fs from "node:fs/promises";
 import os from "node:os";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import INFO from "../src/data/user.js";
 import { selectProjects } from "./pdf/select.mjs";
@@ -48,7 +48,8 @@ async function requireBinary(name) {
 	} catch {
 		throw new Error(
 			`Required binary "${name}" is not on PATH. ` +
-				`Install it (ffmpeg: apt install ffmpeg / conda install ffmpeg; ` +
+				`Install it (ffmpeg: apt install ffmpeg / conda install ffmpeg — ` +
+				`this also provides ffprobe; ` +
 				`google-chrome: https://google.com/chrome) and re-run.`
 		);
 	}
@@ -116,7 +117,12 @@ async function main() {
 		info: INFO,
 		featured,
 		grid,
-		imageFor: (project) => images.get(project) ?? null,
+		// file:// URLs so a `#`, `%`, or space in the repo path can't silently
+		// break <img src> resolution inside Chrome.
+		imageFor: (project) => {
+			const absPath = images.get(project);
+			return absPath ? pathToFileURL(absPath).href : null;
+		},
 	});
 
 	// Chrome needs a real file so that relative/absolute image paths resolve.
@@ -124,32 +130,51 @@ async function main() {
 	const htmlFile = path.join(tmpDir, "portfolio.html");
 	await fs.writeFile(htmlFile, html, "utf8");
 
+	// Print to a fresh path inside the temp dir first, and only copy it over
+	// the real destination once we've verified Chrome actually wrote it.
+	// Without this, a Chrome run that exits 0 without writing (e.g. the
+	// destination directory is read-only) reports success over whatever
+	// stale PDF already sits at OUT -- and the default OUT always exists,
+	// since the PDF is committed.
+	const tmpPdf = path.join(tmpDir, "portfolio.pdf");
+
 	try {
-		// Chrome writes harmless snap/libproxy warnings to stderr even on
-		// success, so success is judged by exit code and output size only.
-		await run("google-chrome", [
-			"--headless",
-			"--disable-gpu",
-			"--no-pdf-header-footer",
-			`--print-to-pdf=${OUT}`,
-			`file://${htmlFile}`,
-		]);
-	} catch (error) {
-		throw new Error(
-			`Chrome failed to render the PDF.\n${error.stderr || error.message}`
-		);
-	}
+		try {
+			// Chrome writes harmless snap/libproxy warnings to stderr even on
+			// success, so success is judged by exit code and output size only.
+			await run("google-chrome", [
+				"--headless",
+				"--disable-gpu",
+				"--no-pdf-header-footer",
+				`--print-to-pdf=${tmpPdf}`,
+				pathToFileURL(htmlFile).href,
+			]);
+		} catch (error) {
+			throw new Error(
+				`Chrome failed to render the PDF.\n${error.stderr || error.message}`
+			);
+		}
 
-	const stat = await fs.stat(OUT).catch(() => null);
-	if (!stat || stat.size < 1024) {
-		throw new Error(
-			`Chrome produced no usable output at ${OUT} ` +
-				`(${stat ? stat.size : 0} bytes). Expected a real document.`
-		);
-	}
+		const stat = await fs.stat(tmpPdf).catch(() => null);
+		if (!stat || stat.size < 1024) {
+			throw new Error(
+				`Chrome produced no usable output at ${tmpPdf} ` +
+					`(${stat ? stat.size : 0} bytes). Expected a real document.`
+			);
+		}
 
-	await fs.rm(tmpDir, { recursive: true, force: true });
-	console.log(`Wrote ${OUT} (${Math.round(stat.size / 1024)} KB)`);
+		try {
+			await fs.copyFile(tmpPdf, OUT);
+		} catch (error) {
+			// tmpDir may be on a different filesystem than OUT, so we can't
+			// rename; surface a copy failure through the same loud error path.
+			throw new Error(`Failed to write the PDF to ${OUT}.\n${error.message}`);
+		}
+
+		console.log(`Wrote ${OUT} (${Math.round(stat.size / 1024)} KB)`);
+	} finally {
+		await fs.rm(tmpDir, { recursive: true, force: true });
+	}
 }
 
 main().catch((error) => {

@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npx vitest run` — run the suite once (CI-style, non-interactive)
 - `npx vitest run src/App.test.jsx` — run a single test file
 - `npm run deploy` — build and publish `build/` to GitHub Pages via `gh-pages` (this is what makes the live site at https://colinbalfour.github.io update; `predeploy` runs the build automatically)
+- `npm run pdf` — regenerate `public/ColinBalfourPortfolio.pdf` from `src/data/user.js` (optional `--out <path>` to write elsewhere instead)
 
 No linter is configured. Formatting uses the Prettier config in `package.json` (tabs, width 4).
 
@@ -61,6 +62,33 @@ asserts the agent actually converges (and that the critic stays calibrated — v
 targets reach ~250, so the critic is trained on normalized returns; without that it
 underfits ~7x and explained variance collapses to zero). Those training tests take
 ~40s, which dominates the suite runtime.
+
+### Portfolio PDF (`npm run pdf`)
+
+`scripts/build-portfolio-pdf.mjs` renders `src/data/user.js` into a standalone
+HTML document (`scripts/pdf/render.mjs`) and prints it to
+`public/ColinBalfourPortfolio.pdf` via headless `google-chrome`. This file is
+committed and deployed like any other asset in `public/` — it is what the
+résumé/portfolio PDF link on the live site serves.
+
+Per-project data fields (`src/data/user.js`) control what lands in the PDF:
+
+- `pdf: true` — include the project in the back grid (six per page).
+- `pdfFeatured: true` — give the project its own full page instead.
+- `pdfPosterAt: "m:ss"` (or `"h:mm:ss"`) — override which frame is extracted
+  as the thumbnail for a video `photo`; without it, the frame is taken 40%
+  into the clip. Frames are cached in `.pdf-cache/` (gitignored, derived —
+  never commit it), keyed by both the source video and the seek point, so
+  changing `pdfPosterAt` always produces a fresh frame.
+
+**After editing any project flagged `pdf`/`pdfFeatured` (or its photo,
+tagline, or description), re-run `npm run pdf` and commit the regenerated
+PDF** — nothing regenerates it automatically.
+
+Requires `google-chrome`, `ffmpeg`, and `ffprobe` (ships with `ffmpeg`) on
+`PATH`. See `docs/superpowers/specs/2026-09-03-portfolio-pdf-design.md` and
+`docs/superpowers/plans/2026-09-03-portfolio-pdf.md` for the design rationale
+and error-handling contract.
 
 ### Component layout
 
