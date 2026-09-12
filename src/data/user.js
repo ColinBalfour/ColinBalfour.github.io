@@ -452,7 +452,7 @@ const INFO = {
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/html/html.png",
 			],
 			linkText: "Try the demo",
-			link: "/playground",
+			link: "/#event-camera",
 			photo: "/playground_events.mp4",
 			keywords: [
 				"Colin Balfour", "event camera", "DVS", "dynamic vision sensor", "interactive demo", "computer vision", "JavaScript", "canvas", "simulation", "robotics",

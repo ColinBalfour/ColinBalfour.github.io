@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
 import Clarity from "@microsoft/clarity";
 
@@ -9,7 +9,6 @@ import Robotics from "./pages/robotics";
 import Projects from "./pages/projects";
 import ReadProject from "./pages/readProject";
 import Publications from "./pages/publications";
-import Playground from "./pages/playground";
 import Learning from "./pages/learning";
 import Contact from "./pages/contact";
 import Notfound from "./pages/404";
@@ -55,7 +54,12 @@ function App() {
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/projects/:slug" element={<ReadProject />} />
 					<Route path="/publications" element={<Publications />} />
-					<Route path="/playground" element={<Playground />} />
+					{/* The event camera demo now lives on the homepage; old
+					    shared /playground links still land on it. */}
+					<Route
+						path="/playground"
+						element={<Navigate to="/#event-camera" replace />}
+					/>
 					<Route path="/learning" element={<Learning />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/*" element={<Notfound />} />

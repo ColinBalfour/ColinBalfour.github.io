@@ -28,7 +28,7 @@ This is a **React + Vite** single-page portfolio, originally scaffolded from the
 
 The base link-preview / crawler metadata (title, description, Open Graph, Twitter card) lives in the root `index.html` — this is a client-rendered SPA, so that static HTML is what crawlers that don't run JS see. Update it if the tagline or default description changes.
 
-**Routing** (`src/App.jsx`, react-router-dom v6, wrapped in a `BrowserRouter` in `src/index.jsx`): static routes for `/`, `/about`, `/robotics`, `/projects`, `/publications`, `/learning`, `/contact`, plus dynamic `/projects/:slug`. Everything else falls through to the 404 page. (The upstream template's Articles feature was removed — it only ever held placeholder content.)
+**Routing** (`src/App.jsx`, react-router-dom v6, wrapped in a `BrowserRouter` in `src/index.jsx`): static routes for `/`, `/about`, `/robotics`, `/projects`, `/publications`, `/learning`, `/contact`, plus dynamic `/projects/:slug`. `/playground` redirects (`<Navigate replace />`) to `/#event-camera`, since the event camera demo it used to host now lives on the homepage. Everything else falls through to the 404 page. (The upstream template's Articles feature was removed — it only ever held placeholder content.)
 
 Because GitHub Pages has no server-side SPA fallback, deep links (e.g. `/publications`) are handled by the rafgraph redirect shim: `public/404.html` encodes the path into a query string and bounces to `/`, and an inline script at the top of the root `index.html` `<head>` restores it before the app boots. Keep both in sync if the scheme changes.
 
@@ -43,17 +43,23 @@ Internal projects use the sentinel `link: "/projects/"` plus a `slug` field:
 
 **When adding a new internal project page, always give it a unique `slug`.** Historically these pages were addressed purely by array position, so reordering `projects` broke every internal URL; the `slug` field decouples the URL from array order. Do not reintroduce index-based internal links.
 
-### Playground demos (`/playground`)
+### Interactive demos (`src/components/playground/`)
 
 Self-contained interactive demos, each with its own pure "engine" module under
 `src/utils/` and a thin canvas component under `src/components/playground/`:
 
 - **Event camera** — `src/utils/eventSensor.js` (per-pixel DVS model) + `eventCamera.jsx`.
-- **RL lab** — `src/utils/rl/` holds a planar-quadrotor env, a hand-written MLP with
-  manual backprop and Adam, and the PPO maths (GAE, clipped surrogate, diagnostics).
-  `trainWorker.js` runs training in a **Web Worker** — an iteration takes ~200ms and
-  would freeze the page inline; the component animates the robot against the last
-  policy snapshot the worker posted.
+  Embedded directly on the homepage (`src/pages/homepage.jsx`, `id="event-camera"`),
+  not on its own route. It defaults to sample footage, starts only once the section
+  scrolls into view (`IntersectionObserver`) and pauses when it scrolls back out, and
+  never requests the webcam without an explicit "Use my own camera" click.
+- **RL lab** — `rlLab.jsx` + `sparkline.jsx`, backed by `src/utils/rl/`: a
+  planar-quadrotor env, a hand-written MLP with manual backprop and Adam, and the PPO
+  maths (GAE, clipped surrogate, diagnostics). `trainWorker.js` runs training in a
+  **Web Worker** — an iteration takes ~200ms and would freeze the page inline; the
+  component animates the robot against the last policy snapshot the worker posted.
+  The code is intentionally kept in the repo but currently unrouted (no page imports
+  `rlLab.jsx`); it previously lived on the removed `/playground` page.
 
 The engines are deliberately separate from the components so they can be unit-tested:
 `nn.test.js` includes a **finite-difference gradient check**, and `trainer.test.js`
