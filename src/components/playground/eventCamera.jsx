@@ -258,15 +258,27 @@ const EventCamera = () => {
 						{eventRate.toLocaleString()} events/sec
 					</div>
 				)}
-			</div>
 
-			<div className="evcam-source-switch">
-				<button
-					className="evcam-btn primary evcam-camera-btn"
-					onClick={isWebcam ? startSampleVideo : startWebcam}
-				>
-					{isWebcam ? "Back to sample footage" : "Use my own camera"}
-				</button>
+				{source === "video" && (
+					<div className="evcam-credit">
+						Footage:{" "}
+						<a
+							href="https://commons.wikimedia.org/wiki/File:Congested_traffic_on_the_Dan_Ryan_Expy_(10x_timelapse)_-_April_2026.webm"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							AlphaBeta135
+						</a>
+						,{" "}
+						<a
+							href="https://creativecommons.org/licenses/by/4.0/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							CC BY 4.0
+						</a>
+					</div>
+				)}
 			</div>
 
 			{error && <div className="evcam-error">{error}</div>}
@@ -315,6 +327,12 @@ const EventCamera = () => {
 
 				<div className="evcam-toggles evcam-legend">
 					<button
+						className="evcam-chip primary"
+						onClick={isWebcam ? startSampleVideo : startWebcam}
+					>
+						{isWebcam ? "Back to sample footage" : "Use my own camera"}
+					</button>
+					<button
 						className={"evcam-chip" + (showGhost ? " on" : "")}
 						onClick={() => setShowGhost((v) => !v)}
 					>
@@ -336,27 +354,6 @@ const EventCamera = () => {
 					</span>
 				</div>
 			</div>
-
-			{source === "video" && (
-				<div className="evcam-credit">
-					Footage:{" "}
-					<a
-						href="https://commons.wikimedia.org/wiki/File:Congested_traffic_on_the_Dan_Ryan_Expy_(10x_timelapse)_-_April_2026.webm"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						AlphaBeta135
-					</a>
-					,{" "}
-					<a
-						href="https://creativecommons.org/licenses/by/4.0/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						CC BY 4.0
-					</a>
-				</div>
-			)}
 		</div>
 	);
 };

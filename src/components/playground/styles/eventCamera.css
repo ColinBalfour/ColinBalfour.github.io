@@ -63,49 +63,6 @@
 	padding: 5px 12px;
 }
 
-.evcam-btn {
-	font-family: var(--secondary-font);
-	font-size: 13.5px;
-	font-weight: 600;
-	color: #ffffff;
-	background: rgba(255, 255, 255, 0.12);
-	border: 1px solid rgba(255, 255, 255, 0.28);
-	border-radius: 10px;
-	padding: 10px 18px;
-	cursor: pointer;
-	transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.evcam-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	transform: translateY(-1px);
-}
-
-.evcam-btn.primary {
-	background: var(--link-color);
-	border-color: var(--link-color);
-	box-shadow: 0 4px 14px rgba(20, 184, 166, 0.4);
-}
-
-.evcam-btn.primary:hover {
-	background: #0d9488;
-}
-
-/* Primary source-switch control, below the stage — visually the loudest
-   control in the demo since switching to a live camera is opt-in. */
-.evcam-source-switch {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 16px;
-}
-
-.evcam-camera-btn {
-	font-size: 14.5px;
-	font-weight: 700;
-	padding: 13px 24px;
-}
-
 .evcam-readout {
 	position: absolute;
 	top: 12px;
@@ -226,6 +183,20 @@
 	background: #f0fdfa;
 }
 
+/* The camera toggle sits in the same row as the other chips, but filled so
+   it still reads as the main (opt-in) action. */
+.evcam-chip.primary {
+	color: #ffffff;
+	background: var(--link-color);
+	border-color: var(--link-color);
+}
+
+.evcam-chip.primary:hover:not(:disabled) {
+	color: #ffffff;
+	background: #0d9488;
+	border-color: #0d9488;
+}
+
 .evcam-chip:disabled {
 	opacity: 0.45;
 	cursor: default;
@@ -246,8 +217,8 @@
 	gap: 8px;
 }
 
-/* Ghost/Freeze share one row with the ON/OFF legend: center everything on
-   the line and give the legend a little extra room from the buttons. */
+/* The camera, Ghost and Freeze buttons share one row with the ON/OFF legend:
+   center everything on the line and give the legend a little extra room. */
 .evcam-toggles.evcam-legend {
 	align-items: center;
 }
@@ -271,20 +242,28 @@
 	background: #ef4444;
 }
 
+/* License credit for the sample footage, tucked into the stage's bottom-right
+   corner (like the badge and readout) so it takes no space on the page. */
 .evcam-credit {
+	position: absolute;
+	right: 10px;
+	bottom: 8px;
 	font-family: var(--secondary-font);
-	font-size: 11.5px;
-	line-height: 1.5;
-	color: var(--tertiary-color);
+	font-size: 10.5px;
+	line-height: 1.3;
+	color: rgba(255, 255, 255, 0.6);
+	background: rgba(0, 0, 0, 0.45);
+	border-radius: 6px;
+	padding: 2px 7px;
 }
 
 .evcam-credit a {
-	color: var(--tertiary-color);
+	color: inherit;
 	text-decoration: underline;
 }
 
 .evcam-credit a:hover {
-	color: var(--link-color);
+	color: #ffffff;
 }
 
 @media (max-width: 600px) {
