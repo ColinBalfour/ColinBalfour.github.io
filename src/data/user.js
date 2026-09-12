@@ -48,7 +48,7 @@ const INFO = {
 	},
 
 	about: {
-		title: "I’m Colin Balfour — a robotics engineer and researcher in the Boston area, teaching machines to perceive and fly.",
+		title: "I’m Colin Balfour, a robotics engineer and researcher in the Boston area, teaching machines to perceive and fly.",
 		description:
 			"I'm pursuing my B.S. and M.S. in Robotics Engineering at WPI, with a minor in mathematics. My work spans deep learning, perception, and autonomous systems — from research and engineering internships at NVIDIA, Magna Electronics, and RTX BBN to published research at the PeAR Lab. Much of my project work is open-source; if something here catches your eye, feel free to explore the code, reach out, or share ideas. I'm always open to new challenges and collaboration.",
 	},
@@ -197,162 +197,7 @@ const INFO = {
 
 	projects: [
 		{
-			title: "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
-			tagline:
-				"Autonomous flight through darkness, smoke, and snow on a 140g drone — milliwatt ultrasound + learned denoising. Science Robotics 2026.",
-			description:
-				"Saranga is the first palm-sized aerial robot capable of autonomous navigation in complete darkness, smoke, and snow — using only onboard milliWatt ultrasound sensing and compute, at just 140g. " +
-				"I employ deep-learning signal processing to suppress noise and estimate depth in real time, achieving 84% success across 10 scenes (200+ trials). " +
-				"Published in Science Robotics (2026).",
-			photo: "/saranga.jpg",
-			logo: [
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/numpy.svg",
-			],
-			linkText: "View Project",
-			pdfFeatured: true,
-			link: "https://pear.wpi.edu/research/saranga.html",
-			keywords: [
-				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
-			],
-		},
-
-		{
-			title: "[Under Review — ICRA 2027] ActiveNav: Learning Active Monocular Flight in Forests",
-			tagline:
-				"Hierarchical RL that aims the camera mid-flight — 80% success in unseen forests, zero-shot sim2real on a Jetson.",
-			description:
-				"ActiveNav is a novel approach for quadrotor navigation using active perception. " +
-				"With flow and its uncertainty as an input, a hierarchical RL policy actively " +
-				"controls the drone's camera along with its movement. The policy is able to actively point the camera to areas " +
-				"that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, " +
-				"running onboard a Jetson Nano.",
-			photo: "/activenav.jpg",
-			logo: [
-				"/pytorch_logo.png",
-				"/blender_logo.png",
-				"/opencv_logo.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/numpy.svg",
-			],
-			linkText: "View Project",
-			pdfFeatured: true,
-			slug: "activenav",
-			link: "/projects/",
-			keywords: [
-				"Colin Balfour", "Balfour", "ActiveNav", "Active Perception", "Reinforcement Learning", "Drone", "Quadrotor", "Monocular", "Optical Flow", "Robotics", "ICRA",
-			],
-			page: {
-				title: "ActiveNav: Learning Active Monocular Flight in Forests",
-				subtitle:
-					"Under review at **ICRA 2027** (with K. Srivastava, D. Singh, and N. Sanket, PeAR Lab). A hierarchical RL policy that actively points the drone's camera — not just its body — to see better and fly further.",
-				description:
-					"Most drones treat their camera as a fixed sensor bolted to the airframe: wherever the body points, that's what they see. ActiveNav borrows a trick from birds — which constantly move their heads to gather the most useful visual information — and learns to control the camera's gaze *as part of the flight policy itself*.\n\n" +
-					"## How it works\n\n" +
-					"The policy takes optical flow and its uncertainty as input, and a **hierarchical reinforcement-learning** controller outputs both flight commands and an active camera (neck) yaw. The camera is steered toward regions that reduce perception uncertainty — peeking around occlusions and checking gaps before committing — which directly improves obstacle avoidance in dense clutter.\n\n" +
-					"![ActiveNav forest flight](/speedmeter_web.mp4)\n\n" +
-					"## Results\n\n" +
-					"Trained entirely in simulation, the policy transfers **zero-shot** to the real world, achieving 80% success in cluttered, previously unseen forest environments — running fully onboard a Jetson Nano.\n\n" +
-					"![Onboard view](/activenav.jpg)",
-			},
-		},
-
-		{
-			title: "[Under Review — RA-L 2026] AttentionSeeker: Passive Attention-Based Aerial Navigation with Events",
-			tagline:
-				"Passive attention from defocus in event streams — high-speed forest flight with no frames and no depth sensor.",
-			description:
-				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
-				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
-			photo: "/Events_Video.mp4",
-			slug: "attentionseeker",
-			logo: [
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"/pytorch_logo.png",
-				"/numpy.svg",
-				"/cuda.svg",
-				"/blender_logo.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
-			],
-			linkText: "View Project",
-			pdfFeatured: true,
-			link: "/projects/",
-			keywords: [
-				"Colin Balfour", "Balfour", "AttentionSeeker", "Event Camera", "Defocus", "Attention", "Reinforcement Learning", "Drone", "Aerial Navigation", "RA-L", "Robotics",
-			],
-			page: {
-				title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
-				subtitle:
-					"Under review at **RA-L 2026** (with D. Singh* and N. Sanket, PeAR Lab; *equal contribution). Passive attention for drones: letting the optics themselves say what matters.",
-				description:
-					"Event cameras only report *change* — asynchronous, per-pixel brightness events at microsecond latency, with no frames at all. That makes them ideal for fast flight, but it also means most of the stream is clutter: everything moves when the camera does. AttentionSeeker asks a simple question — what if the lens itself could tell us what to pay attention to?\n\n" +
-					"## Defocus as attention\n\n" +
-					"By exploiting **defocus cues** in the event stream, objects at the depth of interest produce sharp, distinctive event signatures while the rest blurs away — a *passive*, optics-driven attention mechanism that requires no extra compute, power, or moving parts. The result is a naturally foveated input that highlights obstacles at exactly the range that matters for avoidance.\n\n" +
-					"![Event stream visualization](/Events_Video.mp4)\n\n" +
-					"## Learning to fly on events\n\n" +
-					"On top of this attention signal we train **reinforcement-learning policies** that fly a quadrotor through dense forest at high speed using only events — no frames, no depth sensor. The GIF above shows a policy navigating a dense simulated forest from the event stream alone.",
-			},
-		},
-
-		{
-			title: "Agile Event-based Flight through Cluttered Environments",
-			tagline:
-				"Event-camera depth + topological replanning on a custom-built quadrotor, fully onboard. Best MQP Award Finalist.",
-			description:
-				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered environments using only onboard sensing — inspired by how birds fly through trees.",
-			date: "2025 - 2026",
-			logo: [
-				"/pytorch_logo.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
-				"/ros2_logo.png",
-				"/opencv_logo.png",
-				"/cuda.svg",
-			],
-			linkText: "View Project",
-			slug: "agile-event-flight",
-			link: "/projects/",
-			photo: "/mqp_flight.mp4",
-			keywords: [
-				"Colin Balfour", "Balfour", "MQP", "WPI", "Event Camera", "Drone", "Quadrotor", "Autonomous Navigation", "Motion Planning", "Deep Learning", "Reinforcement Learning", "Robotics",
-			],
-			page: {
-				title: "Agile Event-based Flight through Cluttered Environments",
-				subtitle:
-					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab).",
-				links: [
-					{
-						label: "📄 Read the Project Report",
-						url: "https://drive.google.com/file/d/1a4dQrtl8_N-TtYmtHigq0v0pnoG3NXzc/view",
-						primary: true,
-					},
-					{
-						label: "▶ Skip to the Flight Tests",
-						url: "https://youtu.be/vZI_f9TqJVw?t=155",
-					},
-				],
-				video: "vZI_f9TqJVw",
-				description:
-					"Birds fly through dense forests at high speed with nothing but their eyes. Our MQP asked whether a palm-sized quadrotor could do the same — navigating hazardous, cluttered, and dynamic environments using only lightweight **event-camera** perception and onboard compute, instead of the bulky LIDAR or stereo rigs that agile drones usually rely on. We built the full stack end to end: perception, planning, control, and the aircraft itself.\n\n" +
-					"## Event-based depth perception\n\n" +
-					"Event cameras report asynchronous, per-pixel brightness changes at microsecond latency — ideal for fast flight, but their sparse, unconventional data breaks standard vision pipelines. We treat the event stream as a 3D point cloud and learn to predict dense depth from it, using a multi-resolution feature grid (L = 4 levels) with trilinear interpolation and a Deep Sets–style spatial pooling that turns sparse events into a dense feature map for the network to reason over.\n\n" +
-					"## Planning: topological replanning\n\n" +
-					"From the predicted depth we build an occupancy ESDF and plan with a Fast-Planner–style topological search. A sparse roadmap of “guards” defines free-space regions, connectors link distinct passages, and each distinct route is shortened, pruned, and optimized into a smooth, dynamically feasible B-spline. When visibility changes mid-flight, the planner replans in real time rather than re-searching from scratch.\n\n" +
-					"![Topological replanning](/mqp_planner.jpg)\n\n" +
-					"## The aircraft\n\n" +
-					"To carry the event camera and onboard compute, we designed and built a custom carbon-fiber quadrotor, iterating from CAD to a flight-ready platform tuned for agile flight.\n\n" +
-					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
-					"## Results\n\n" +
-					"The system flew autonomously through dense, cluttered obstacle courses using only onboard sensing and computation — below, the drone (bottom right) threads the arena while the onboard point cloud builds in real time (inset). The project was recognized as a Best MQP Award Finalist at WPI.\n\n" +
-					"![Autonomous arena flight](/mqp_flight.mp4)",
-			},
-		},
-
-		{
-			title: "Learning to Chase: Vision-Based Drone Pursuit and Adversarial Self-Play",
+			title: "[WIP] Learning to Chase: Vision-Based Drone Pursuit and Adversarial Self-Play",
 			tagline:
 				"2048 arenas on one GPU: drones that chase a ball from vision alone, and that learn to escape each other.",
 			description:
@@ -421,7 +266,166 @@ const INFO = {
 		},
 
 		{
+			title: "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
+			date: "2024-2025",
+			tagline:
+				"Autonomous flight through darkness, smoke, and snow on a 140g drone — milliwatt ultrasound + learned denoising. Science Robotics 2026.",
+			description:
+				"Saranga is the first palm-sized aerial robot capable of autonomous navigation in complete darkness, smoke, and snow — using only onboard milliWatt ultrasound sensing and compute, at just 140g. " +
+				"I employ deep-learning signal processing to suppress noise and estimate depth in real time, achieving 84% success across 10 scenes (200+ trials). " +
+				"Published in Science Robotics (2026).",
+			photo: "/saranga.jpg",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			pdfFeatured: true,
+			link: "https://pear.wpi.edu/research/saranga.html",
+			keywords: [
+				"Colin Balfour", "Balfour", "Colin", "Colin B", "Colin B.", "C Balfour", "Robotics", "Python", "Simulation", "Kinematics", "Inverse Kinematics", "Motion Profile", "FIRST Robotics",
+			],
+		},
+
+		{
+			title: "[Under Review — ICRA 2027] ActiveNav: Learning Active Monocular Flight in Forests",
+			date: "2025-2026",
+			tagline:
+				"Hierarchical RL that aims the camera mid-flight — 80% success in unseen forests, zero-shot sim2real on a Jetson.",
+			description:
+				"ActiveNav is a novel approach for quadrotor navigation using active perception. " +
+				"With flow and its uncertainty as an input, a hierarchical RL policy actively " +
+				"controls the drone's camera along with its movement. The policy is able to actively point the camera to areas " +
+				"that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, " +
+				"running onboard a Jetson Nano.",
+			photo: "/activenav.jpg",
+			logo: [
+				"/pytorch_logo.png",
+				"/blender_logo.png",
+				"/opencv_logo.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/numpy.svg",
+			],
+			linkText: "View Project",
+			pdfFeatured: true,
+			slug: "activenav",
+			link: "/projects/",
+			keywords: [
+				"Colin Balfour", "Balfour", "ActiveNav", "Active Perception", "Reinforcement Learning", "Drone", "Quadrotor", "Monocular", "Optical Flow", "Robotics", "ICRA",
+			],
+			page: {
+				title: "ActiveNav: Learning Active Monocular Flight in Forests",
+				subtitle:
+					"Under review at **ICRA 2027** (with K. Srivastava, D. Singh, and N. Sanket, PeAR Lab). A hierarchical RL policy that actively points the drone's camera — not just its body — to see better and fly further.",
+				description:
+					"Most drones treat their camera as a fixed sensor bolted to the airframe: wherever the body points, that's what they see. ActiveNav borrows a trick from birds — which constantly move their heads to gather the most useful visual information — and learns to control the camera's gaze *as part of the flight policy itself*.\n\n" +
+					"## How it works\n\n" +
+					"The policy takes optical flow and its uncertainty as input, and a **hierarchical reinforcement-learning** controller outputs both flight commands and an active camera (neck) yaw. The camera is steered toward regions that reduce perception uncertainty — peeking around occlusions and checking gaps before committing — which directly improves obstacle avoidance in dense clutter.\n\n" +
+					"![ActiveNav forest flight](/speedmeter_web.mp4)\n\n" +
+					"## Results\n\n" +
+					"Trained entirely in simulation, the policy transfers **zero-shot** to the real world, achieving 80% success in cluttered, previously unseen forest environments — running fully onboard a Jetson Nano.\n\n" +
+					"![Onboard view](/activenav.jpg)",
+			},
+		},
+
+		{
+			title: "[Under Review — RA-L 2026] AttentionSeeker: Passive Attention-Based Aerial Navigation with Events",
+			date: "2025-2026",
+			tagline:
+				"Passive attention from defocus in event streams — high-speed forest flight with no frames and no depth sensor.",
+			description:
+				"AttentionSeeker uses defocus cues in event-camera streams for passive, attention-based aerial navigation. " +
+				"I train reinforcement-learning policies that fly a drone through dense forest at high speed using only events — the GIF above shows one such policy in simulation.",
+			photo: "/Events_Video.mp4",
+			slug: "attentionseeker",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/numpy.svg",
+				"/cuda.svg",
+				"/blender_logo.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/c/c.png",
+			],
+			linkText: "View Project",
+			pdfFeatured: true,
+			link: "/projects/",
+			keywords: [
+				"Colin Balfour", "Balfour", "AttentionSeeker", "Event Camera", "Defocus", "Attention", "Reinforcement Learning", "Drone", "Aerial Navigation", "RA-L", "Robotics",
+			],
+			page: {
+				title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
+				subtitle:
+					"Under review at **RA-L 2026** (with D. Singh* and N. Sanket, PeAR Lab; *equal contribution). Passive attention for drones: letting the optics themselves say what matters.",
+				description:
+					"Event cameras only report *change* — asynchronous, per-pixel brightness events at microsecond latency, with no frames at all. That makes them ideal for fast flight, but it also means most of the stream is clutter: everything moves when the camera does. AttentionSeeker asks a simple question — what if the lens itself could tell us what to pay attention to?\n\n" +
+					"## Defocus as attention\n\n" +
+					"By exploiting **defocus cues** in the event stream, objects at the depth of interest produce sharp, distinctive event signatures while the rest blurs away — a *passive*, optics-driven attention mechanism that requires no extra compute, power, or moving parts. The result is a naturally foveated input that highlights obstacles at exactly the range that matters for avoidance.\n\n" +
+					"![Event stream visualization](/Events_Video.mp4)\n\n" +
+					"## Learning to fly on events\n\n" +
+					"On top of this attention signal we train **reinforcement-learning policies** that fly a quadrotor through dense forest at high speed using only events — no frames, no depth sensor. The GIF above shows a policy navigating a dense simulated forest from the event stream alone.",
+			},
+		},
+
+		{
+			title: "Agile Event-based Flight through Cluttered Environments",
+			tagline:
+				"Event-camera depth + topological replanning on a custom-built quadrotor, fully onboard. Best MQP Award Finalist.",
+			description:
+				"My WPI senior capstone (MQP), and a Best MQP Award Finalist: a full event-camera perception, planning, and control stack that flies a custom-built quadrotor through dense, cluttered environments using only onboard sensing — inspired by how birds fly through trees.",
+			date: "2025-2026",
+			logo: [
+				"/pytorch_logo.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+				"/ros2_logo.png",
+				"/opencv_logo.png",
+				"/cuda.svg",
+			],
+			linkText: "View Project",
+			slug: "agile-event-flight",
+			link: "/projects/",
+			photo: "/mqp_flight.mp4",
+			keywords: [
+				"Colin Balfour", "Balfour", "MQP", "WPI", "Event Camera", "Drone", "Quadrotor", "Autonomous Navigation", "Motion Planning", "Deep Learning", "Reinforcement Learning", "Robotics",
+			],
+			page: {
+				title: "Agile Event-based Flight through Cluttered Environments",
+				subtitle:
+					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab).",
+				links: [
+					{
+						label: "📄 Read the Project Report",
+						url: "https://drive.google.com/file/d/1a4dQrtl8_N-TtYmtHigq0v0pnoG3NXzc/view",
+						primary: true,
+					},
+					{
+						label: "▶ Skip to the Flight Tests",
+						url: "https://youtu.be/vZI_f9TqJVw?t=155",
+					},
+				],
+				video: "vZI_f9TqJVw",
+				description:
+					"Birds fly through dense forests at high speed with nothing but their eyes. Our MQP asked whether a palm-sized quadrotor could do the same — navigating hazardous, cluttered, and dynamic environments using only lightweight **event-camera** perception and onboard compute, instead of the bulky LIDAR or stereo rigs that agile drones usually rely on. We built the full stack end to end: perception, planning, control, and the aircraft itself.\n\n" +
+					"## Event-based depth perception\n\n" +
+					"Event cameras report asynchronous, per-pixel brightness changes at microsecond latency — ideal for fast flight, but their sparse, unconventional data breaks standard vision pipelines. We treat the event stream as a 3D point cloud and learn to predict dense depth from it, using a multi-resolution feature grid (L = 4 levels) with trilinear interpolation and a Deep Sets–style spatial pooling that turns sparse events into a dense feature map for the network to reason over.\n\n" +
+					"## Planning: topological replanning\n\n" +
+					"From the predicted depth we build an occupancy ESDF and plan with a Fast-Planner–style topological search. A sparse roadmap of “guards” defines free-space regions, connectors link distinct passages, and each distinct route is shortened, pruned, and optimized into a smooth, dynamically feasible B-spline. When visibility changes mid-flight, the planner replans in real time rather than re-searching from scratch.\n\n" +
+					"![Topological replanning](/mqp_planner.jpg)\n\n" +
+					"## The aircraft\n\n" +
+					"To carry the event camera and onboard compute, we designed and built a custom carbon-fiber quadrotor, iterating from CAD to a flight-ready platform tuned for agile flight.\n\n" +
+					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
+					"## Results\n\n" +
+					"The system flew autonomously through dense, cluttered obstacle courses using only onboard sensing and computation — below, the drone (bottom right) threads the arena while the onboard point cloud builds in real time (inset). The project was recognized as a Best MQP Award Finalist at WPI.\n\n" +
+					"![Autonomous arena flight](/mqp_flight.mp4)",
+			},
+		},
+
+		{
 			title: "Einstein Vision: a Full-Self Driving Perception Stack",
+			date: "2025",
 			tagline:
 				"3D object tracking, lanes, depth, and collision prediction — a full AV perception stack from one camera.",
 			description:
@@ -447,6 +451,7 @@ const INFO = {
 
 		{
 			title: "Classical Structure From Motion (SfM) & Neural Radiance Field (NeRF)",
+			date: "2025",
 			tagline:
 				"Full classical SfM pipeline + a NeRF implemented from scratch in PyTorch.",
 			description:
@@ -467,6 +472,7 @@ const INFO = {
 
 		{
 			title: "Depth Camera Data Collection Rig",
+			date: "2024",
 			tagline:
 				"Three RealSenses fused into 160° ground-truth depth — torch-optimized extrinsic calibration and stitching, built end to end.",
 			description:
@@ -505,6 +511,7 @@ const INFO = {
 
 		{
 			title: "Sim2Real Image Segmentation",
+			date: "2024",
 			tagline:
 				"U-Net trained purely in simulation, segmenting real images zero-shot.",
 			description:
@@ -525,6 +532,7 @@ const INFO = {
 
 		{
 			title: "Adversarial Attack on Monocular Depth Neural Network",
+			date: "2024",
 			tagline:
 				"A printable adversarial patch that forces a SOTA depth network to predict arbitrary depth — in the real world.",
 			description:
@@ -546,6 +554,7 @@ const INFO = {
 
 		{
 			title: "FRC Competition Robot",
+			date: "2022-2024",
 			tagline:
 				"Swerve drive, AprilTag + Kalman localization, and YOLOv8 detection — full competition autonomy on a Jetson.",
 			description:
@@ -569,6 +578,7 @@ const INFO = {
 
 		{
 			title: "Probability of Boundary Edge Detection",
+			date: "2024",
 			tagline:
 				"Probabilistic boundary detection (pb-lite) that outperforms Canny and Sobel baselines.",
 			description:
@@ -588,6 +598,7 @@ const INFO = {
 
 		{
 			title: "Auto Panogram: Classical & DL Panoramic Image Stitching",
+			date: "2025",
 			tagline:
 				"Classical stitching (ANMS, RANSAC, Poisson blending) vs. supervised & unsupervised deep homography.",
 			description:
@@ -612,6 +623,7 @@ const INFO = {
 
 		{
 			title: "CIFAR-10 Image Classification (ResNet, ResNeXt, DenseNet)",
+			date: "2025",
 			tagline:
 				"ResNet, ResNeXt, and DenseNet from raw PyTorch layers, benchmarked head-to-head on CIFAR-10.",
 			description:
@@ -629,6 +641,7 @@ const INFO = {
 
 		{
 			title: "A* Pathfinding with an MLP Heuristic",
+			date: "2021",
 			tagline:
 				"A* with a learned heuristic — an MLP written from scratch in NumPy, trained via genetic algorithm.",
 			description:
@@ -652,7 +665,7 @@ const INFO = {
 				"IK, linear motion profiling, and control for a 2.5-DOF arm — validated in simulation before the hardware existed.",
 			description:
 				"For our 2022-2023 season, I developed the controls and planning for our 2.5 DOF (wrist had only 3 positions) arm. I developed a simulation in python to test the kinematics, motion profile, and control before we had a physical prototype.",
-			date: "7 May 2023",
+			date: "2023",
 			logo: ["https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",],
 			linkText: "View Project",
 			slug: "two-jointed-arm",
@@ -687,6 +700,7 @@ const INFO = {
 
 		{
 			title: "Self-balancing Two Wheel Robot",
+			date: "2022",
 			tagline:
 				"IMU + complementary filter + PID: a two-wheel robot that keeps itself upright.",
 			description:

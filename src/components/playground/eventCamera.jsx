@@ -260,6 +260,15 @@ const EventCamera = () => {
 				)}
 			</div>
 
+			<div className="evcam-source-switch">
+				<button
+					className="evcam-btn primary evcam-camera-btn"
+					onClick={isWebcam ? startSampleVideo : startWebcam}
+				>
+					{isWebcam ? "Back to sample footage" : "Use my own camera"}
+				</button>
+			</div>
+
 			{error && <div className="evcam-error">{error}</div>}
 
 			<div className="evcam-controls">
@@ -300,18 +309,11 @@ const EventCamera = () => {
 						}
 					/>
 					<span className="evcam-hint">
-						How long an event lingers on screen. Real sensors have
-						none — this just makes it visible.
+						How long an event stays on screen.
 					</span>
 				</label>
 
-				<div className="evcam-toggles">
-					<button
-						className="evcam-chip primary"
-						onClick={isWebcam ? startSampleVideo : startWebcam}
-					>
-						{isWebcam ? "Back to sample footage" : "📷 Use my own camera"}
-					</button>
+				<div className="evcam-toggles evcam-legend">
 					<button
 						className={"evcam-chip" + (showGhost ? " on" : "")}
 						onClick={() => setShowGhost((v) => !v)}
@@ -325,42 +327,34 @@ const EventCamera = () => {
 					>
 						{paused ? "Resume" : "Freeze"}
 					</button>
+
+					<span className="evcam-legend-start">
+						<i className="evcam-swatch on" /> ON — brightness increased
+					</span>
+					<span>
+						<i className="evcam-swatch off" /> OFF — brightness decreased
+					</span>
 				</div>
-
-				<span className="evcam-privacy-note">
-					Your camera feed never leaves this page — every pixel is
-					processed locally in your browser.
-				</span>
-			</div>
-
-			<div className="evcam-legend">
-				<span>
-					<i className="evcam-swatch on" /> ON — brightness increased
-				</span>
-				<span>
-					<i className="evcam-swatch off" /> OFF — brightness decreased
-				</span>
 			</div>
 
 			{source === "video" && (
 				<div className="evcam-credit">
-					Sample footage:{" "}
+					Footage:{" "}
 					<a
 						href="https://commons.wikimedia.org/wiki/File:Congested_traffic_on_the_Dan_Ryan_Expy_(10x_timelapse)_-_April_2026.webm"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						“Congested traffic on the Dan Ryan Expy”
-					</a>{" "}
-					by AlphaBeta135, licensed{" "}
+						AlphaBeta135
+					</a>
+					,{" "}
 					<a
 						href="https://creativecommons.org/licenses/by/4.0/"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						CC BY 4.0
-					</a>{" "}
-					via Wikimedia Commons.
+					</a>
 				</div>
 			)}
 		</div>

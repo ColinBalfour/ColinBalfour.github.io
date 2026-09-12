@@ -39,12 +39,11 @@ const Projects = () => {
 					</div>
 					<div className="projects-container">
 						<div className="title projects-title">
-							Robots that perceive, plan, and fly — and the code
-							behind them.
+							Some cool stuff I've made through the years
 						</div>
 
 						<div className="subtitle projects-subtitle">
-							My work in perception, autonomy, and deep learning —
+							My work in perception, autonomy, and deep learning;
 							from research published in Science Robotics to
 							full-stack robot builds, with the occasional rabbit
 							hole along the way. Projects run roughly
