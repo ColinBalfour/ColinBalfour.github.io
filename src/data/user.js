@@ -349,6 +349,74 @@ const INFO = {
 		},
 
 		{
+			title: "Learning to Chase: Vision-Based Drone Pursuit and Adversarial Self-Play",
+			tagline:
+				"2048 arenas on one GPU: drones that chase a ball from vision alone, and that learn to escape each other.",
+			description:
+				"A GPU-parallel research platform for training quadrotor control policies with reinforcement learning, used to attack two problems: " +
+				"tracking a moving ball from onboard vision alone (the policy never receives the target's position), and 1v1 pursuit–evasion where both drones learn at once. " +
+				"The most valuable findings came from measuring carefully enough to catch my own mistakes — including a noise floor that retracted my headline result.",
+			photo: "/selfplay_fpv_pursuit.mp4",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/cuda.svg",
+				"/numpy.svg",
+				"/blender_logo.png",
+				"/ros2_logo.png",
+			],
+			linkText: "View Project",
+			slug: "learning-to-chase",
+			link: "/projects/",
+			keywords: [
+				"Colin Balfour", "Balfour", "Reinforcement Learning", "PPO", "Self-Play", "Pursuit-Evasion", "Quadrotor", "Drone", "Isaac Lab", "Isaac Sim", "Newton", "Warp", "Sim2Real", "Vision-Based Tracking", "Robotics",
+			],
+			page: {
+				title: "Learning to Chase: Vision-Based Drone Pursuit in Simulation",
+				subtitle:
+					"Reinforcement learning for quadrotor control in massively parallel simulation — applied to vision-based target tracking, and to adversarial 1v1 pursuit–evasion where both drones learn at the same time.",
+				description:
+					"I built a GPU-parallel research platform for training quadrotor control policies with reinforcement learning, and used it to attack two problems: **tracking a moving ball using only onboard vision** (the policy never receives the target's position), and **1v1 pursuit–evasion where both drones learn at once**. Thousands of arenas run simultaneously on a single GPU, so a policy that flies at 50 Hz can accumulate hours of flight experience per minute of wall-clock. The interesting results were rarely the ones I expected — the most valuable findings came from measuring carefully enough to catch my own mistakes, including one that retracted a headline conclusion and another that invalidated an entire month of adversarial-training results.\n\n" +
+					"![The pursuer's view of the chase](/selfplay_fpv_pursuit.mp4)\n\n" +
+					"## The problems\n\n" +
+					"**Vision-based tracking.** A quadrotor must chase a moving ball around an 11 × 4.5 × 3.65 m room. It sees a depth image from an onboard camera plus an analytic segmentation mask marking the target — and *nothing else about the ball*. No position, no velocity, no oracle. If the ball leaves the field of view, the policy has to search for it. This is deliberately harder than the usual formulation, where the target's state is fed to the network.\n\n" +
+					"**Adversarial pursuit–evasion.** Two drones, one arena, both learning simultaneously: a pursuer trying to close distance and keep the evader in frame, an evader trying to escape. Neither has a scripted opponent — they co-evolve. This replicates and extends *AgilePE* (arXiv:2608.14135), and it is where the most instructive failures happened, because in self-play there is no fixed yardstick: your opponent is moving too.\n\n" +
+					"## How the system works\n\n" +
+					"**Simulation.** NVIDIA Isaac Lab with the Newton physics backend, running **2048 independent arenas in parallel** on one GPU. Each arena has its own drone, target, walls, and randomized dynamics. Collision detection runs as custom Warp GPU kernels against per-arena obstacle arrays rather than mesh colliders, which is what makes the parallelism affordable.\n\n" +
+					"**The policy.** PPO (rsl_rl) trains a network that sees a **depth image** (plus an analytic mask channel isolating the target) and a **proprioception vector** — attitude as a yaw-free rotation matrix, gyro rates, body-frame velocity and gravity-removed acceleration, and its own previous action. It outputs either velocity setpoints (routed through a Lee geometric controller) or **collective thrust and body rates (CTBR) at 50 Hz** — the interface a real PX4 flight controller accepts, which is what makes the policies deployable rather than academic.\n\n" +
+					"![What the policy sees: the drone tracks the ball from onboard vision alone](/tracking_fpv_acquire.mp4)\n\n" +
+					"**Training without a curriculum.** Instead of hand-designing task difficulty, the environment draws each episode from **programmatic reset families** — *terminal* (target nearly in reach), *intercept*, *acquire*, *search* (target out of frame), *recovery* (drone tumbling), and *uniform* (anything goes). This follows the OmniReset idea (arXiv:2603.15789): diverse resets graded by task progress replace curricula and reward shaping. It also gives evaluation a natural structure — a policy's capture rate *per family* says far more than one aggregate number.\n\n" +
+					"![The hard case: the target starts behind the drone, which has to find it first](/tracking_blindspot.mp4)\n\n" +
+					"**Self-play.** Two agents share each arena, paired by index, and terminate together. Three regimes are supported: naive self-play (always the current opponent), **fictitious self-play** (uniform over a pool of past opponents), and **prioritized FSP** (sampling weighted toward opponents that beat you).\n\n" +
+					"**Sim-to-real.** Policies train through a PX4-accurate thrust curve, 60 ms first-order motor lag, sensor noise, and randomized mass, inertia, thrust and command latency, and export to a dependency-free NumPy inference module verified against the training network to ~5 × 10⁻⁶. Three airframes have been modeled from bench data.\n\n" +
+					"## Results: vision-based tracking\n\n" +
+					"![Capture rate by reset family](/fig_tracking_reset_families.png)\n\n" +
+					"**Control interface dominates everything else.** With velocity control the policy captures on 97–100% of the easy families and 53–72% of the hard ones. With direct body-rate control it initially scored **0.0%** — and the reason is instructive: an untrained rate policy *destroys itself* before it can collect any positive experience. 94% of its episodes ended in a wall within about 24 steps. The velocity controller's inner loop keeps a bad policy airborne long enough for it to stumble into a capture and start learning. The plant was verified exact (a scripted zero action holds altitude to 0.000 m over 4 s), so this is a learning-dynamics problem, not a physics bug.\n\n" +
+					"**Proprioception is what rescues body-rate control.** Adding body velocity and acceleration to the observation moves attitude control from 6/0/0% to 88/81/75% on the easy families. Watching *which* inputs unlock a control mode turned out to be more informative than any reward-shaping experiment I ran.\n\n" +
+					"**More training made one arm worse.** The attitude-control policy scored 88/81/75 at iteration 400 and 66/53/41 at iteration 813 — a real regression, visible only because evaluation was checkpointed rather than run once at the end.\n\n" +
+					"**A hard physical wall.** Above speed parity, tracking collapses: ~1% capture when the ball moves 1.5× the drone's speed, versus 48–51% at 0.8–1.0×. The cause is not the policy — the drone is capped at 2.0 m/s forward but only **0.8 m/s vertical**, so a fleeing ball simply climbs away. No amount of training fixes an actuation limit.\n\n" +
+					"![The chase from outside: drone path (blue) against the ball's path (pink)](/tracking_thirdperson.mp4)\n\n" +
+					"## Results: adversarial self-play\n\n" +
+					"![Pursuer wins: both drones learned simultaneously, neither was scripted](/selfplay_capture_room.mp4)\n\n" +
+					"![Evader wins: the same two policies, a different outcome](/selfplay_escape.mp4)\n\n" +
+					"**The honest metric is a matrix, not a number.** During self-play the reported per-round capture rate looked healthy — but each round evaluates against a *mixture* of pooled opponents, which flatters whoever you are currently training. Replaying every pursuer checkpoint against every evader checkpoint tells a different story: pursuers peaked at **rounds 4–8** (0.41–0.43 capture against the round-1 evader) and *regressed* afterwards, while the **round-12 evader was nearly unbeatable** — no pursuer from any round exceeded 0.06 against it. A single training curve would have hidden both facts.\n\n" +
+					"![Cross-evaluation matrix](/fig_selfplay_crosseval.png)\n\n" +
+					"**Naive self-play collapses, and the collapse looks like success.** Naive SP posted the *highest* tracking rate of the three regimes (0.82 in-FOV) while its policy entropy cratered by 5–7 nats. FSP and PFSP held entropy 4–6 nats higher and stayed flat. The high score was not a better pursuer — it was an evader that had **stopped trying**, a unilateral strategy collapse. Opponent pools are what prevent it.\n\n" +
+					"![Self-play regimes](/fig_selfplay_regimes.png)\n\n" +
+					"**The bug that invalidated a month of results.** The evader's Gaussian action standard deviation diverged from 1 to **~350**, unclamped, in every run before I caught it. With actions clipped to ±1, that is a coin flip per axis: the evader was a bang-bang noise process from round 1, and the pursuer had learned to *hover*, because chasing a random tumbler was not worth the control-effort penalty. The mechanism is a reward-structure asymmetry — the entropy bonus pushes sigma up every update, and the evader's survive-only reward gave almost nothing to pull it back down, while the pursuer's informative reward kept its own sigma near 0.2. Everything I had concluded about evader strategy up to that point was *pursuer versus noise*. The fix (clamp sigma, and set the evader's entropy coefficient to zero) also dissolved a behaviour I had described as strategy: the universal “tumbling” evader was mostly entropy noise.\n\n" +
+					"**Warm-starting the pursuer hurt.** Initializing the pursuer from an already-trained tracker cost about **12 points** of capture rate versus training from scratch (0.88–0.90 vs 0.76–0.78) and nearly tripled its collision rate (9% → 23%). Worse, this confound had manufactured a different finding: an apparent “+14 points for a recurrent evader” was entirely explained by which arms happened to be warm-started. Once matched properly, memory made no measurable difference in that arena.\n\n" +
+					"![After 24 rounds of co-evolution](/selfplay_late_capture.mp4)\n\n" +
+					"## What I'd actually put on the wall: the methodology findings\n\n" +
+					"**The noise floor retracted my own headline result.** I re-ran *byte-identical* configurations — same seed, only the run's name differing — and scored them on a fixed held-out evaluation of 384 deterministic episodes. They ranged from **55.7% to 79.9%**, a standard deviation of 9–11 points. That means any comparison of two single runs carries roughly ±14 points of error, and **any gap under about 25 points is uninterpretable**. Several conclusions I had already drawn — including a “26-point” advantage for one reset mixture — replicated to +6.9 ± 7.0, i.e. nothing. Confidence intervals computed *inside* one evaluation do not capture this; the variance is in the training run itself. Everything since is reported as 3+ seeds with spread.\n\n" +
+					"**Reward hacking is the default outcome, not an edge case.** Across the project I found and fixed seven distinct reward exploits, each of which produced a *higher return* while making the policy worse at the actual task: a shaping term that paid the drone to crawl the last metre; an arrival bonus that taught it to loiter where moving targets would pass through it; a reference that teleported on contact so the policy learned to dart rather than follow; a per-step bonus cliff it could farm by parking; a pure-penalty economy that made **crashing into a wall the optimal move** (ending the episode cost less than living in it); and a survival bonus large enough that hovering beat working. The general lesson is that the reward and the environment mechanics have to be read *together* — several of these were invisible in the reward function alone.\n\n" +
+					"**Suspect the measurement before the model.** A tracking benchmark returned almost exactly the same error (~2.9 m) for five very different policies across many training stages. That constancy was the tell: the evaluation harness was injecting a reference trajectory that the environment then overwrote every step, so the metric was measuring the distance between two unrelated curves. Several redesigns had been made in response to that number before I checked the instrument.\n\n" +
+					"**A useful control-theory shortcut.** The tracking policies turned out to lag a moving target by a nearly constant ~0.43 s regardless of speed — they aim at where the target *is*, not where it will be. Rather than retrain, feeding the reference **0.45 s ahead** cancels the lag: mean tracking error dropped from 97 cm to **17.5 cm** with no additional training. This is first-order preview compensation, the same principle as classical zero-phase-error tracking control. Seven attempts to *learn* anticipation instead all measured worse than the static policy plus one line of feed-forward.\n\n" +
+					"## Stack\n\n" +
+					"Python · PyTorch · PPO (rsl_rl) · NVIDIA Isaac Lab + Newton · Warp GPU kernels · SLURM multi-GPU cluster · Blender (offline trajectory rendering) · PX4 / MAVROS / ROS 2 (deployment path) · NumPy standalone inference export",
+			},
+		},
+
+		{
 			title: "Einstein Vision: a Full-Self Driving Perception Stack",
 			tagline:
 				"3D object tracking, lanes, depth, and collision prediction — a full AV perception stack from one camera.",
