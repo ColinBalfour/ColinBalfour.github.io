@@ -156,6 +156,7 @@ const EventCamera = () => {
 
 	const startWebcam = useCallback(async () => {
 		setError("");
+		stopEverything();
 		try {
 			const stream = await navigator.mediaDevices.getUserMedia({
 				video: { facingMode: "user", width: { ideal: 1280 } },
@@ -183,7 +184,7 @@ const EventCamera = () => {
 					"Showing sample footage instead."
 			);
 		}
-	}, [startLoop, startSampleVideo]);
+	}, [startLoop, startSampleVideo, stopEverything]);
 
 	useEffect(() => stopEverything, [stopEverything]);
 
@@ -247,7 +248,7 @@ const EventCamera = () => {
 					muted
 				/>
 
-				<div className="evcam-badge">
+				<div className="evcam-badge" aria-live="polite">
 					<span className="evcam-dot" />
 					{isWebcam ? "LIVE — YOUR CAMERA" : "SAMPLE FOOTAGE"}
 				</div>
