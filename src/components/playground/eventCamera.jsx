@@ -260,19 +260,6 @@ const EventCamera = () => {
 				)}
 			</div>
 
-			<div className="evcam-source-switch">
-				<button
-					className="evcam-btn primary evcam-camera-btn"
-					onClick={isWebcam ? startSampleVideo : startWebcam}
-				>
-					{isWebcam ? "Back to sample footage" : "📷 Use my own camera"}
-				</button>
-				<span className="evcam-privacy-note">
-					Your camera feed never leaves this page — every pixel is
-					processed locally in your browser.
-				</span>
-			</div>
-
 			{error && <div className="evcam-error">{error}</div>}
 
 			<div className="evcam-controls">
@@ -320,6 +307,12 @@ const EventCamera = () => {
 
 				<div className="evcam-toggles">
 					<button
+						className="evcam-chip primary"
+						onClick={isWebcam ? startSampleVideo : startWebcam}
+					>
+						{isWebcam ? "Back to sample footage" : "📷 Use my own camera"}
+					</button>
+					<button
 						className={"evcam-chip" + (showGhost ? " on" : "")}
 						onClick={() => setShowGhost((v) => !v)}
 					>
@@ -333,6 +326,11 @@ const EventCamera = () => {
 						{paused ? "Resume" : "Freeze"}
 					</button>
 				</div>
+
+				<span className="evcam-privacy-note">
+					Your camera feed never leaves this page — every pixel is
+					processed locally in your browser.
+				</span>
 			</div>
 
 			<div className="evcam-legend">
