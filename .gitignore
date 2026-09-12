@@ -27,3 +27,4 @@ package-lock.json
 yarn.lock
 .superpowers/
 .claude/worktrees/
+.pdf-cache/
