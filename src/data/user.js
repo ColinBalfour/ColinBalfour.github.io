@@ -199,11 +199,9 @@ const INFO = {
 		{
 			title: "[WIP] Learning to Chase: Vision-Based Drone Pursuit and Adversarial Self-Play",
 			tagline:
-				"2048 arenas on one GPU: drones that chase a ball from vision alone, and that learn to escape each other.",
+				"Drones that learn to chase a target from onboard vision alone, and to escape each other. 2048 simulations on one GPU.",
 			description:
-				"A GPU-parallel research platform for training quadrotor control policies with reinforcement learning, used to attack two problems: " +
-				"tracking a moving ball from onboard vision alone (the policy never receives the target's position), and 1v1 pursuit–evasion where both drones learn at once. " +
-				"The most valuable findings came from measuring carefully enough to catch my own mistakes — including a noise floor that retracted my headline result.",
+				"Reinforcement learning for drones in massively parallel simulation: chasing a moving target using only onboard vision, and 1v1 pursuit–evasion where both drones learn at the same time. Velocity-control policies catch the target 97–100% of the time from easy starts.",
 			photo: "/selfplay_fpv_pursuit.mp4",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
@@ -221,48 +219,47 @@ const INFO = {
 				"Colin Balfour", "Balfour", "Reinforcement Learning", "PPO", "Self-Play", "Pursuit-Evasion", "Quadrotor", "Drone", "Isaac Lab", "Isaac Sim", "Newton", "Warp", "Sim2Real", "Vision-Based Tracking", "Robotics",
 			],
 			page: {
-				title: "Learning to Chase: Vision-Based Drone Pursuit in Simulation",
+				title: "Learning to Chase: Vision-Based Drone Pursuit",
 				subtitle:
-					"Reinforcement learning for quadrotor control in massively parallel simulation — applied to vision-based target tracking, and to adversarial 1v1 pursuit–evasion where both drones learn at the same time.",
+					"Reinforcement learning for drones in massively parallel simulation: chasing a target using only onboard vision, and 1v1 pursuit–evasion where both drones learn at the same time.",
 				description:
-					"I built a GPU-parallel research platform for training quadrotor control policies with reinforcement learning, and used it to attack two problems: **tracking a moving ball using only onboard vision** (the policy never receives the target's position), and **1v1 pursuit–evasion where both drones learn at once**. Thousands of arenas run simultaneously on a single GPU, so a policy that flies at 50 Hz can accumulate hours of flight experience per minute of wall-clock. The interesting results were rarely the ones I expected — the most valuable findings came from measuring carefully enough to catch my own mistakes, including one that retracted a headline conclusion and another that invalidated an entire month of adversarial-training results.\n\n" +
 					"![The pursuer's view of the chase](/selfplay_fpv_pursuit.mp4)\n\n" +
-					"## The problems\n\n" +
-					"**Vision-based tracking.** A quadrotor must chase a moving ball around an 11 × 4.5 × 3.65 m room. It sees a depth image from an onboard camera plus an analytic segmentation mask marking the target — and *nothing else about the ball*. No position, no velocity, no oracle. If the ball leaves the field of view, the policy has to search for it. This is deliberately harder than the usual formulation, where the target's state is fed to the network.\n\n" +
-					"**Adversarial pursuit–evasion.** Two drones, one arena, both learning simultaneously: a pursuer trying to close distance and keep the evader in frame, an evader trying to escape. Neither has a scripted opponent — they co-evolve. This replicates and extends *AgilePE* (arXiv:2608.14135), and it is where the most instructive failures happened, because in self-play there is no fixed yardstick: your opponent is moving too.\n\n" +
-					"## How the system works\n\n" +
-					"**Simulation.** NVIDIA Isaac Lab with the Newton physics backend, running **2048 independent arenas in parallel** on one GPU. Each arena has its own drone, target, walls, and randomized dynamics. Collision detection runs as custom Warp GPU kernels against per-arena obstacle arrays rather than mesh colliders, which is what makes the parallelism affordable.\n\n" +
-					"**The policy.** PPO (rsl_rl) trains a network that sees a **depth image** (plus an analytic mask channel isolating the target) and a **proprioception vector** — attitude as a yaw-free rotation matrix, gyro rates, body-frame velocity and gravity-removed acceleration, and its own previous action. It outputs either velocity setpoints (routed through a Lee geometric controller) or **collective thrust and body rates (CTBR) at 50 Hz** — the interface a real PX4 flight controller accepts, which is what makes the policies deployable rather than academic.\n\n" +
-					"![What the policy sees: the drone tracks the ball from onboard vision alone](/tracking_fpv_acquire.mp4)\n\n" +
-					"**Training without a curriculum.** Instead of hand-designing task difficulty, the environment draws each episode from **programmatic reset families** — *terminal* (target nearly in reach), *intercept*, *acquire*, *search* (target out of frame), *recovery* (drone tumbling), and *uniform* (anything goes). This follows the OmniReset idea (arXiv:2603.15789): diverse resets graded by task progress replace curricula and reward shaping. It also gives evaluation a natural structure — a policy's capture rate *per family* says far more than one aggregate number.\n\n" +
-					"![The hard case: the target starts behind the drone, which has to find it first](/tracking_blindspot.mp4)\n\n" +
-					"**Self-play.** Two agents share each arena, paired by index, and terminate together. Three regimes are supported: naive self-play (always the current opponent), **fictitious self-play** (uniform over a pool of past opponents), and **prioritized FSP** (sampling weighted toward opponents that beat you).\n\n" +
-					"**Sim-to-real.** Policies train through a PX4-accurate thrust curve, 60 ms first-order motor lag, sensor noise, and randomized mass, inertia, thrust and command latency, and export to a dependency-free NumPy inference module verified against the training network to ~5 × 10⁻⁶. Three airframes have been modeled from bench data.\n\n" +
-					"## Results: vision-based tracking\n\n" +
-					"![Capture rate by reset family](/fig_tracking_reset_families.png)\n\n" +
-					"**Control interface dominates everything else.** With velocity control the policy captures on 97–100% of the easy families and 53–72% of the hard ones. With direct body-rate control it initially scored **0.0%** — and the reason is instructive: an untrained rate policy *destroys itself* before it can collect any positive experience. 94% of its episodes ended in a wall within about 24 steps. The velocity controller's inner loop keeps a bad policy airborne long enough for it to stumble into a capture and start learning. The plant was verified exact (a scripted zero action holds altitude to 0.000 m over 4 s), so this is a learning-dynamics problem, not a physics bug.\n\n" +
-					"**Proprioception is what rescues body-rate control.** Adding body velocity and acceleration to the observation moves attitude control from 6/0/0% to 88/81/75% on the easy families. Watching *which* inputs unlock a control mode turned out to be more informative than any reward-shaping experiment I ran.\n\n" +
-					"**More training made one arm worse.** The attitude-control policy scored 88/81/75 at iteration 400 and 66/53/41 at iteration 813 — a real regression, visible only because evaluation was checkpointed rather than run once at the end.\n\n" +
-					"**A hard physical wall.** Above speed parity, tracking collapses: ~1% capture when the ball moves 1.5× the drone's speed, versus 48–51% at 0.8–1.0×. The cause is not the policy — the drone is capped at 2.0 m/s forward but only **0.8 m/s vertical**, so a fleeing ball simply climbs away. No amount of training fixes an actuation limit.\n\n" +
-					"![The chase from outside: drone path (blue) against the ball's path (pink)](/tracking_thirdperson.mp4)\n\n" +
-					"## Results: adversarial self-play\n\n" +
-					"![Pursuer wins: both drones learned simultaneously, neither was scripted](/selfplay_capture_room.mp4)\n\n" +
-					"![Evader wins: the same two policies, a different outcome](/selfplay_escape.mp4)\n\n" +
-					"**The honest metric is a matrix, not a number.** During self-play the reported per-round capture rate looked healthy — but each round evaluates against a *mixture* of pooled opponents, which flatters whoever you are currently training. Replaying every pursuer checkpoint against every evader checkpoint tells a different story: pursuers peaked at **rounds 4–8** (0.41–0.43 capture against the round-1 evader) and *regressed* afterwards, while the **round-12 evader was nearly unbeatable** — no pursuer from any round exceeded 0.06 against it. A single training curve would have hidden both facts.\n\n" +
-					"![Cross-evaluation matrix](/fig_selfplay_crosseval.png)\n\n" +
-					"**Naive self-play collapses, and the collapse looks like success.** Naive SP posted the *highest* tracking rate of the three regimes (0.82 in-FOV) while its policy entropy cratered by 5–7 nats. FSP and PFSP held entropy 4–6 nats higher and stayed flat. The high score was not a better pursuer — it was an evader that had **stopped trying**, a unilateral strategy collapse. Opponent pools are what prevent it.\n\n" +
-					"![Self-play regimes](/fig_selfplay_regimes.png)\n\n" +
-					"**The bug that invalidated a month of results.** The evader's Gaussian action standard deviation diverged from 1 to **~350**, unclamped, in every run before I caught it. With actions clipped to ±1, that is a coin flip per axis: the evader was a bang-bang noise process from round 1, and the pursuer had learned to *hover*, because chasing a random tumbler was not worth the control-effort penalty. The mechanism is a reward-structure asymmetry — the entropy bonus pushes sigma up every update, and the evader's survive-only reward gave almost nothing to pull it back down, while the pursuer's informative reward kept its own sigma near 0.2. Everything I had concluded about evader strategy up to that point was *pursuer versus noise*. The fix (clamp sigma, and set the evader's entropy coefficient to zero) also dissolved a behaviour I had described as strategy: the universal “tumbling” evader was mostly entropy noise.\n\n" +
-					"**Warm-starting the pursuer hurt.** Initializing the pursuer from an already-trained tracker cost about **12 points** of capture rate versus training from scratch (0.88–0.90 vs 0.76–0.78) and nearly tripled its collision rate (9% → 23%). Worse, this confound had manufactured a different finding: an apparent “+14 points for a recurrent evader” was entirely explained by which arms happened to be warm-started. Once matched properly, memory made no measurable difference in that arena.\n\n" +
-					"![After 24 rounds of co-evolution](/selfplay_late_capture.mp4)\n\n" +
-					"## What I'd actually put on the wall: the methodology findings\n\n" +
-					"**The noise floor retracted my own headline result.** I re-ran *byte-identical* configurations — same seed, only the run's name differing — and scored them on a fixed held-out evaluation of 384 deterministic episodes. They ranged from **55.7% to 79.9%**, a standard deviation of 9–11 points. That means any comparison of two single runs carries roughly ±14 points of error, and **any gap under about 25 points is uninterpretable**. Several conclusions I had already drawn — including a “26-point” advantage for one reset mixture — replicated to +6.9 ± 7.0, i.e. nothing. Confidence intervals computed *inside* one evaluation do not capture this; the variance is in the training run itself. Everything since is reported as 3+ seeds with spread.\n\n" +
-					"**Reward hacking is the default outcome, not an edge case.** Across the project I found and fixed seven distinct reward exploits, each of which produced a *higher return* while making the policy worse at the actual task: a shaping term that paid the drone to crawl the last metre; an arrival bonus that taught it to loiter where moving targets would pass through it; a reference that teleported on contact so the policy learned to dart rather than follow; a per-step bonus cliff it could farm by parking; a pure-penalty economy that made **crashing into a wall the optimal move** (ending the episode cost less than living in it); and a survival bonus large enough that hovering beat working. The general lesson is that the reward and the environment mechanics have to be read *together* — several of these were invisible in the reward function alone.\n\n" +
-					"**Suspect the measurement before the model.** A tracking benchmark returned almost exactly the same error (~2.9 m) for five very different policies across many training stages. That constancy was the tell: the evaluation harness was injecting a reference trajectory that the environment then overwrote every step, so the metric was measuring the distance between two unrelated curves. Several redesigns had been made in response to that number before I checked the instrument.\n\n" +
-					"**A useful control-theory shortcut.** The tracking policies turned out to lag a moving target by a nearly constant ~0.43 s regardless of speed — they aim at where the target *is*, not where it will be. Rather than retrain, feeding the reference **0.45 s ahead** cancels the lag: mean tracking error dropped from 97 cm to **17.5 cm** with no additional training. This is first-order preview compensation, the same principle as classical zero-phase-error tracking control. Seven attempts to *learn* anticipation instead all measured worse than the static policy plus one line of feed-forward.\n\n" +
+					"## Setup\n\n" +
+					"- **Simulator:** Isaac Lab + Newton, 2048 environments on one GPU, with custom Warp collision kernels.\n- **Policy:** PPO. It sees a depth image, a mask of the target, and its own state, but never the target's position. It outputs velocity commands, or thrust and body rates at 50 Hz (what a real PX4 flight controller takes).\n- **Training:** no hand-made curriculum. Each episode starts from a random mix of situations (target in reach, target behind the drone, drone tumbling, and so on).\n\n" +
+					"## Key results\n\n" +
+					"### Vision-based tracking\n\n" +
+					"![Capture rate by starting situation](/fig_tracking_reset_families.png)\n\n" +
+					"- With velocity control, the drone catches the target **97–100%** of the time from easy starts and **53–72%** from hard ones.\n- Body-rate control started at **0%**: the untrained policy crashed before it could learn anything. Giving it its own velocity and acceleration raised it to **88 / 81 / 75%**.\n- Aiming 0.45 s ahead of the target cut tracking error from **97 cm to 17.5 cm**, with no retraining.\n- Above the drone's own speed, capture drops to **~1%**. It can only climb at 0.8 m/s, so the target escapes upward.\n\n" +
+					"### Self-play pursuit–evasion\n\n" +
+					"![Pursuer wins](/selfplay_capture_room.mp4)\n\n" +
+					"![Evader wins, with the same two policies](/selfplay_escape.mp4)\n\n" +
+					"![Every pursuer checkpoint played against every evader checkpoint](/fig_selfplay_crosseval.png)\n\n" +
+					"- Pursuers peaked at rounds 4–8 (**0.41–0.43** capture rate), then got worse. The round-12 evader held every pursuer under **0.06**.\n- Plain self-play scored highest (**0.82**), but only because the evader collapsed and stopped trying. Training against a pool of past opponents prevented this.\n\n" +
+					"## Lessons\n\n" +
+					"- **Run-to-run noise is large.** Identical runs scored anywhere from **55.7% to 79.9%**, so I now report 3+ seeds. One \"26-point\" improvement shrank to +6.9 ± 7.0.\n- **A bug invalidated a month of results.** The evader's action noise grew unchecked to ~350, so the pursuer had been chasing random noise.\n- **Reward hacking is the default.** I found and fixed seven reward exploits. In one, crashing into a wall was the best move, because ending the episode cost less than staying alive.\n\n" +
 					"## Stack\n\n" +
-					"Python · PyTorch · PPO (rsl_rl) · NVIDIA Isaac Lab + Newton · Warp GPU kernels · SLURM multi-GPU cluster · Blender (offline trajectory rendering) · PX4 / MAVROS / ROS 2 (deployment path) · NumPy standalone inference export",
+					"Python, PyTorch, rsl_rl (PPO), Isaac Lab + Newton, Warp, Blender, PX4 / ROS 2",
 			},
+		},
+
+		{
+			title: "TerminalRL: Learning from Sparse Rewards in Fast Simulators",
+			date: "2026",
+			tagline:
+				"A self-play Rocket League bot that beats Nexto in 96–100% of games, and a robot arm that learns manipulation from success-only rewards.",
+			description:
+				"RL policies trained from sparse, outcome-only rewards in fast simulators, with curricula over start states. Terminal is a Rocket League bot trained by self-play in RocketSim: it beat Nexto in 96–100% of games across 1v1, 2v2, and 3v3 (128 games each), and was entered in the RLBot Championship 2026. clothrl trains a Franka arm with PPO across 1,024 parallel environments to insert a cork (0.99 success), stack cubes (0.999), and drape cloth (1.00).",
+			photo: "/terminalrl_3v3.mp4",
+			logo: [
+				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+				"/pytorch_logo.png",
+				"/cuda.svg",
+			],
+			linkText: "View Project",
+			link: "https://terminalrl.github.io/",
+			keywords: [
+				"Colin Balfour", "TerminalRL", "Reinforcement Learning", "Self-Play", "Rocket League", "RocketSim", "RLBot", "Sparse Reward", "Robot Manipulation", "Franka", "PPO",
+			],
 		},
 
 		{
@@ -318,14 +315,14 @@ const INFO = {
 			page: {
 				title: "ActiveNav: Learning Active Monocular Flight in Forests",
 				subtitle:
-					"Under review at **ICRA 2027** (with K. Srivastava, D. Singh, and N. Sanket, PeAR Lab). A hierarchical RL policy that actively points the drone's camera — not just its body — to see better and fly further.",
+					"Under review at **ICRA 2027**, with K. Srivastava, D. Singh, and N. Sanket (PeAR Lab).",
 				description:
-					"Most drones treat their camera as a fixed sensor bolted to the airframe: wherever the body points, that's what they see. ActiveNav borrows a trick from birds — which constantly move their heads to gather the most useful visual information — and learns to control the camera's gaze *as part of the flight policy itself*.\n\n" +
-					"## How it works\n\n" +
-					"The policy takes optical flow and its uncertainty as input, and a **hierarchical reinforcement-learning** controller outputs both flight commands and an active camera (neck) yaw. The camera is steered toward regions that reduce perception uncertainty — peeking around occlusions and checking gaps before committing — which directly improves obstacle avoidance in dense clutter.\n\n" +
+					"A drone learns to move its camera, not just its body, so it can see obstacles better while flying through a forest.\n\n" +
 					"![ActiveNav forest flight](/speedmeter_web.mp4)\n\n" +
-					"## Results\n\n" +
-					"Trained entirely in simulation, the policy transfers **zero-shot** to the real world, achieving 80% success in cluttered, previously unseen forest environments — running fully onboard a Jetson Nano.\n\n" +
+					"## How it works\n\n" +
+					"A hierarchical RL policy takes optical flow and its uncertainty as input. It outputs both flight commands and a camera yaw angle, and learns to point the camera where it's least sure what's ahead.\n\n" +
+					"## Key results\n\n" +
+					"- **80% success** in cluttered forests it never saw during training.\n- Trained only in simulation, and transfers **zero-shot** to the real drone.\n- Runs fully onboard a **Jetson Nano**.\n\n" +
 					"![Onboard view](/activenav.jpg)",
 			},
 		},
@@ -358,14 +355,12 @@ const INFO = {
 			page: {
 				title: "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
 				subtitle:
-					"Under review at **RA-L 2026** (with D. Singh* and N. Sanket, PeAR Lab; *equal contribution). Passive attention for drones: letting the optics themselves say what matters.",
+					"Under review at **RA-L 2026**, with D. Singh* and N. Sanket (PeAR Lab). *Equal contribution.",
 				description:
-					"Event cameras only report *change* — asynchronous, per-pixel brightness events at microsecond latency, with no frames at all. That makes them ideal for fast flight, but it also means most of the stream is clutter: everything moves when the camera does. AttentionSeeker asks a simple question — what if the lens itself could tell us what to pay attention to?\n\n" +
-					"## Defocus as attention\n\n" +
-					"By exploiting **defocus cues** in the event stream, objects at the depth of interest produce sharp, distinctive event signatures while the rest blurs away — a *passive*, optics-driven attention mechanism that requires no extra compute, power, or moving parts. The result is a naturally foveated input that highlights obstacles at exactly the range that matters for avoidance.\n\n" +
-					"![Event stream visualization](/Events_Video.mp4)\n\n" +
-					"## Learning to fly on events\n\n" +
-					"On top of this attention signal we train **reinforcement-learning policies** that fly a quadrotor through dense forest at high speed using only events — no frames, no depth sensor. The GIF above shows a policy navigating a dense simulated forest from the event stream alone.",
+					"Event cameras only report pixels whose brightness changes, so when the drone moves, almost everything fires. AttentionSeeker uses lens defocus as a filter: objects at the focus distance produce sharp events, and everything else blurs out. That picks out obstacles at the range that matters.\n\n" +
+					"![Event stream from a simulated forest flight](/Events_Video.mp4)\n\n" +
+					"## Key results\n\n" +
+					"- RL policies fly a drone through dense forest at high speed using **only events**, with no frames and no depth sensor.\n- The attention comes from the lens itself, so it needs **no extra compute, power, or moving parts**.",
 			},
 		},
 
@@ -394,7 +389,7 @@ const INFO = {
 			page: {
 				title: "Agile Event-based Flight through Cluttered Environments",
 				subtitle:
-					"My WPI Major Qualifying Project (senior capstone) — a **Best MQP Award Finalist**. Built with Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket (ACP Lab & PeAR Lab).",
+					"My WPI senior capstone (MQP) and a **Best MQP Award Finalist**. With Rohan Inamdar and Evan Kaba, advised by Guanrui Li and Nitin Sanket.",
 				links: [
 					{
 						label: "📄 Read the Project Report",
@@ -408,18 +403,18 @@ const INFO = {
 				],
 				video: "vZI_f9TqJVw",
 				description:
-					"Birds fly through dense forests at high speed with nothing but their eyes. Our MQP asked whether a palm-sized quadrotor could do the same — navigating hazardous, cluttered, and dynamic environments using only lightweight **event-camera** perception and onboard compute, instead of the bulky LIDAR or stereo rigs that agile drones usually rely on. We built the full stack end to end: perception, planning, control, and the aircraft itself.\n\n" +
-					"## Event-based depth perception\n\n" +
-					"Event cameras report asynchronous, per-pixel brightness changes at microsecond latency — ideal for fast flight, but their sparse, unconventional data breaks standard vision pipelines. We treat the event stream as a 3D point cloud and learn to predict dense depth from it, using a multi-resolution feature grid (L = 4 levels) with trilinear interpolation and a Deep Sets–style spatial pooling that turns sparse events into a dense feature map for the network to reason over.\n\n" +
-					"## Planning: topological replanning\n\n" +
-					"From the predicted depth we build an occupancy ESDF and plan with a Fast-Planner–style topological search. A sparse roadmap of “guards” defines free-space regions, connectors link distinct passages, and each distinct route is shortened, pruned, and optimized into a smooth, dynamically feasible B-spline. When visibility changes mid-flight, the planner replans in real time rather than re-searching from scratch.\n\n" +
+					"We built a full autonomy stack for a custom quadrotor that flies through cluttered obstacle courses using only an event camera and onboard compute, with no LIDAR or stereo rig.\n\n" +
+					"## Perception\n\n" +
+					"We treat the event stream as a 3D point cloud and train a network to predict dense depth from it.\n\n" +
+					"## Planning\n\n" +
+					"From the predicted depth we build a map and plan with a Fast-Planner-style topological search. It finds several distinct routes and smooths them into flyable B-spline trajectories, then replans in real time as new obstacles come into view.\n\n" +
 					"![Topological replanning](/mqp_planner.jpg)\n\n" +
-					"## The aircraft\n\n" +
-					"To carry the event camera and onboard compute, we designed and built a custom carbon-fiber quadrotor, iterating from CAD to a flight-ready platform tuned for agile flight.\n\n" +
+					"## Hardware\n\n" +
+					"We designed and built a custom carbon-fiber quadrotor to carry the event camera and compute.\n\n" +
 					"![Custom quadrotor](/mqp_drone.jpg)\n\n" +
 					"## Results\n\n" +
-					"The system flew autonomously through dense, cluttered obstacle courses using only onboard sensing and computation — below, the drone (bottom right) threads the arena while the onboard point cloud builds in real time (inset). The project was recognized as a Best MQP Award Finalist at WPI.\n\n" +
-					"![Autonomous arena flight](/mqp_flight.mp4)",
+					"- Flew autonomously through dense obstacle courses with **only onboard sensing and compute**.\n- **Best MQP Award Finalist** at WPI.\n\n" +
+					"![The drone (bottom right) flying the course, with the onboard point cloud in the inset](/mqp_flight.mp4)",
 			},
 		},
 
@@ -496,16 +491,18 @@ const INFO = {
 			page: {
 				title: "Depth Camera Data Collection Rig",
 				subtitle:
-					"A custom multi-sensor rig I designed and built at the PeAR Lab to collect ground-truth depth data for training a novel depth model — hardware, drivers, calibration, and an optimized data pipeline.",
+					"A multi-sensor rig I designed and built at the PeAR Lab to collect ground-truth depth for training depth models.",
 				description:
-					"Training a depth network is only as good as its ground truth — and no single off-the-shelf sensor gave us the wide field of view we needed. So I designed and built our own rig, owning it end to end: the physical layout and assembly, the (frequently uncooperative) sensor drivers, the inter-sensor calibration, and the software pipeline that turned raw streams into usable ground truth.\n\n" +
-					"## The sensor suite\n\n" +
-					"The rig combines **three Intel RealSense D430 stereo cameras**, an **Intel L515 solid-state LIDAR** for high-accuracy reference depth, and an **OAK-D Lite** for RGB and onboard stereo. All streams are time-synchronized and recorded through a **ROS 2** pipeline. Keeping five depth sensors alive on one machine meant wrangling USB bandwidth limits and driver instabilities — much of the rig's reliability came from hardening that layer.\n\n" +
+					"No single sensor had the wide field of view we needed, so I built a rig. I handled it end to end: hardware, drivers, calibration, and the data pipeline.\n\n" +
+					"## Sensors\n\n" +
+					"- 3× Intel RealSense D430 stereo cameras\n- Intel L515 LIDAR for reference depth\n- OAK-D Lite for RGB and stereo\n\n" +
+					"All streams are time-synced and recorded through ROS 2.\n\n" +
 					"![The data collection rig](/data_rig.png)\n\n" +
-					"## Calibration & torch-based point-cloud stitching\n\n" +
-					"Fusing three overlapping RealSense units into one seamless 160°×40° depth image required **precise extrinsic calibration** between all sensors. I formulated the stitching as a **PyTorch-based optimization**, refining the inter-camera transforms directly against the overlapping point clouds — and spent significant time optimizing the pipeline so it could keep up with the large volume of incoming sensor data.\n\n" +
+					"## Stitching\n\n" +
+					"I calibrated the three RealSense cameras against each other by optimizing their relative poses in PyTorch on the overlapping point clouds, then merged them into one depth image.\n\n" +
 					"![Stitched depth output](/stitched_depth.png)\n\n" +
-					"The resulting wide-FOV depth images serve as the ground truth for training and evaluating depth-estimation models at the lab.",
+					"## Result\n\n" +
+					"- One **160° × 40°** depth image from three cameras, used as ground truth for training and evaluating the lab's depth models.",
 			},
 		},
 
