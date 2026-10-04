@@ -246,9 +246,9 @@ const INFO = {
 			title: "TerminalRL: Learning from Sparse Rewards in Fast Simulators",
 			date: "2026",
 			tagline:
-				"A self-play Rocket League bot that beats Nexto in 96–100% of games, and a robot arm that learns manipulation from success-only rewards.",
+				"A self-play Rocket League bot that wins 94–100% of games against established community bots, and a robot arm that learns manipulation from success-only rewards.",
 			description:
-				"RL policies trained from sparse, outcome-only rewards in fast simulators, with curricula over start states. Terminal is a Rocket League bot trained by self-play in RocketSim: it beat Nexto in 96–100% of games across 1v1, 2v2, and 3v3 (128 games each), and was entered in the RLBot Championship 2026. clothrl trains a Franka arm with PPO across 1,024 parallel environments to insert a cork (0.99 success), stack cubes (0.999), and drape cloth (1.00).",
+				"RL policies trained from sparse, outcome-only rewards in fast simulators, with curricula over start states. Terminal is a Rocket League bot trained by self-play in RocketSim: it won 94–100% of games against established community bots (Nexto, Wisp v2, ChadGPT) across 1v1, 2v2, and 3v3, over 128 games per matchup, and was entered in the RLBot Championship 2026. clothrl trains a Franka arm with PPO across 1,024 parallel environments to insert a cork (0.99 success), stack cubes (0.999), and drape cloth (1.00).",
 			photo: "/terminalrl_3v3.mp4",
 			logo: [
 				"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
