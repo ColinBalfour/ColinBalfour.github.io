@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npx vitest run` — run the suite once (CI-style, non-interactive)
 - `npx vitest run src/App.test.jsx` — run a single test file
 - `npm run deploy` — build and publish `build/` to GitHub Pages via `gh-pages` (this is what makes the live site at https://colinbalfour.github.io update; `predeploy` runs the build automatically)
+- `npm run edit` — local project editor UI at http://localhost:3456 (reads/writes `src/data/projects.js`; run `npm run dev` alongside to see changes live)
 - `npm run pdf` — regenerate `public/ColinBalfourPortfolio.pdf` from `src/data/user.js` (optional `--out <path>` to write elsewhere instead)
 
 No linter is configured. Formatting uses the Prettier config in `package.json` (tabs, width 4).
@@ -23,7 +24,8 @@ This is a **React + Vite** single-page portfolio, originally scaffolded from the
 
 **Content is data-driven, not hardcoded in components.** Almost all editable content lives in `src/data/`, and pages/components read from it. When asked to update portfolio content, edit the data files, not the JSX:
 
-- `src/data/user.js` — the single source of truth for site content. Exports one `INFO` object with `main`, `socials`, `homepage`, `about`, `robotics`, `work`, `education`, and a `projects` array. This is the file to edit for almost any content change.
+- `src/data/user.js` — the single source of truth for site content. Exports one `INFO` object with `main`, `socials`, `homepage`, `about`, `robotics`, `work`, `education`, and a `projects` array. This is the file to edit for almost any content change except projects.
+- `src/data/projects.js` — the project cards and project pages, imported by `user.js` as `INFO.projects` (entries with `hidden: true` are filtered out there, so no consumer sees them). The file is **JSON after `export default`** because the `npm run edit` editor (`scripts/project-editor/`) parses and rewrites it: keep it valid JSON (no comments, trailing commas or string concatenation) when editing by hand.
 - `src/data/seo.js` — exports a `SEO` array of `{ page, description, keywords }` objects, one per page name (`home`, `about`, `robotics`, `projects`, `contact`), consumed via `Helmet` in the page components. Keep descriptions distinct and under ~160 chars.
 - `src/data/tracking.js` — Google Analytics `TRACKING_ID` (empty disables GA; wired up in `src/App.js`).
 
@@ -50,8 +52,9 @@ Self-contained interactive demos, each with its own pure "engine" module under
 `src/utils/` and a thin canvas component under `src/components/playground/`:
 
 - **Event camera** — `src/utils/eventSensor.js` (per-pixel DVS model) + `eventCamera.jsx`.
-  Embedded directly on the homepage (`src/pages/homepage.jsx`, `id="event-camera"`),
-  not on its own route. It defaults to sample footage, starts only once the section
+  Embedded on the homepage (`src/pages/homepage.jsx`, `id="event-camera"`), not on its
+  own route — **currently commented out** there (judged clutter), so `/playground` →
+  `/#event-camera` just lands at the top of the homepage. Uncomment it to restore. It defaults to sample footage, starts only once the section
   scrolls into view (`IntersectionObserver`) and pauses when it scrolls back out, and
   never requests the webcam without an explicit "Use my own camera" click.
 - **RL lab** — `rlLab.jsx` + `sparkline.jsx`, backed by `src/utils/rl/`: a
@@ -77,7 +80,7 @@ HTML document (`scripts/pdf/render.mjs`) and prints it to
 committed and deployed like any other asset in `public/` — it is what the
 résumé/portfolio PDF link on the live site serves.
 
-Per-project data fields (`src/data/user.js`) control what lands in the PDF:
+Per-project data fields (`src/data/projects.js`) control what lands in the PDF:
 
 - `pdf: true` — include the project in the back grid (six per page).
 - `pdfFeatured: true` — give the project its own full page instead.

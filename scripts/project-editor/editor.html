@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Editor</title>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<style>
+	:root {
+		--bg: #f6f6f4; --panel: #ffffff; --text: #1f2328; --muted: #6b7280;
+		--border: #e2e2de; --accent: #0f9488; --accent-ink: #ffffff;
+		--danger: #dc2626; --warn-bg: #fff7e6; --warn: #92400e;
+		--selected: #e6f7f5; --input: #fbfbfa;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #16181c; --panel: #1e2126; --text: #e6e6e6; --muted: #9aa0a8;
+			--border: #30343b; --accent: #2dd4bf; --accent-ink: #0b1312;
+			--danger: #f87171; --warn-bg: #3a2c12; --warn: #fcd34d;
+			--selected: #1d3533; --input: #181a1e;
+		}
+	}
+	* { box-sizing: border-box; }
+	body { margin: 0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+	header { display: flex; align-items: center; gap: 12px; padding: 10px 20px; border-bottom: 1px solid var(--border); background: var(--panel); position: sticky; top: 0; z-index: 2; }
+	header h1 { font-size: 16px; margin: 0; flex: 1; }
+	header a { color: var(--accent); font-size: 13px; }
+	#status { color: var(--muted); font-size: 13px; }
+	#status.dirty { color: var(--danger); }
+	button { font: inherit; border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+	button:hover { border-color: var(--accent); }
+	button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+	button.danger { color: var(--danger); }
+	button.small { padding: 2px 8px; font-size: 12.5px; }
+	button:disabled { opacity: .4; cursor: default; }
+	.layout { display: grid; grid-template-columns: 300px 1fr; height: calc(100vh - 51px); }
+	aside { border-right: 1px solid var(--border); overflow-y: auto; background: var(--panel); }
+	aside .toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--panel); }
+	aside ol { list-style: none; margin: 0; padding: 0; }
+	aside li { padding: 9px 12px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; gap: 8px; align-items: baseline; }
+	aside li:hover { background: var(--bg); }
+	aside li.active { background: var(--selected); }
+	aside li.hidden .name { color: var(--muted); text-decoration: line-through; }
+	aside li .num { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 1.5em; }
+	aside li .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	aside li .tag { font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0 4px; }
+	main { overflow-y: auto; padding: 20px 28px 60px; }
+	section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 18px; }
+	section h2 { margin: 0 0 4px; font-size: 15px; }
+	.hint { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
+	.note { background: var(--warn-bg); color: var(--warn); border-radius: 6px; padding: 8px 12px; font-size: 13px; margin-bottom: 14px; }
+	label { display: block; font-weight: 600; font-size: 12.5px; margin: 12px 0 4px; }
+	label .opt { font-weight: 400; color: var(--muted); }
+	input[type=text], textarea { width: 100%; font: inherit; color: var(--text); background: var(--input); border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; }
+	input[type=text]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+	textarea { resize: vertical; min-height: 60px; }
+	textarea.mono { font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+	.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+	.checks { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; }
+	.check { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; margin: 0; cursor: pointer; }
+	.check .opt { font-weight: 400; color: var(--muted); }
+	.split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
+	.split textarea { min-height: 560px; height: 100%; }
+	.preview { border: 1px solid var(--border); border-radius: 6px; padding: 4px 16px; overflow-y: auto; max-height: 760px; }
+	.preview img, .preview video { max-width: 100%; }
+	.thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+	.thumbs img { height: 28px; }
+	.photo-preview img, .photo-preview video { max-width: 280px; max-height: 170px; margin-top: 8px; border-radius: 6px; }
+	.links-table { display: grid; grid-template-columns: 1fr 1.6fr auto auto; gap: 6px 8px; align-items: center; }
+	.links-table .head { font-size: 12px; color: var(--muted); }
+	.empty { color: var(--muted); padding: 40px; text-align: center; }
+	@media (max-width: 800px) {
+		.layout { grid-template-columns: 1fr; height: auto; }
+		aside { max-height: 40vh; }
+		.row, .split { grid-template-columns: 1fr; }
+		.links-table { grid-template-columns: 1fr; }
+		.links-table .head { display: none; }
+		main { padding: 16px; }
+	}
+</style>
+</head>
+<body>
+<header>
+	<h1>Project Editor</h1>
+	<a id="viewLink" target="_blank" rel="noopener" title="Needs `npm run dev` running">View on local site ↗</a>
+	<span id="status">Loading…</span>
+	<button class="primary" id="save" title="Ctrl+S">Save</button>
+</header>
+<div class="layout">
+	<aside>
+		<div class="toolbar">
+			<button id="add">+ New</button>
+			<button id="dup">Duplicate</button>
+			<button id="up" title="Move up">↑</button>
+			<button id="down" title="Move down">↓</button>
+			<button id="del" class="danger">Delete</button>
+		</div>
+		<ol id="list"></ol>
+	</aside>
+	<main id="form"><div class="empty">Loading projects…</div></main>
+</div>
+
+<script>
+const SITE = "http://localhost:3000";
+let projects = [];
+let current = 0;
+let dirty = false;
+
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const isVideo = (src) => /\.(mp4|webm)$/i.test(src || "");
+const media = (src) => !src ? "" : isVideo(src)
+	? `<video src="${esc(src)}" autoplay muted loop playsinline></video>`
+	: `<img src="${esc(src)}" alt="">`;
+const slugify = (s) => String(s).toLowerCase().replace(/\[.*?\]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 50);
+
+// Markdown preview — like the site's <Media>, image syntax pointing at a video renders as a video
+function md(s) {
+	if (!window.marked) return `<pre>${esc(s)}</pre>`;
+	const div = document.createElement("div");
+	div.innerHTML = marked.parse(s || "");
+	div.querySelectorAll("img").forEach((img) => {
+		if (isVideo(img.getAttribute("src"))) img.outerHTML = media(img.getAttribute("src"));
+	});
+	return div.innerHTML;
+}
+
+function setDirty(value) {
+	dirty = value;
+	$("#status").textContent = value ? "Unsaved changes" : "All changes saved";
+	$("#status").className = value ? "dirty" : "";
+}
+
+async function load() {
+	const res = await fetch("/api/projects");
+	const data = await res.json();
+	if (!res.ok) { $("#form").innerHTML = `<div class="empty">${esc(data.error)}</div>`; return; }
+	projects = data;
+	rerender();
+	setDirty(false);
+}
+
+async function save() {
+	const missing = projects.filter((p) => p.page && !p.slug).map((p) => p.title);
+	if (missing.length) { alert("These projects have a page but no slug (URL):\n\n" + missing.join("\n")); return; }
+	const res = await fetch("/api/projects", { method: "PUT", body: JSON.stringify(projects) });
+	const result = await res.json();
+	if (result.ok) setDirty(false);
+	else alert("Save failed: " + result.error);
+}
+
+function rerender() { renderList(); renderForm(); }
+
+function renderList() {
+	$("#list").innerHTML = projects.map((p, i) => `
+		<li data-i="${i}" class="${i === current ? "active" : ""} ${p.hidden ? "hidden" : ""}">
+			<span class="num">${i + 1}</span>
+			<span class="name">${esc(p.title) || "<em>Untitled</em>"}</span>
+			${p.page ? '<span class="tag">page</span>' : ""}
+			${p.pdfFeatured ? '<span class="tag">pdf★</span>' : p.pdf ? '<span class="tag">pdf</span>' : ""}
+		</li>`).join("");
+	$("#up").disabled = current <= 0;
+	$("#down").disabled = current >= projects.length - 1;
+	const p = projects[current];
+	const path = !p || p.hidden ? "/" : p.page ? `/projects/${p.slug || current + 1}` : "/projects";
+	$("#viewLink").href = SITE + path;
+}
+
+function field(label, key, value, { multiline, mono, hint, rows } = {}) {
+	const control = multiline
+		? `<textarea data-key="${key}" class="${mono ? "mono" : ""}" rows="${rows || 3}">${esc(value)}</textarea>`
+		: `<input type="text" data-key="${key}" value="${esc(value)}">`;
+	return `<label>${label}${hint ? ` <span class="opt">${hint}</span>` : ""}</label>${control}`;
+}
+
+const check = (key, label, checked, hint) =>
+	`<label class="check"><input type="checkbox" data-check="${key}" ${checked ? "checked" : ""}> ${label}${hint ? ` <span class="opt">${hint}</span>` : ""}</label>`;
+
+function renderLinks(links) {
+	return `
+		<div class="links-table">
+			${links.length ? '<span class="head">Label</span><span class="head">URL</span><span class="head">Primary</span><span></span>' : ""}
+			${links.map((l, i) => `
+				<input type="text" data-link="${i}" data-field="label" value="${esc(l.label)}" placeholder="📄 Read the paper">
+				<input type="text" data-link="${i}" data-field="url" value="${esc(l.url)}" placeholder="https://…">
+				<input type="checkbox" data-link="${i}" data-field="primary" ${l.primary ? "checked" : ""} title="Highlighted button">
+				<button class="small danger" data-remove-link="${i}">Remove</button>`).join("")}
+		</div>
+		<button class="small" id="addLink" style="margin-top:8px">+ Add button</button>`;
+}
+
+function renderForm() {
+	const p = projects[current];
+	if (!p) { $("#form").innerHTML = '<div class="empty">No projects yet — click “+ New”.</div>'; return; }
+	const page = p.page;
+
+	$("#form").innerHTML = `
+		${p.pdf || p.pdfFeatured ? '<div class="note">This project is in the portfolio PDF. After editing, run <code>npm run pdf</code> and commit the new PDF.</div>' : ""}
+		<section>
+			<h2>Project card</h2>
+			<p class="hint">Shown on the homepage (tagline) and Projects page (description). Card text is plain text, not markdown. The date is added in front automatically, e.g. “(2024-2025) …”.</p>
+			${field("Title", "title", p.title)}
+			${field("Tagline", "tagline", p.tagline, { multiline: true, rows: 2, hint: "short version, used on the homepage" })}
+			${field("Description", "description", p.description, { multiline: true, rows: 5, hint: "full version, used on the Projects page" })}
+			<div class="row">
+				<div>
+					${field("Photo or video", "photo", p.photo, { hint: "path in public/, e.g. /drone.jpg or /frc.mp4" })}
+					<div class="photo-preview">${media(p.photo)}</div>
+				</div>
+				<div>${field("Date", "date", p.date, { hint: "e.g. 2024-2025" })}</div>
+			</div>
+			<div class="row">
+				<div>${field("Link text", "linkText", p.linkText)}</div>
+				<div>${page ? `<label>Link</label><p class="hint" style="margin:6px 0 0">Goes to this project's own page.</p>` : field("Link", "link", p.link, { hint: "external URL — leave empty for no link" })}</div>
+			</div>
+			${field("Logos", "logo", (p.logo || []).join("\n"), { multiline: true, mono: true, rows: 3, hint: "one image path/URL per line" })}
+			<div class="thumbs">${(p.logo || []).map((l) => `<img src="${esc(l)}" alt="">`).join("")}</div>
+			${field("SEO keywords", "keywords", (p.keywords || []).join(", "), { multiline: true, rows: 2, hint: "comma separated" })}
+			<div class="checks">
+				${check("hidden", "Hidden", p.hidden, "kept here but not shown on the site")}
+				${check("pdf", "In PDF grid", p.pdf)}
+				${check("pdfFeatured", "Featured PDF page", p.pdfFeatured)}
+			</div>
+			${p.pdf || p.pdfFeatured ? field("PDF poster frame", "pdfPosterAt", p.pdfPosterAt, { hint: "for a video photo: timestamp like 0:12 (default 40% in)" }) : ""}
+		</section>
+
+		<section>
+			<label class="check"><input type="checkbox" id="hasPage" ${page ? "checked" : ""}> This project has its own page</label>
+			${page ? `
+				${field("URL slug", "slug", p.slug, { hint: `page lives at /projects/${esc(p.slug || "…")}. Changing it breaks old links to this page.` })}
+				${field("Page title", "page.title", page.title, { hint: "markdown" })}
+				${field("Page subtitle", "page.subtitle", page.subtitle, { multiline: true, rows: 3, hint: "markdown" })}
+				<label>Buttons <span class="opt">shown under the subtitle (paper, report, code…)</span></label>
+				${renderLinks(page.links || [])}
+				${field("YouTube video ID", "page.video", page.video, { hint: "optional — the part after watch?v=" })}
+				<label>Page body <span class="opt">markdown: ## headings, **bold**, [links](url), ![caption](/image.png or /clip.mp4)</span></label>
+				<div class="split">
+					<textarea data-key="page.description" class="mono">${esc(page.description)}</textarea>
+					<div class="preview" id="preview">${md(page.description)}</div>
+				</div>` : '<p class="hint" style="margin:8px 0 0">Turn this on to give the card its own write-up page instead of an external link.</p>'}
+		</section>`;
+}
+
+// Set or remove a field; empty values are dropped so the file stays tidy
+function setField(obj, key, value) {
+	const empty = value === "" || value === false || (Array.isArray(value) && !value.length);
+	if (empty) delete obj[key];
+	else obj[key] = value;
+}
+
+$("#form").addEventListener("input", (e) => {
+	const t = e.target;
+	const p = projects[current];
+
+	if (t.dataset.link !== undefined) {
+		const link = p.page.links[Number(t.dataset.link)];
+		if (t.dataset.field === "primary") setField(link, "primary", t.checked);
+		else link[t.dataset.field] = t.value;
+		return setDirty(true);
+	}
+
+	if (t.dataset.check) {
+		setField(p, t.dataset.check, t.checked);
+		setDirty(true);
+		return rerender();
+	}
+
+	const key = t.dataset.key;
+	if (!key) return;
+	let value = t.value;
+	if (key === "logo") value = value.split("\n").map((s) => s.trim()).filter(Boolean);
+	if (key === "keywords") value = value.split(",").map((s) => s.trim()).filter(Boolean);
+
+	if (key.startsWith("page.")) {
+		setField(p.page, key.slice(5), value);
+		if (key === "page.description") $("#preview").innerHTML = md(value);
+	} else if (key === "logo") {
+		p.logo = value; // the card always expects an array
+	} else {
+		setField(p, key, value);
+	}
+
+	if (key === "title" || key === "slug") renderList();
+	if (key === "photo") $(".photo-preview").innerHTML = media(value);
+	if (key === "logo") $(".thumbs").innerHTML = value.map((l) => `<img src="${esc(l)}" alt="">`).join("");
+	setDirty(true);
+});
+
+$("#form").addEventListener("change", (e) => {
+	if (e.target.id !== "hasPage") return;
+	const p = projects[current];
+	if (e.target.checked) {
+		p.page = p.page || { title: p.title, subtitle: "", description: "" };
+		p.slug = p.slug || slugify(p.title);
+		p.link = "/projects/";
+		p.linkText = p.linkText || "View Project";
+	} else {
+		if (!confirm("Remove this project's page and all of its text?")) { e.target.checked = true; return; }
+		delete p.page;
+		delete p.slug;
+		if (p.link === "/projects/") delete p.link;
+	}
+	setDirty(true);
+	rerender();
+});
+
+$("#form").addEventListener("click", (e) => {
+	const p = projects[current];
+	if (e.target.id === "addLink") {
+		p.page.links = [...(p.page.links || []), { label: "", url: "" }];
+	} else if (e.target.dataset.removeLink !== undefined) {
+		p.page.links.splice(Number(e.target.dataset.removeLink), 1);
+		if (!p.page.links.length) delete p.page.links;
+	} else return;
+	setDirty(true);
+	renderForm();
+});
+
+$("#list").addEventListener("click", (e) => {
+	const li = e.target.closest("li");
+	if (!li) return;
+	current = Number(li.dataset.i);
+	rerender();
+	$("main").scrollTop = 0;
+});
+
+function move(delta) {
+	const to = current + delta;
+	if (to < 0 || to >= projects.length) return;
+	[projects[current], projects[to]] = [projects[to], projects[current]];
+	current = to;
+	setDirty(true);
+	rerender();
+}
+
+function insert(project) {
+	projects.splice(current + 1, 0, project);
+	current++;
+	setDirty(true);
+	rerender();
+}
+
+$("#up").onclick = () => move(-1);
+$("#down").onclick = () => move(1);
+$("#add").onclick = () => {
+	insert({ title: "New project", tagline: "", description: "", logo: [], linkText: "View Project" });
+	$('[data-key="title"]').select();
+};
+$("#dup").onclick = () => {
+	if (!projects[current]) return;
+	const copy = structuredClone(projects[current]);
+	copy.title += " (copy)";
+	if (copy.slug) copy.slug += "-copy";
+	insert(copy);
+};
+$("#del").onclick = () => {
+	if (!projects[current] || !confirm(`Delete “${projects[current].title}”?\n\nTip: tick “Hidden” instead to keep it around.`)) return;
+	projects.splice(current, 1);
+	current = Math.max(0, Math.min(current, projects.length - 1));
+	setDirty(true);
+	rerender();
+};
+$("#save").onclick = save;
+
+document.addEventListener("keydown", (e) => {
+	if ((e.ctrlKey || e.metaKey) && e.key === "s") { e.preventDefault(); save(); }
+});
+window.addEventListener("beforeunload", (e) => { if (dirty) e.preventDefault(); });
+
+load();
+</script>
+</body>
+</html>
