@@ -17,7 +17,7 @@ import NavBar from "../components/common/navBar";
 import AllProjects from "../components/projects/allProjects";
 import FlippingPhoto from "../components/homepage/flippingPhoto";
 import VideoPlayer from "../components/homepage/videoPlayer";
-import EventCamera from "../components/playground/eventCamera";
+// import EventCamera from "../components/playground/eventCamera";
 
 import INFO from "../data/user";
 import SEO from "../data/seo";
@@ -286,6 +286,7 @@ const Homepage = () => {
 							/>
 						</button>
 
+						{/* Event camera demo — hidden for now (felt like clutter). Uncomment to restore.
 						<div className="homepage-event-camera" id="event-camera">
 							<h2 className="homepage-eventcam-title">
 								Event Camera Demo
@@ -305,7 +306,7 @@ const Homepage = () => {
 								dynamic range: exactly what you want for high
 								speed drone navigation.
 							</p>
-						</div>
+						</div> */}
 
 						{INFO.homepage.featured && (
 							<div className="homepage-featured">
