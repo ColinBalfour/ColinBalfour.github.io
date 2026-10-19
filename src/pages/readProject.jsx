@@ -13,6 +13,26 @@ import INFO from "../data/user";
 
 import "./styles/readProject.css";
 
+// Markdown images become numbered figures, captioned with their alt text.
+// A paragraph holding only images is unwrapped so <figure> isn't nested in <p>.
+const isImageOnly = (node) =>
+	node.children.every(
+		(c) =>
+			(c.type === "element" && c.tagName === "img") ||
+			(c.type === "text" && !c.value.trim())
+	);
+
+const markdownComponents = {
+	p: ({ node, children }) =>
+		isImageOnly(node) ? <>{children}</> : <p>{children}</p>,
+	img: ({ src, alt }) => (
+		<figure className="read-project-figure">
+			<Media src={src} alt={alt || ""} />
+			{alt && <figcaption>{alt}</figcaption>}
+		</figure>
+	),
+};
+
 const ReadProject = () => {
 	let { slug } = useParams();
 
@@ -52,11 +72,13 @@ const ReadProject = () => {
 
 					<div className="read-project-container">
 						<div className="read-project-wrapper">
-							<div className="read-project-date-container">
-								<div className="read-project-date">
-									{project.date}
+							{project.date && (
+								<div className="read-project-date-container">
+									<div className="read-project-date">
+										{project.date}
+									</div>
 								</div>
-							</div>
+							)}
 
 							<div className="title read-project-title">
 								<ReactMarkdown>{page.title}</ReactMarkdown>
@@ -98,13 +120,7 @@ const ReadProject = () => {
 							)}
 
 							<div className="read-project-body">
-								<ReactMarkdown
-									components={{
-										img: ({ src, alt }) => (
-											<Media src={src} alt={alt || ""} />
-										),
-									}}
-								>
+								<ReactMarkdown components={markdownComponents}>
 									{page.description}
 								</ReactMarkdown>
 							</div>
