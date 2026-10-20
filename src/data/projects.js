@@ -173,7 +173,7 @@ export default [
 		"page": {
 			"title": "AttentionSeeker: Using Defocus in Events for Passive Attention-Based Aerial Navigation",
 			"subtitle": "Under review at **RA-L 2026**, with D. Singh* and N. Sanket (PeAR Lab). *Equal contribution.",
-			"description": "Event cameras only report pixels whose brightness changes, so when the drone moves, almost everything fires. AttentionSeeker uses lens defocus as a filter: objects at the focus distance produce sharp events, and everything else blurs out. That picks out obstacles at the range that matters.\n\n![Event stream from a simulated forest flight](/Events_Video.mp4)\n\n## Key results\n\n- RL policies fly a drone through dense forest at high speed using **only events**, with no frames and no depth sensor.\n- The attention comes from the lens itself, so it needs **no extra compute, power, or moving parts**."
+			"description": "While I can't share too many details just yet, the core idea is to use reinforcement learning with an optics-driven approach to navigate with only a single event camera, which is very tricky because it has no natural depth cues or rich color/textural information (which monocular rgb depth models use) to infer depth. The most challenging part about this project (and often event-cameras in general) was how to formulate the policy input to prevent sim2real issues.\n\n![Event stream from a simulated forest flight](/Events_Video.mp4)\n\n"
 		}
 	},
 	{
