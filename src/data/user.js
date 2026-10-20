@@ -40,9 +40,9 @@ const INFO = {
 			video: "/research_clips.mp4",
 			poster: "/research_clips_poster.jpg",
 			label: "Research Highlights",
-			playerLabel: "Saranga · ActiveNav · MQP",
+			playerLabel: "Saranga · UFlowRL · MQP",
 			duration: "0:34",
-			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (ActiveNav), and agile event-based flight through an obstacle course (my MQP).",
+			title: "A reel from my research: ultrasound navigation through darkness and fog (Saranga), active monocular flight through forests (UFlowRL), and agile event-based flight through an obstacle course (my MQP).",
 		},
 		title: "Robotics software engineer and researcher in perception & autonomy.",
 		description:
@@ -151,7 +151,7 @@ const INFO = {
 				"Passive, attention-based aerial navigation that reads defocus cues in event-camera streams, training reinforcement-learning policies to fly through dense forest at high speed using only events.",
 		},
 		{
-			title: "ActiveNav: Learning Active Monocular Flight in Forests",
+			title: "UFlowRL: Learning Monocular Flight with Optical Flow and Uncertainty",
 			authors: "Colin Balfour, K. Srivastava, D. Singh, N. Sanket",
 			venue: "IEEE International Conference on Robotics and Automation (ICRA)",
 			year: "2027",

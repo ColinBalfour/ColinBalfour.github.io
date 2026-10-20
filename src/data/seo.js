@@ -81,7 +81,7 @@ const SEO = [
 	{
 		page: "publications",
 		description:
-			"Peer-reviewed and in-review research by Colin Balfour on perception and autonomous flight, including Saranga (Science Robotics), AttentionSeeker (RA-L), and ActiveNav (ICRA).",
+			"Peer-reviewed and in-review research by Colin Balfour on perception and autonomous flight, including Saranga (Science Robotics), AttentionSeeker (RA-L), and UFlowRL (ICRA).",
 		keywords: [
 			"Colin Balfour",
 			"publications",
@@ -89,7 +89,7 @@ const SEO = [
 			"Science Robotics",
 			"Saranga",
 			"AttentionSeeker",
-			"ActiveNav",
+			"UFlowRL",
 			"aerial robotics",
 			"drone navigation",
 			"PeAR Lab",

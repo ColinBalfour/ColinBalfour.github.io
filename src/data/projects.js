@@ -103,10 +103,10 @@ export default [
 		]
 	},
 	{
-		"title": "[Under Review — ICRA 2027] ActiveNav: Learning Active Monocular Flight in Forests",
+		"title": "[Under Review — ICRA 2027] UFlowRL: Learning Monocular Flight with Optical Flow and Uncertainty",
 		"date": "2025-2026",
 		"tagline": "Hierarchical RL that aims the camera mid-flight. 80% success in unseen forests, zero-shot sim2real on a Jetson.",
-		"description": "ActiveNav is a novel approach for quadrotor navigation using active perception. With flow and its uncertainty as an input, a hierarchical RL policy actively controls the drone's camera along with its movement. The policy is able to actively point the camera to areas that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, running onboard a Jetson Nano.",
+		"description": "UFlowRL is a novel approach for quadrotor navigation using active perception. With flow and its uncertainty as an input, a hierarchical RL policy actively controls the drone's camera along with its movement. The policy is able to actively point the camera to areas that would improve perception and avoid obstacles. The model was able to generalize zero-shot to the real world, running onboard a Jetson Nano.",
 		"photo": "/activenav.jpg",
 		"logo": [
 			"/pytorch_logo.png",
@@ -117,12 +117,12 @@ export default [
 		],
 		"linkText": "View Project",
 		"pdfFeatured": true,
-		"slug": "activenav",
+		"slug": "uflowrl",
 		"link": "/projects/",
 		"keywords": [
 			"Colin Balfour",
 			"Balfour",
-			"ActiveNav",
+			"UFlowRL",
 			"Active Perception",
 			"Reinforcement Learning",
 			"Drone",
@@ -133,9 +133,9 @@ export default [
 			"ICRA"
 		],
 		"page": {
-			"title": "ActiveNav: Learning Active Monocular Flight in Forests",
+			"title": "UFlowRL: Learning Monocular Flight with Optical Flow and Uncertainty",
 			"subtitle": "Under review at **ICRA 2027**, with K. Srivastava (equal contrib), D. Singh, and N. Sanket (PeAR Lab).",
-			"description": "A drone learns to move its camera, not just its body, so it can see obstacles better while flying through a forest.\n\n![ActiveNav forest flight](/speedmeter_web.mp4)\n\n## How it works\n\nA hierarchical RL policy takes optical flow and its uncertainty as input. It outputs both flight commands and a camera yaw angle, and learns to point the camera where it's least sure what's ahead.\n\nA master policy is chosen to select between three options: a subpolicy trained with the full action space (3d vel + camera yaw), a subpolicy trained with a restricted action space (3d vel), and a global planner/movement direction (i.e., \"go straight\").\n\nThis formulation allows for a simpler path for the policy to learn when and when not to turn, as yaw motion degrades optical flow's quality as a depth/navigation cue.\n\n## Key results\n\n- **80% success** in three cluttered forest scenes it never saw during training.\n- Trained only in simulation, and transfers **zero-shot** to the real drone.\n- Runs fully onboard a **Jetson Nano**.\n\n![Onboard view](/activenav.jpg)"
+			"description": "A drone learns to move its camera, not just its body, so it can see obstacles better while flying through a forest.\n\n![UFlowRL forest flight](/speedmeter_web.mp4)\n\n## How it works\n\nA hierarchical RL policy takes optical flow and its uncertainty as input. It outputs both flight commands and a camera yaw angle, and learns to point the camera where it's least sure what's ahead.\n\nA master policy is chosen to select between three options: a subpolicy trained with the full action space (3d vel + camera yaw), a subpolicy trained with a restricted action space (3d vel), and a global planner/movement direction (i.e., \"go straight\").\n\nThis formulation allows for a simpler path for the policy to learn when and when not to turn, as yaw motion degrades optical flow's quality as a depth/navigation cue.\n\n## Key results\n\n- **80% success** in three cluttered forest scenes it never saw during training.\n- Trained only in simulation, and transfers **zero-shot** to the real drone.\n- Runs fully onboard a **Jetson Nano**.\n\n![Onboard view](/activenav.jpg)"
 		}
 	},
 	{
