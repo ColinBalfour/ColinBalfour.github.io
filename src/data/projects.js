@@ -72,6 +72,40 @@ export default [
 		]
 	},
 	{
+		"title": "[Stanford DroneHacks 2026 Winner] Low Crane: Zero-Shot RL Drone Racing in 48 Hours",
+		"date": "2026",
+		"tagline": "Won Most Technically Impressive: an RL policy flew 90% of the course zero-shot on its first real flight, fastest of any team.",
+		"description": "Our team’s entry at Stanford DroneHacks 2026, judged by Anduril, Wing, Zipline, Skydio, PX4 and others. In 48 hours we built two full autonomy stacks for a drone with only an OAK-D depth camera and a Jetson. The RL policy maps depth straight to velocity commands with no VIO or map, trained with sparse success-only rewards and a start-state curriculum, plus heavy domain randomization (course layout, stereo depth noise reproduced with the same SGM pipeline we ran on the Jetson, and cluttered backgrounds). It showed no sim2real gap. As a backup, a classical C++ stack combined corridor-centered A*, GTSAM iSAM2 localization with depth ICP, and a 50 Hz MPPI controller rolling out 1,024 trajectories through a 6-DoF quadrotor model.",
+		"photo": "/low_crane.png",
+		"logo": [
+			"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
+			"https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
+			"/pytorch_logo.png",
+			"/opencv_logo.png"
+		],
+		"linkText": "View Project",
+		"link": "https://low-crane-dronehacks.github.io/",
+		"keywords": [
+			"Colin Balfour",
+			"Balfour",
+			"DroneHacks",
+			"Stanford",
+			"Hackathon",
+			"Reinforcement Learning",
+			"PPO",
+			"Sparse Reward",
+			"Sim2Real",
+			"Domain Randomization",
+			"Drone",
+			"Quadrotor",
+			"Depth Camera",
+			"MPPI",
+			"GTSAM",
+			"PX4",
+			"Jetson"
+		]
+	},
+	{
 		"title": "[Science Robotics 2026] Saranga: milliWatt Ultrasound Navigation on Palm-Sized Drones",
 		"date": "2024-2025",
 		"tagline": "Autonomous flight through darkness, smoke, and snow on a 140g drone — milliwatt ultrasound + learned denoising. Science Robotics 2026.",
